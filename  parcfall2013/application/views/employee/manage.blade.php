@@ -1,0 +1,210 @@
+<div class="row-fluid">
+	<div id="tabs" class="span8">
+		<ul>
+			<li><a href="#clients" onclick="tabFlag=false;clientSelectList.updateButtons();">Clients</a></li>
+			<li><a href="#employees" onclick="tabFlag=true;employeeSelectList.updateButtons();">Employees</a></li>
+		</ul>
+		<div id="clients" >
+			<div class="searchFor">Enter the clients name or id:</div>
+				<div class="searchBox">
+					<input type="text" name="clientSelectList_criteria" id="clientSelectList_criteria" maxlength="100" style="width:80%" >
+					<button id="searchClientsButton" class="searchButton" onclick="updateSelectList(1);"><i class="icon-search icon4x"></i>Go</button>
+				</div>
+			<div class="listColumns">
+				<div class="col1" >Name</div>
+				<div class="col2" >Programs</div>
+			</div>
+			<div class="list">
+				<div class="selectList" id="clientSelectListContent"></div>
+			</div>
+		</div>
+		<div id="employees" >
+			<div class="searchFor">Enter the employees name or id:</div>
+				<div class="searchBox">
+					<input type="text" name="employeeSelectList_criteria" id="employeeSelectList_criteria" maxlength="100" style="width:80%" >
+					<button id="searchEmployeesButton" class="searchButton" onclick="updateSelectList(0);"><i class="icon-search icon4x"></i>Go</button>
+				</div>
+			<div class="listColumns">
+				<div class="col1" >Name</div>
+				<div class="col2" >Programs</div>
+			</div>
+			<div class="list">
+				<div class="selectList" id="employeeSelectListContent"></div>
+			</div>
+		</div>
+	</div>
+	<div id="buttons" class="span4">
+		<input type="hidden" name="employeeID" value="" id="employeeID" />
+		<?php if(Auth::user()->can('employeeCreation')){ ?>
+		<button id="createEmployee" class="span12" onclick="submitEmployee('employee/createForm');"><i class="icon-plus-sign icon4x"></i>Create</button>
+		<?php } ?>
+		<button id="editEmployeeButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitEmployee('employee/edit');"><i class="icon-edit icon4x"></i>Edit</button>
+		<?php if(Auth::user()->can('employeeDeletion') ){ ?>
+		<button id="deleteEmployee" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))deleteEmployee();"><i class="icon-trash icon4x"></i>Archive</button>
+		<?php } ?>
+		<button id="trackedItem" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitEmployee('trackeditem/manage');"><i class="icon-folder-open icon4x"></i>Personnel File</button>
+	</div>
+</div>
+@section('scripts')
+@parent
+<script type="text/javascript" src="/js/SelectList.js"></script>
+<script type="text/javascript" src="/js/jQuery/jquery.blockUI.js"></script>
+<script type="text/javascript">
+	var employeeSelectList = new SelectList('employeeSelectList');
+	var clientSelectList = new SelectList('clientSelectList');
+	var tabFlag=false;
+	$(function () {
+		$("#tabs").tabs();
+		$("button").button();
+		updateSelectList(1); 
+		updateSelectList(0);
+		$("#clients").selectListSortable({
+		    headers: ".listColumns",
+		    content: ".selectList",
+		    groupingClass: "testGroup",
+		    groupingName: "groupName",
+		    rowPrefix: 'selectedItem',
+		    sortBy: {
+		      '.col1': 'alpha',
+		      '.col2': 'number'
+		    }
+		  });
+	});
+	function deleteEmployee () {
+		var idval = (tabFlag==true ? employeeSelectList.list[employeeSelectList.selectedItem.split('_')[1]].id : clientSelectList.list[clientSelectList.selectedItem.split('_')[1]].id);
+		(tabFlag === 0?employeeSelectList.clickItem({id:idval}):clientSelectList.clickItem({id:idval}));
+		$.ajax({
+		  url: '/employee/archive/'+idval,
+		  type: 'POST',
+		  dataType: 'json',
+		  complete: function(xhr, textStatus) {
+		    ( tabFlag == true ? updateSelectList(0) : updateSelectList(1));
+		  },
+		  error: function() {
+		  	
+		  }
+		});
+		
+	}
+	function updateSelectList(flag){
+		var content= flag===1?"employeeSelectListContent":"clientSelectListContent";
+	$("#"+content).block({
+			message:'<div style="font-family:Arial;font-weight:bold;">Loading . . . <img src="/img/loading.gif" style="vertical-align:middle;"></div>',
+			css: {
+				border:                     'none',
+				padding:                    '15px',
+				backgroundColor:            '#000',
+				'-webkit-border-radius':    '10px',
+				'-moz-border-radius':       '10px',
+				opacity:                    .5,
+				color:                      '#fff'
+			}
+		});
+	var criteria;
+	if(flag===1)
+		criteria= $("#clientSelectList_criteria").val();
+	else
+		criteria= $("#employeeSelectList_criteria").val();
+		
+	$.ajax({
+			url: "/employee/find/"+flag ,
+			data: {
+				criteria: criteria
+		},
+			type: "POST",
+			dataType: "json",
+			error: function(XMLHttpRequest, textStatus, errorThrown){
+				$("#"+content).unblock();
+			},
+			success: function(msg){
+				if(flag===1){
+					clientSelectList.list = msg;
+					updateemployees(clientSelectList.list, "clientSelectList");
+				} else {
+					employeeSelectList.list = msg;
+					updateemployees(employeeSelectList.list, "employeeSelectList");
+				}
+				$("#"+content).unblock();
+			}
+		});
+	}
+	function updateemployees(employees, listID)
+	{
+		console.log(employees);
+		var theHTML = '';
+	  var organization = 0;
+		var rowOffset = 0;
+		var groups = 0;
+		for (var row=0; row < employees.length; row++){
+			theHTML += '<div id="'+ listID +'profile_' + row + '" class="selectItem' + ((row+rowOffset) % 2 == 0 ? 'Even' : 'Odd') + '" onclick="'+listID+'.clickItem(this)" ondblclick="'+listID+'.clickItem(this);if('+listID+'.selectedItem.length > 0)submitEmployee(\'employee/edit\');"  data-employeeID="'+employees[row].id+'">';
+			theHTML += '<div class="column1">'+ employees[row].lastname + ', ' + employees[row].firstname + '</div>';
+			theHTML += '<div class="column2">' + _.reduce(employees[row].programs, function(memo, item){
+				if(item.programname === 'General' || item.programname === 'General Employee' || item.programname === 'General Client')
+					return memo;
+				else
+					return memo  + item.programname + " ";
+			}, "") +'</div>';        
+			theHTML +=  '</div>';
+		}
+		$("#" + listID + "Content").html(theHTML);
+	}
+	function submitEmployee (formLocation) {
+		if(formLocation === 'employee/createForm'){
+				window.location='/'+formLocation;
+			}else
+			if ((tabFlag==true ? employeeSelectList.selectedItem : clientSelectList.selectedItem) != 0){
+				var idval = (tabFlag==true ? employeeSelectList.list[employeeSelectList.selectedItem.split('_')[1]].id : clientSelectList.list[clientSelectList.selectedItem.split('_')[1]].id);
+				window.location='/' + formLocation + '/' + idval;
+		}
+	}
+	function myEmployeesButtons(){
+			var disabled = ((tabFlag==false ? clientSelectList.selectedItem : employeeSelectList.selectedItem) == 0);
+			if (disabled){
+				$("#editEmployeeButton").button('disable');
+				$("#deleteEmployee").button('disable');
+				$("#trackedItem").button('disable');
+			}
+			else{
+				$("#editEmployeeButton").button('enable');
+				$("#deleteEmployee").button('enable');
+				$("#trackedItem").button('enable');
+			}
+
+		}
+	employeeSelectList.updateButtons = myEmployeesButtons;
+	clientSelectList.updateButtons = myEmployeesButtons;
+</script>
+@endsection
+@section('styles')
+@parent
+	<style type="text/css">
+	.col1{
+		width:          48%;
+		float:left;
+    	border-right:solid 1px;
+    	padding: 0 4px;
+    	white-space: nowrap;
+    	
+	}
+	.col2{
+
+		float:left;
+    	padding: 0 4px;
+    	white-space: nowrap;
+    
+	}
+	.listColumns{
+		font-size:medium;
+		color:white;
+		background-color:#00A305;
+	}
+	.searchButton{
+		margin-top:-8px;
+	}
+	#buttons{
+		float: right;
+		padding-top: 120px;
+	}
+	</style>
+<link rel="stylesheet" href="/styles/css/selectList.css">
+@endsection
