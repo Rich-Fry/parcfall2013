@@ -51,6 +51,27 @@ class Employee_Controller extends Base_Controller {
 				foreach ($p as $program) {
 					$e->programs()->attach(Program::find($program));
 				}
+				
+				//Store the information needed to save the person's first name in the questionresponse table
+				$responseFirstName = array(
+					'formquestion_id' =>1,
+					'response' => e(Input::get('firstname')),
+					'dataform_id'	=>1,
+					'employee_id'	=>$e->id,
+					);
+					
+				//Store the information needed to save the person's last name in the questionresponse table
+				$responseLastName = array(
+					'formquestion_id' =>3,
+					'response' => e(Input::get('lastname')),
+					'dataform_id'	=>1,
+					'employee_id'	=>$e->id,
+					);
+					
+				//Then save the names into the table
+				QuestionResponse::create($responseFirstName);
+				QuestionResponse::create($responseLastName);
+				
 				return Redirect::to('employee/edit/'.$e->id);
 			}
 			catch(Exception $e){
