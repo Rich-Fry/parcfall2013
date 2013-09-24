@@ -39,7 +39,7 @@
 									</div>
 								<?php endforeach ?>
 								<div style="clear:both;"></div>
-								<button class="button" onclick="saveForm('form_{{$form->id}}');"><i class="icon-folder-close icon4x"></i>Save</button>
+								<!--<button class="button" onclick="saveForm('form_{{$form->id}}');"><i class="icon-folder-close icon4x"></i>Save</button>-->
 								<div style="clear:both;"></div>
 							</div>
 						<?php endforeach ?>
