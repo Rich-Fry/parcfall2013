@@ -34,7 +34,29 @@
 											}else
 												$val= ''
 											?>
-											<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}">
+											<?php //FieldTypes 1=textbox 2=combobox 3=datepicker 4=numeric 5=checkbox  
+											if($question->fieldtype == 2) { ?>
+											<!-- TODO: Emily - put combobox code here-->
+											<select>
+												<!-- These are just sample options - TODO: Emily, make the options pull from the database based on the $question->id -->
+												<option></option> <!-- This lets the user "clear" the field by selecting nothing -->
+												<option value="Male" selected="True">Male</option> <!-- Use the selected attribute on an option to set by default (for loading values back in) -->
+												<<option value="Female">Female</option>
+											</select>
+											<?php } else if ($question->fieldtype == 3) { ?>
+											<!-- datepicker -->
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="date-picker"/>
+											<?php } else if ($question->fieldtype == 4) { ?>
+											<!-- numeric field -->
+											<!-- TODO: we need to figure out how to restrict our numeric fields - either here or in our validation later -->
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}">
+											<?php } else if ($question->fieldtype == 5) { ?>
+											<!-- checkbox - TODO: I'm still not entirely sure how we want to handle checkboxes-->
+												<input type="checkbox" checked="{{$val}}"/>
+											<?php } else { ?>
+												<!-- This is the standard textbox like we had before -->
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}">
+											<?php } ?>
 										</div>
 									</div>
 								<?php endforeach ?>
@@ -76,6 +98,12 @@
 		font-size:18px;
 		font-weight: bold;
 	}
+	.date-picker{
+		
+	}
+	.numeric{
+		
+	}
 </style>
 @endsection
 @section('scripts')
@@ -85,6 +113,7 @@
 		$('#outerTabs').tabs();
 		$('.innerTabs').tabs();
 		$(".button").button();
+		$(".date-picker").datepicker();
 	});
 	function saveAll () {
 		var promises = [];
