@@ -9,6 +9,7 @@ class Formquestions {
 			$table->integer('dataform_id')->unsigned();
 			$table->string('questionText');
 			$table->string('questionExample');
+			$table->integer('fieldType')->unsigned();
 			$table->timestamps();
 	});
 
