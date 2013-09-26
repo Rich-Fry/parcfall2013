@@ -11,7 +11,7 @@
 			<?php } ?>
 			<?php endforeach ?>
 		</ul>
-		<?php foreach ($programs as $program): ?>	
+		<?php foreach ($programs as $program): ?>
 			<?php if(count($program->forms) > 0) {?>
 				<div id="prog_{{$program->id}}">
 				<div class="row-fluid">
@@ -19,16 +19,16 @@
 						<ul>
 							<?php foreach ($program->forms as $form): ?>
 								<li><a href="#form_{{$form->id}}">{{$form->formname}}</a></li>
-							<?php endforeach ?>	
+							<?php endforeach ?>
 						</ul>
-						<?php foreach ($program->forms as $form): ?>			
+						<?php foreach ($program->forms as $form): ?>
 							<div id="form_{{$form->id}}">
 								<input type="hidden" class="formIDs" value="{{$form->id}}">
 								<?php foreach ($form->questions as $question): ?>
 									<div class="control-group">
 										<label class="control-label" data-questionID="{{$question->id}}" for="input{{$question->id}}">{{$question->questiontext}}:</label>
 										<div class="controls">
-											<?php 
+											<?php
 											if(array_key_exists($form->id, $employee->forms) AND array_key_exists("$question->id", $employee->forms[$form->id]['responses'])) {
 												$val = $employee->forms[$form->id]['responses']["$question->id"];
 											}else
@@ -71,7 +71,7 @@
 			<?php } ?>
 		<?php endforeach ?>
 	</div>
-	<button class="button" onclick="saveAll();"><i class="icon-folder-close icon4x"></i>Done & Save All</button>
+	<button class="button" onclick="saveAll();"><i class="icon-folder-close icon4x"></i>Done &amp; Save All</button>
 </div>
 @section('styles')
 <style type="text/css">
