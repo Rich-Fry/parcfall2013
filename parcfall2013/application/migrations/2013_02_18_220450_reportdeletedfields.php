@@ -1,6 +1,6 @@
 <?php
 
-class ReportDeletedFields {    
+class ReportDeletedFields {
 
 	public function up()
     {
@@ -8,12 +8,12 @@ class ReportDeletedFields {
 		{
 			$table->boolean('deleted')->default(0);
 		});
-		
+
 		Schema::table('ReportFilter', function($table)
 		{
 			$table->boolean('deleted')->default(0);
 		});
-		
+
 		Schema::table('ReportTemplate', function($table)
 		{
 			$table->boolean('deleted')->default(0);
