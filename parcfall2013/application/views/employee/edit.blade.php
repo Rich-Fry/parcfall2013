@@ -34,10 +34,10 @@
 											}else
 												$val= ''
 											?>
-											<?php //FieldTypes 1=textbox 2=combobox 3=datepicker 4=numeric 5=checkbox  
+											<?php //FieldTypes 1=textbox 2=combobox 3=datepicker 4=numeric 5=checkbox
 											if($question->fieldtype == 2) { ?>
 											<!-- TODO: Emily - put combobox code here-->
-											<select>
+											<select class="<?php echo ($question->required ? "required" : ""); ?>" data-validate="<?php echo $question->validate; ?>">
 												<!-- These are just sample options - TODO: Emily, make the options pull from the database based on the $question->id -->
 												<option></option> <!-- This lets the user "clear" the field by selecting nothing -->
 												<option value="Male" selected="True">Male</option> <!-- Use the selected attribute on an option to set by default (for loading values back in) -->
@@ -45,17 +45,17 @@
 											</select>
 											<?php } else if ($question->fieldtype == 3) { ?>
 											<!-- datepicker -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="date-picker"/>
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="date-picker<?php echo ($question->required ? " required" : "");?>"/>
 											<?php } else if ($question->fieldtype == 4) { ?>
 											<!-- numeric field -->
 											<!-- TODO: we need to figure out how to restrict our numeric fields - either here or in our validation later -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}">
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" data-validate="<?php echo $question->validate; ?>" />
 											<?php } else if ($question->fieldtype == 5) { ?>
 											<!-- checkbox - TODO: I'm still not entirely sure how we want to handle checkboxes-->
 												<input type="checkbox" checked="{{$val}}"/>
 											<?php } else { ?>
 												<!-- This is the standard textbox like we had before -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}">
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" data-validate="<?php echo $question->validate; ?>">
 											<?php } ?>
 										</div>
 									</div>
@@ -99,10 +99,10 @@
 		font-weight: bold;
 	}
 	.date-picker{
-		
+
 	}
 	.numeric{
-		
+
 	}
 </style>
 @endsection
