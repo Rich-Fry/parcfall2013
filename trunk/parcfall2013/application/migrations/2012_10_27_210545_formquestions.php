@@ -11,7 +11,7 @@ class Formquestions {
 			$table->string('questionExample');
 			$table->integer('fieldType')->unsigned();
       $table->boolean('required')->default(true);
-      $table->string('validate', 45)->nullable()->default(null);
+      $table->string('validate', 256)->nullable()->default(null);
 			$table->timestamps();
 	});
 
