@@ -115,10 +115,75 @@ LOAD DATA INFILE ''
 -- Create additional Forms
 ----------------------------------------
 
+-- Employment
+-- Additional Information
 
+-- 3
+INCERT INTO form (formName, formDescription, created_at, updated_at)
+	VALUES ('Employment', 'Employment Information', now(), now());
 
-
+-- 4	
+INCERT INTO form (formName, formDescription, created_at, updated_at)
+	VALUES ('Additional Information', 'Additional Information', now(), now());
 
 ----------------------------------------
 -- Populate Form Questions
 ----------------------------------------
+
+-- Employment
+-- FieldTypes 1=textbox 2=combobox 3=datepicker 4=numeric 5=checkbox
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Work Location Code', 'Code', '1', now(), now());
+	
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Job Title', '', '1', now(), now());
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Full Time / PT', '', '1', now(), now());	
+	
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Shift', '', '1', now(), now());	
+	
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Hire Date', '', '1', now(), now());	
+	
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Training Wage', '', '1', now(), now());	
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Productivity in Primary Job', '', '1', now(), now());	
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Basis for Productivity', '', '1', now(), now());
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Separation Date', '', '1', now(), now());
+	
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Separation Type', '', '1', now(), now());
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Separation Reason', '', '1', now(), now());
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Add Separation Comments', '', '1', now(), now());
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Exit Interview - Like most about job', '', '1', now(), now());
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Exit Interview - Like least about job', '', '1', now(), now());
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Exit Interview - Add Comments', '', '1', now(), now());
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Tenure (Months)', '', '1', now(), now());
+
+INCERT INTO formquestion (dataform_id, questionText, questionExample, fieldType, created_at, updated_at)
+	VALUES ('3', 'Tenure (Years)', '', '1', now(), now());
+
+-- Additional Information
+
+

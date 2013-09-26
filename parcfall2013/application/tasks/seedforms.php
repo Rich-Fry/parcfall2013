@@ -8,6 +8,8 @@ class SeedForms_Task {
 		
 		SeedForms_Task::F1();
 		SeedForms_Task::F2();
+		SeedForms_Task::F3();
+		SeedForms_Task::F4();
 	}
 	
 	//We would need to add an extra column to the database table for formQuestions and add an entry to every question
@@ -435,217 +437,275 @@ class SeedForms_Task {
 		$df->questions()->save($fq);
 	}
 	
-	/*
-	public function form1()
-	{
-		$df = new DataForm;
-		$df->formName = 'Medical Information 2';
-		$df->formDescription = 'Collects medical Data';
-		$df->save();
-		$df->program()->attach(Program::where('programName', '=', 'Community Employed')->get()[0]);
-		
-		
-		$fq = new FormQuestion;
-		$fq->questionText = "Question text goes here!!";
-		$fq->questionExample = "An example answer to that question";
-		$df->questions()->save($fq);
-	}
-	*/
-	
-	/*
-	//Added by Cory Snelson
-	//Demographic Data Form
-	public function form2()
-	{
+	public function F3() {
 		//Create the form
 		$df = new DataForm;
-		$df->formName = 'Demographic Data Form';
-		$df->formDescription = 'Collects Demographic Data';
-		//TODO: update below line to associate with correct program or programs
+		$df->formName = 'Employment';
+		$df->formDescription = 'Employment Information';		
 		$df->save();
-		$df->program()->attach(Program::where('programName', '=', 'Community Employed')->get()[0]);
-		
 		
 		//Create the questions
 		
 		//Q1
 		$fq = new FormQuestion;
-		$fq->questionText = "Date Hired";
-		$fq->questionExample = "MM/DD/YEAR";
+		$fq->questionText = "Work Location Code";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q2
-		$fq = new FormQuestion;
-		$fq->questionText = "Full Name";
-		$fq->questionExample = "Enter Full Name";
-		$df->questions()->save($fq);
-		
-		//Q3
-		$fq = new FormQuestion;
-		$fq->questionText = "Program Location";
-		$fq->questionExample = "Enter Program Location";
-		$df->questions()->save($fq);
-		
-		//Q4
 		$fq = new FormQuestion;
 		$fq->questionText = "Job Title";
-		$fq->questionExample = "Enter Job Title";
-		$df->questions()->save($fq);
-		
-		//Q5
-		$fq = new FormQuestion;
-		$fq->questionText = "Date of Birth";
-		$fq->questionExample = "MM/DD/YEAR";
-		$df->questions()->save($fq);
-		
-		//Q6
-		$fq = new FormQuestion;
-		$fq->questionText = "Gender";
-		$fq->questionExample = "Male/Female";
-		$df->questions()->save($fq);
-		
-		//Q7
-		$fq = new FormQuestion;
-		$fq->questionText = "Marital Status";
-		$fq->questionExample = "Single/Married/Divorced/Widowed";
-		$df->questions()->save($fq);
-		
-		//Q8
-		$fq = new FormQuestion;
-		$fq->questionText = "Veteran Status";
-		$fq->questionExample = "Newly Separated/Special Disabled/Vietnam Vet/Other Protected Vet";
-		$df->questions()->save($fq);
-		
-		//Q9
-		$fq = new FormQuestion;
-		$fq->questionText = "Race";
-		$fq->questionExample = "American Indian, Alaskan Native/Asian/Black or African American/Hispanic or Latino/
-								Native Hawaiian, Other Pacific Islander/White/Two or More Races";
-		$df->questions()->save($fq);
-		
-		//Q10
-		$fq = new FormQuestion;
-		$fq->questionText = "Referral Source";
-		$fq->questionExample = "Ad or Publication/Gov't Agency/Job Fair/PARC Employee/Radio or Television/School or College/
-								Website or Internet/OTHER";
-		$df->questions()->save($fq);
-	}
-	*/
-	
-	/*
-	//Added by Cory Snelson
-	//SCA Employee Information Sheet
-	public function form3()
-	{
-		//Create the form
-		$df = new DataForm;
-		$df->formName = 'SCA Employee Information Sheet';
-		$df->formDescription = 'Collects SCA Employee Information';
-		//TODO: update below line to associate with correct program or programs
-		$df->save();
-		$df->program()->attach(Program::where('programName', '=', 'Community Employed')->get()[0]);
-		
-		
-		//Create the questions
-		
-		//Q1
-		$fq = new FormQuestion;
-		$fq->questionText = "Name";
-		$fq->questionExample = "First Last MI";
-		$df->questions()->save($fq);
-		
-		//Q2
-		$fq = new FormQuestion;
-		$fq->questionText = "Address";
-		$fq->questionExample = "Enter Full Street Address";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q3
 		$fq = new FormQuestion;
-		$fq->questionText = "City";
-		$fq->questionExample = "Enter City Name";
+		$fq->questionText = "Full Time / PT";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q4
 		$fq = new FormQuestion;
-		$fq->questionText = "State";
-		$fq->questionExample = "Enter State Name";
+		$fq->questionText = "Shift";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q5
 		$fq = new FormQuestion;
-		$fq->questionText = "Zip Code";
-		$fq->questionExample = "Enter Zip Code";
+		$fq->questionText = "Hire Date";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q6
 		$fq = new FormQuestion;
-		$fq->questionText = "Home Phone";
-		$fq->questionExample = "(801)555-5555";
+		$fq->questionText = "Training Wage";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q7
 		$fq = new FormQuestion;
-		$fq->questionText = "Alt. Phone";
-		$fq->questionExample = "(801)555-5555";
+		$fq->questionText = "Productivity in Primary Job";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q8
 		$fq = new FormQuestion;
-		$fq->questionText = "Date of Birth";
-		$fq->questionExample = "MM/DD/YEAR";
+		$fq->questionText = "Basis for Productivity";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q9
 		$fq = new FormQuestion;
-		$fq->questionText = "Social Security Number";
-		$fq->questionExample = "###-##-####";
+		$fq->questionText = "Separation Date";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q10
 		$fq = new FormQuestion;
-		$fq->questionText = "Marital Status";
-		$fq->questionExample = "MM/DD/YEAR";
+		$fq->questionText = "Separation Type";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q11
 		$fq = new FormQuestion;
-		$fq->questionText = "Sex";
-		$fq->questionExample = "Male/Female";
+		$fq->questionText = "Separation Reason";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q12
 		$fq = new FormQuestion;
-		$fq->questionText = "Emergency Contact";
-		$fq->questionExample = "Enter Emergency Contact Name";
+		$fq->questionText = "Add Separation Comments";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q13
 		$fq = new FormQuestion;
-		$fq->questionText = "Emergency Contact Relationship";
-		$fq->questionExample = "Enter Relationship With Emergency Contact";
+		$fq->questionText = "Exit Interview - Like most about job";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
+		
 		
 		//Q14
 		$fq = new FormQuestion;
-		$fq->questionText = "Emergency Contact Home Phone";
-		$fq->questionExample = "(801)555-5555";
+		$fq->questionText = "Exit Interview - Like least about job";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q15
 		$fq = new FormQuestion;
-		$fq->questionText = "Emergency Contact Alt. Phone";
-		$fq->questionExample = "(801)555-5555";
+		$fq->questionText = "Exit Interview - Add Comments";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+	
+		//Q16
+		$fq = new FormQuestion;
+		$fq->questionText = "Tenure (Months)";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q17
+		$fq = new FormQuestion;
+		$fq->questionText = "Tenure (Years)";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+	}
+	
+	public function F4() {
+		//Create the form
+		$df = new DataForm;
+		$df->formName = 'Additional Information';
+		$df->formDescription = 'Additional Information';		
+		$df->save();
+		
+		//Create the questions
+		
+		//Q1
+		$fq = new FormQuestion;
+		$fq->questionText = "Classified/Non";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q2
+		$fq = new FormQuestion;
+		$fq->questionText = "Hiring/Referral Source";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q3
+		$fq = new FormQuestion;
+		$fq->questionText = "Veteran";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q4
+		$fq = new FormQuestion;
+		$fq->questionText = "Special Disabled Veteran";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q5
+		$fq = new FormQuestion;
+		$fq->questionText = "";
+		$fq->questionExample = "Veteran Date of Separation";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q6
+		$fq = new FormQuestion;
+		$fq->questionText = "Other Protected Veteran";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q7
+		$fq = new FormQuestion;
+		$fq->questionText = "AbilityOne Eligibility";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q8
+		$fq = new FormQuestion;
+		$fq->questionText = "Person with a Disabiliity";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q9
+		$fq = new FormQuestion;
+		$fq->questionText = "Encore Disability Code";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q10
+		$fq = new FormQuestion;
+		$fq->questionText = "Primary Disability";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q11
+		$fq = new FormQuestion;
+		$fq->questionText = "Additional Disability 2";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q12
+		$fq = new FormQuestion;
+		$fq->questionText = "Additional Disability 3";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q13
+		$fq = new FormQuestion;
+		$fq->questionText = "Additional Disability 4";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q14
+		$fq = new FormQuestion;
+		$fq->questionText = "Employee of NPA";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q15
+		$fq = new FormQuestion;
+		$fq->questionText = "AbilityOn E Direct Labor";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
 		//Q16
 		$fq = new FormQuestion;
-		$fq->questionText = "Race";
-		$fq->questionExample = "American Indian, Alaskan Native/Asian/Black or African American/Hispanic or Latino/
-								Native Hawaiian, Other Pacific Islander/White/Two or More Races";
+		$fq->questionText = "AbilityOn E Indirect Labor"
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 		
-		//Need to find out how to handle office use only section
-	}
-	*/
+		//Q17
+		$fq = new FormQuestion;
+		$fq->questionText = "State Use Projects";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q18
+		$fq = new FormQuestion;
+		$fq->questionText = "FLSA 14c Certificate";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q19
+		$fq = new FormQuestion;
+		$fq->questionText = "Eligible for Fringe Benefits";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
 }
