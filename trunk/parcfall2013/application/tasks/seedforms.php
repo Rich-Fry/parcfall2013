@@ -683,7 +683,7 @@ class SeedForms_Task {
 		
 		//Q16
 		$fq = new FormQuestion;
-		$fq->questionText = "AbilityOn E Indirect Labor"
+		$fq->questionText = "AbilityOn E Indirect Labor";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
@@ -708,4 +708,5 @@ class SeedForms_Task {
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
+}
 }
