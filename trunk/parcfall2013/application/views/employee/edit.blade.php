@@ -110,10 +110,15 @@
 <script type="text/javascript" src="/js/jQuery/jquery.blockUI.js"></script>
 <script type="text/javascript">
 	$(function () {
+	  var today = new Date();
 		$('#outerTabs').tabs();
 		$('.innerTabs').tabs();
 		$(".button").button();
-		$(".date-picker").datepicker();
+		$(".date-picker").datepicker({
+		  changeYear:true,
+		  changeMonth:true,
+		  yearRange:"1900:"+(today.getFullYear()+10)
+		});
 	});
 	function saveAll () {
 		var promises = [];
