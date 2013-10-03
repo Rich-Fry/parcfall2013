@@ -5,12 +5,13 @@ class CreatecomboBox {
 	public function up()
     {
 		Schema::create('comboboxfields', function($table) {
-			$table->increments('id')->primary();
-			
+			$table->increments('id');	
 			$table->integer('formQuestion_id')->unsigned();
 			$table->integer('roles_id')->unsigned();
 			$table->string('comboValue');
 			$table->timestamps();
+		//	$table->foreign('formQuestion_id')->references('id')->on('formquestion');
+		
 	});
 
     }    
