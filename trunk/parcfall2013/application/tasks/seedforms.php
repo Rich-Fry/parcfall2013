@@ -67,6 +67,7 @@ class SeedForms_Task {
 		$fq->questionText = "Social Security Number";
 		$fq->questionExample = "XXX-XX-XXXX";
 		$fq->fieldType = 1;
+          $fq->validate = "^\d{3}-?\d{2}-?\d{4}$";
 		$df->questions()->save($fq);
 
 		//Q6
@@ -144,6 +145,7 @@ class SeedForms_Task {
 		$fq->questionText = "E-mail Address";
 		$fq->questionExample = "JaneDoe@sample.com";
 		$fq->fieldType = 1;
+          $fq->validate = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
 		$df->questions()->save($fq);
 
 		//Q17
