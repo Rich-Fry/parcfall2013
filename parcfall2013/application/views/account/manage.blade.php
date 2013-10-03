@@ -1,19 +1,23 @@
-<div id="manageTabs">
-	<ul>
-		<li><a href="#employees">Personnel</a></li>
+<!-- <div id="manageTabs"> how it used to be, remove for conformity -->
+	<ul class="breadcrumb">
+		<li><a href="#employees">Main</a></li>
 		<?php //if(Auth::user()->can('reportGeneration') || Auth::user()->can('reportTemplate')){ ?>
 		<!-- <li><a href="#reports">Reports</a></li> -->
 		<?php //} ?>
 	</ul>
-	<div id="employees">
-		{{$employeeContent}}
-	</div>
+	<!-- where employee content div used to be -->
 	<?php //if(Auth::user()->can('reportGeneration') || Auth::user()->can('reportTemplate')){ ?>
 	<!-- <div id="reports"> -->
 		<?php //echo $reportContent; ?>
 	<!-- </div> -->
 	<?php //} ?>
+<!-- </div>  how it used to be, remove for conformity -->
+
+<!-- New spot for employee content div -->
+<div id="employees">
+	{{$employeeContent}}
 </div>
+
 @section('styles')
 <style type="text/css">
 </style>
