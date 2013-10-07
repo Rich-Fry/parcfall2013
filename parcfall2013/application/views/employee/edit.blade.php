@@ -26,7 +26,7 @@
 								<input type="hidden" class="formIDs" value="{{$form->id}}">
 								<?php foreach ($form->questions as $question): ?>
 									<div class="control-group">
-										<label class="control-label" data-questionID="{{$question->id}}" for="input{{$question->id}}">{{$question->questiontext}}: <span class="errorMessage"></span></label>
+										<label class="control-label" data-questionID="{{$question->id}}" for="input{{$question->id}}">{{$question->questiontext}}:</label>
 										<div class="controls">
 											<?php
 											if(array_key_exists($form->id, $employee->forms) AND array_key_exists("$question->id", $employee->forms[$form->id]['responses'])) {
@@ -35,27 +35,28 @@
 												$val= ''
 											?>
 											<?php //FieldTypes 1=textbox 2=combobox 3=datepicker 4=numeric 5=checkbox
-											if($question->fieldtype == 2) { ?>
-											<!-- TODO: Emily - put combobox code here-->
-											<select class="<?php echo ($question->required ? "required" : ""); ?>">
-												<!-- These are just sample options - TODO: Emily, make the options pull from the database based on the $question->id -->
-												<option></option> <!-- This lets the user "clear" the field by selecting nothing -->
-												<option value="Male" selected="True">Male</option> <!-- Use the selected attribute on an option to set by default (for loading values back in) -->
-												<<option value="Female">Female</option>
-											</select>
+											if($question->fieldtype == 2) {					
+												$comboValues = Comboboxfield::getCombo($question->id);?>
+													<select>
+														<option></option> 
+												<?php 	foreach ($comboValues as $key) { ?>
+														<option value="{{$key->id}}">{{$key->id}}</option>
+												<?php 	} ?>
+													</select>																 
+																									 
 											<?php } else if ($question->fieldtype == 3) { ?>
 											<!-- datepicker -->
 												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="date-picker<?php echo ($question->required ? " required" : "");?>"/>
 											<?php } else if ($question->fieldtype == 4) { ?>
 											<!-- numeric field -->
 											<!-- TODO: we need to figure out how to restrict our numeric fields - either here or in our validation later -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" data-validate="<?php echo $question->validate; ?>" />
 											<?php } else if ($question->fieldtype == 5) { ?>
 											<!-- checkbox - TODO: I'm still not entirely sure how we want to handle checkboxes-->
 												<input type="checkbox" checked="{{$val}}"/>
 											<?php } else { ?>
 												<!-- This is the standard textbox like we had before -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" data-validate="<?php echo $question->validate; ?>">
 											<?php } ?>
 										</div>
 									</div>
@@ -85,9 +86,7 @@
 	.button:after{
 		clear:both;
 	}
-  .errorMessage{
-    color:#F00;
-  }
+
 	input[type="text"], input[type="password"] {
         font-size: 16px;
         width: 300px;
@@ -112,63 +111,22 @@
 <script type="text/javascript" src="/js/jQuery/jquery.blockUI.js"></script>
 <script type="text/javascript">
 	$(function () {
-          var today = new Date();
-          $('#outerTabs').tabs();
-          $('.innerTabs').tabs();
-          $(".button").button();
-          $(".date-picker").datepicker({
-               changeYear:true,
-               changeMonth:true,
-               yearRange:"1900:"+(today.getFullYear()+10)
-          });
-          $('.required').focusout(function(){
-               if($(this).val() == "" || $(this).val() == null || $.trim($(this).val()) == ""){
-                    var id = $(this).attr("id");
-                    $('label[for='+id+'] .errorMessage').text('Required!');
-               }
-          }).focusin(function(){
-               var id = $(this).attr("id");
-               $('label[for='+id+'] .errorMessage').text('');
-          }).change(function(){
-               if($(this).val() != "" && $(this).val() != null){
-                    var id = $(this).attr("id");
-                    $('label[for='+id+'] .errorMessage').text('');
-               }
-          });
-          $('input[data-validate]').focusout(function(){
-               var regex = new RegExp($(this).attr('data-validate'));
-               var id = $(this).attr("id");
-               if(!regex.test($(this).val())){
-                    $('label[for='+id+'] .errorMessage').text('Not Valid');
-               }
-          });
-     });
+	  var today = new Date();
+		$('#outerTabs').tabs();
+		$('.innerTabs').tabs();
+		$(".button").button();
+		$(".date-picker").datepicker({
+		  changeYear:true,
+		  changeMonth:true,
+		  yearRange:"1900:"+(today.getFullYear()+10)
+		});
+	});
 	function saveAll () {
-	     var valid = true;
-	     $('.required').each(function(index) {
-		  if($(this).val() == "" || $(this).val() == null || $.trim($(this).val()) == ""){
-		       valid = false;
-		  }
-		  $(this).focusout();
+		var promises = [];
+		$(".formIDs").map(function () {
+			promises.push(saveForm('form_'+$(this).val()));
 		});
-
-		$('input[data-validate]').each(function(index) {
-               var regex = new RegExp($(this).attr('data-validate'));
-               if(!regex.test($(this).val())){
-                    valid = false;
-               }
-               $(this).focusout();
-		});
-
-		if(valid){
-     		var promises = [];
-     		$(".formIDs").map(function () {
-     			promises.push(saveForm('form_'+$(this).val()));
-     		});
-     		$.when(promises).done(function(){window.location="/account/manage"});
-          }else{
-               alert("You have errors that need to be fixed");
-          }
+		$.when(promises).done(function(){window.location="/account/manage"});
 	}
 	function saveForm (formID) {
 		var questions=[];

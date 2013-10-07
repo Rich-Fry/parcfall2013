@@ -95,7 +95,7 @@ class SeedForms_Task {
 		$fq = new FormQuestion;
 		$fq->questionText = "State Code";
 		$fq->questionExample = "2 Digit Code";
-		$fq->fieldType = 1;
+		$fq->fieldType = 2;
 		$df->questions()->save($fq);
 
 		//Q10
