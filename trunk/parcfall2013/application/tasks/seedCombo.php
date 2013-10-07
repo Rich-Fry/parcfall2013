@@ -271,6 +271,26 @@ class SeedCombo_Task {
 				'roles_id' => 0,
 				'comboValue' => 'MALE'
 			));
+			Verify\Models\Comboboxfield::create(array(
+				'formQuestion_id' => '17',
+				'roles_id' => 0,
+				'comboValue' => 'Active'
+			));
+			Verify\Models\Comboboxfield::create(array(
+				'formQuestion_id' => '17',
+				'roles_id' => 0,
+				'comboValue' => 'Inactive'
+			));
+			Verify\Models\Comboboxfield::create(array(
+				'formQuestion_id' => '25',
+				'roles_id' => 0,
+				'comboValue' => 'Married'
+			));
+			Verify\Models\Comboboxfield::create(array(
+				'formQuestion_id' => '25',
+				'roles_id' => 0,
+				'comboValue' => 'Single'
+			));
 						
 	}	
 }

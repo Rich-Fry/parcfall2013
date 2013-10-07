@@ -2,11 +2,20 @@
 
 class Comboboxfield extends Eloquent 
 {
-	public static $table = 'comboboxfields';
-	public static function states($id)
-	{ 
-		$comboValue = DB::$table('comboValue')->lists('comboValue')->where('formquestion_id', $id);
-		return $comboValue;
+	
+	public static function getCombo($id)
+	{
+		return  Comboboxfield::select('comboboxfields.comboValue as id')->where('comboboxfields.formQuestion_id','=',$id)->get();	 		
 	}
-
+	
+	public function formQuestion()
+	{
+		return $this->has_many('formquestion');
+	}
+	
+	public function role()
+	{
+		return $this->has_many('roles');
+	}
+	
 } 
