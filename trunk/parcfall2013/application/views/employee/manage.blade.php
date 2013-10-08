@@ -1,5 +1,5 @@
 <div style="row-fluid">
-	<div id="tabs" class="span8">
+	<div class="tabs span8">
 		<ul>
 			<li><a href="#clients" onclick="tabFlag=false;clientSelectList.updateButtons();">Clients</a></li>
 			<li><a href="#employees" onclick="tabFlag=true;employeeSelectList.updateButtons();">Employees</a></li>
@@ -57,7 +57,7 @@
 	var clientSelectList = new SelectList('clientSelectList');
 	var tabFlag=false;
 	$(function () {
-		$("#tabs").tabs();
+		$(".tabs").tabs();
 		$("button").button();
 		updateSelectList(1); 
 		updateSelectList(0);
@@ -178,41 +178,6 @@
 	clientSelectList.updateButtons = myEmployeesButtons;
 </script>
 @endsection
-<!-- Old Styles
-@section('styles')
-@parent
-	<style type="text/css">
-	.col1{
-		width:          48%;
-		float:left;
-    	border-right:solid 1px;
-    	padding: 0 4px;
-    	white-space: nowrap;
-    	
-	}
-	.col2{
-
-		float:left;
-    	padding: 0 4px;
-    	white-space: nowrap;
-    
-	}
-	.listColumns{
-		font-size:medium;
-		color:white;
-		background-color:#00A305;
-	}
-	.searchButton{
-		margin-top:-8px;
-	}
-	#buttons{
-		float: right;
-		padding-top: 120px;
-	}
-	</style>
-<link rel="stylesheet" href="/styles/css/selectList.css">
-@endsection
--->
 
 @section('styles')
 	<link rel="stylesheet" href="/styles/css/selectList.css">
