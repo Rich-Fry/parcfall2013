@@ -26,7 +26,7 @@
 								<input type="hidden" class="formIDs" value="{{$form->id}}">
 								<?php foreach ($form->questions as $question): ?>
 									<div class="control-group">
-										<label class="control-label" data-questionID="{{$question->id}}" for="input{{$question->id}}">{{$question->questiontext}}: <span class="errorMessage"></span></label>
+										<label class="control-label" data-questionID="{{$question->id}}" for="input{{$question->id}}">{{$question->questiontext}}:</label>
 										<div class="controls">
 											<?php
 											if(array_key_exists($form->id, $employee->forms) AND array_key_exists("$question->id", $employee->forms[$form->id]['responses'])) {
@@ -36,27 +36,33 @@
 											?>
 											<?php //FieldTypes 1=textbox 2=combobox 3=datepicker 4=numeric 5=checkbox
 											if($question->fieldtype == 2) {
-												$comboValues = Comboboxfield::getCombo($question->id);?>
-													<select>
-														<option></option>
-												<?php 	foreach ($comboValues as $key) { ?>
-														<option value="{{$key->id}}">{{$key->id}}</option>
-												<?php 	} ?>
-													</select>
-
-											<?php } else if ($question->fieldtype == 3) { ?>
+												if($question->alt_id != NULL){
+													$comboValues = Comboboxfield::getCombo($question->alt_id);
+												}else{
+													$comboValues = Comboboxfield::getCombo($question->id);
+												}?>
+													<select name="combo" id="input{{$question->id}}" value="{{$val}}">
+														<option></option> 
+													@foreach ($comboValues as $key) 												
+														<option value="{{$key->id}}"{{($val == $key->id?'selected':'')}}>{{$key->id}}</option> 
+													@endforeach
+													</select>	
+																																																				 
+											<?php 
+												
+											} else if ($question->fieldtype == 3) { ?>
 											<!-- datepicker -->
 												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="date-picker<?php echo ($question->required ? " required" : "");?>"/>
 											<?php } else if ($question->fieldtype == 4) { ?>
 											<!-- numeric field -->
 											<!-- TODO: we need to figure out how to restrict our numeric fields - either here or in our validation later -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" data-validate="<?php echo $question->validate; ?>" />
 											<?php } else if ($question->fieldtype == 5) { ?>
 											<!-- checkbox - TODO: I'm still not entirely sure how we want to handle checkboxes-->
 												<input type="checkbox" checked="{{$val}}"/>
 											<?php } else { ?>
 												<!-- This is the standard textbox like we had before -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" data-validate="<?php echo $question->validate; ?>">
 											<?php } ?>
 										</div>
 									</div>
@@ -73,10 +79,6 @@
 		<?php endforeach ?>
 	</div>
 	<button class="button" onclick="saveAll();"><i class="icon-folder-close icon4x"></i>Done &amp; Save All</button>
-	<!-- Modal -->
-	<div id="saveAlert" title="Oops!" style="display:none">
-          <p>You have some errors in the form that need to be fixed before you can move on.</p>
-	</div>
 </div>
 @section('styles')
 <style type="text/css">
@@ -109,78 +111,48 @@
 	.numeric{
 
 	}
-	.errorMessage{
-	     color:#F00;
-	}
+		}
+.ui-combobox {
+    position: relative;
+    display: inline-block;
+  }
+.ui-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+	/* support: IE7 
+	*height: 1.7em;
+	*top: 0.1em;
+	*/
+}
+.ui-combobox-input {
+	margin: 0;
+	padding: 0.3em;
+}
 </style>
 @endsection
 @section('scripts')
 <script type="text/javascript" src="/js/jQuery/jquery.blockUI.js"></script>
 <script type="text/javascript">
 	$(function () {
-          var today = new Date();
-          $('#outerTabs').tabs();
-          $('.innerTabs').tabs();
-          $(".button").button();
-          $(".date-picker").datepicker({
-               changeYear:true,
-               changeMonth:true,
-               yearRange:"1900:"+(today.getFullYear()+10)
-          });
-          $('.required').focusout(function(){
-               if($(this).val() == "" || $(this).val() == null || $.trim($(this).val()) == ""){
-                    var id = $(this).attr("id");
-                    $('label[for='+id+'] .errorMessage').text('Required!');
-               }
-          }).focusin(function(){
-               var id = $(this).attr("id");
-               $('label[for='+id+'] .errorMessage').text('');
-          }).change(function(){
-               if($(this).val() != "" && $(this).val() != null){
-                    var id = $(this).attr("id");
-                    $('label[for='+id+'] .errorMessage').text('');
-               }
-          });
-          $('input[data-validate]').focusout(function(){
-               var regex = new RegExp($(this).attr('data-validate'));
-               var id = $(this).attr("id");
-               if(!regex.test($(this).val())){
-                    $('label[for='+id+'] .errorMessage').text('Not Valid');
-               }
-          });
-     });
+	  var today = new Date();
+		$('#outerTabs').tabs();
+		$('.innerTabs').tabs();
+		$(".button").button();
+		$(".date-picker").datepicker({
+		  changeYear:true,
+		  changeMonth:true,
+		  yearRange:"1900:"+(today.getFullYear()+10)
+		});
+	});
 	function saveAll () {
-	     var valid = true;
-	     $('.required').each(function(index){
-	          if($(this).val() == "" || $(this).val() == null || $.trim($(this).val()) == ""){
-	              valid = false;
-	          }
-	          $(this).focusout();
-	     });
-
-	     $('input[data-validate]').each(function(index){
-	          var regex = new RegExp($(this).attr('data-validate'));
-	          if(!regex.test($(this).val())){
-	               valid = false;
-	          }
-	          $(this).focusout();
-	     });
-	     if(valid){
-     		var promises = [];
-     		$(".formIDs").map(function () {
-     			promises.push(saveForm('form_'+$(this).val()));
-     		});
-     		$.when(promises).done(function(){window.location="/account/manage"});
-          }else{
-               $('#saveAlert').dialog({
-                    modal: true,
-                    buttons: {
-                         Close: function(){
-                              $(this).dialog('close');
-                         }
-                    }
-               });
-          }
+		var promises = [];
+		$(".formIDs").map(function () {
+			promises.push(saveForm('form_'+$(this).val()));
+		});
+		$.when(promises).done(function(){window.location="/account/manage"});
 	}
 	function saveForm (formID) {
 		var questions=[];
