@@ -410,6 +410,16 @@ class SeedCombo_Task {
 				'roles_id' => 0,
 				'comboValue' => 'Not known'
 			));
+			Verify\Models\Comboboxfield::create(array(
+				'formQuestion_id' => '58',
+				'roles_id' => 0,
+				'comboValue' => 'Full time'
+			));
+			Verify\Models\Comboboxfield::create(array(
+				'formQuestion_id' => '58',
+				'roles_id' => 0,
+				'comboValue' => 'Part time'
+			));
 			
 			
 						

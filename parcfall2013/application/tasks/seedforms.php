@@ -246,6 +246,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Additional Code";
 		$fq->fieldType = 2;
     $fq->required = 0;
+		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
 		//Q31
@@ -254,6 +255,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Additional Code";
 		$fq->fieldType = 2;
     $fq->required = 0;
+		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
 		//Q32
@@ -262,6 +264,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Additional Code";
 		$fq->fieldType = 2;
     $fq->required = 0;
+    	$fq->alt_id = 29;
 		$df->questions()->save($fq);
 	}
 
@@ -320,7 +323,8 @@ class SeedForms_Task {
 		$fq = new FormQuestion;
 		$fq->questionText = "P.C. State Code";
 		$fq->questionExample = "2 Digit Code";
-		$fq->fieldType = 1;
+		$fq->fieldType = 2;
+		$fq->alt_id = 9;
 		$df->questions()->save($fq);
 
 		//Q7
@@ -390,7 +394,8 @@ class SeedForms_Task {
 		$fq = new FormQuestion;
 		$fq->questionText = "S.C. State Code";
 		$fq->questionExample = "2 Digit Code";
-		$fq->fieldType = 1;
+		$fq->fieldType = 2;
+		$fq->alt_id = 9;
 		$df->questions()->save($fq);
 
 		//Q17
@@ -470,7 +475,7 @@ class SeedForms_Task {
 		$fq = new FormQuestion;
 		$fq->questionText = "Full Time / PT";
 		$fq->questionExample = "";
-		$fq->fieldType = 1;
+		$fq->fieldType = 2;
 		$df->questions()->save($fq);
 
 		//Q4
@@ -649,28 +654,32 @@ class SeedForms_Task {
 		$fq = new FormQuestion;
 		$fq->questionText = "Primary Disability";
 		$fq->questionExample = "";
-		$fq->fieldType = 1;
+		$fq->fieldType = 2;
+		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
 		//Q11
 		$fq = new FormQuestion;
 		$fq->questionText = "Additional Disability 2";
 		$fq->questionExample = "";
-		$fq->fieldType = 1;
+		$fq->fieldType = 2;
+		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
 		//Q12
 		$fq = new FormQuestion;
 		$fq->questionText = "Additional Disability 3";
 		$fq->questionExample = "";
-		$fq->fieldType = 1;
+		$fq->fieldType = 2;
+		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
 		//Q13
 		$fq = new FormQuestion;
 		$fq->questionText = "Additional Disability 4";
 		$fq->questionExample = "";
-		$fq->fieldType = 1;
+		$fq->fieldType = 2;
+		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
 		//Q14
