@@ -617,8 +617,8 @@ class SeedForms_Task {
 
 		//Q5
 		$fq = new FormQuestion;
-		$fq->questionText = "";
-		$fq->questionExample = "Veteran Date of Separation";
+		$fq->questionText = "Veteran Date of Separation";
+		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
@@ -638,7 +638,7 @@ class SeedForms_Task {
 
 		//Q8
 		$fq = new FormQuestion;
-		$fq->questionText = "Person with a Disabiliity";
+		$fq->questionText = "Person with a Disability";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
