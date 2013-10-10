@@ -235,7 +235,7 @@ class SeedForms_Task {
 
 		//Q29
 		$fq = new FormQuestion;
-		$fq->questionText = "Disabilty Code 01";
+		$fq->questionText = "Disability Code 01";
 		$fq->questionExample = "Primary Code";
 		$fq->fieldType = 2;
 		$df->questions()->save($fq);
