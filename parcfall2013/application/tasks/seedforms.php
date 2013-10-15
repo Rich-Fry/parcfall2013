@@ -45,7 +45,7 @@ class SeedForms_Task {
 		$fq->questionText = "Middle Initial";
 		$fq->questionExample = "M.I.";
 		$fq->fieldType = 1;
-    $fq->required = 0;
+		$fq->required = 0;
 		$df->questions()->save($fq);
 
 		//Q3
@@ -184,7 +184,7 @@ class SeedForms_Task {
 		$df->questions()->save($fq);
 
 		//Q22
-		$fq = new FormQuestion;
+		$fq = new FormQuestion; 
 		$fq->questionText = "Position";
 		$fq->questionExample = "Position Title";
 		$fq->fieldType = 1;
@@ -245,7 +245,7 @@ class SeedForms_Task {
 		$fq->questionText = "Disability Code 02";
 		$fq->questionExample = "Additional Code";
 		$fq->fieldType = 2;
-    $fq->required = 0;
+		$fq->required = 0;
 		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
@@ -254,7 +254,7 @@ class SeedForms_Task {
 		$fq->questionText = "Disability Code 03";
 		$fq->questionExample = "Additional Code";
 		$fq->fieldType = 2;
-    $fq->required = 0;
+		$fq->required = 0;
 		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
@@ -263,9 +263,34 @@ class SeedForms_Task {
 		$fq->questionText = "Disability Code 04";
 		$fq->questionExample = "Additional Code";
 		$fq->fieldType = 2;
-    $fq->required = 0;
+		$fq->required = 0;
     	$fq->alt_id = 29;
 		$df->questions()->save($fq);
+		
+		//Q33
+		$fq = new FormQuestion;
+		$fq->questionText = "Education";
+		$fq->questionExample = "Education";
+		$fq->fieldType = 1;
+		$fq->required = 1;
+		$df->questions()->save($fq);
+		
+		//Q34
+		$fq = new FormQuestion;
+		$fq->questionText = "Person Number";
+		$fq->questionExample = "Person Number";
+		$fq->fieldType = 1;
+		$fq->required = 1;
+		$df->questions()->save($fq);
+		
+		//Q35
+		$fq = new FormQuestion;
+		$fq->questionText = "Ethnicity";
+		$fq->questionExample = "Ethnicity";
+		$fq->fieldType = 1;
+		$fq->required = 1;
+		$df->questions()->save($fq);
+
 	}
 
 	//Emergency Contact tab of document set Beta provided by Josh at PARC
@@ -455,6 +480,10 @@ class SeedForms_Task {
 		$df->formDescription = 'Employment Information';
 		$df->save();
 
+		//TODO: update below line to associate with correct program or programs
+		$programs=Program::where('programName', '=', 'General')->get();
+		$df->program()->attach($programs[0]);
+		
 		//Create the questions
 
 		//Q1
@@ -584,6 +613,10 @@ class SeedForms_Task {
 		$df->formName = 'Additional Information';
 		$df->formDescription = 'Additional Information';
 		$df->save();
+		
+		//TODO: update below line to associate with correct program or programs
+		$programs=Program::where('programName', '=', 'General')->get();
+		$df->program()->attach($programs[0]);
 
 		//Create the questions
 
@@ -617,42 +650,42 @@ class SeedForms_Task {
 
 		//Q5
 		$fq = new FormQuestion;
-		$fq->questionText = "Veteran Date of Separation";
+		$fq->questionText = "Vietnam Veteran";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
-
+		
 		//Q6
 		$fq = new FormQuestion;
-		$fq->questionText = "Other Protected Veteran";
+		$fq->questionText = "Veteran Date of Separation";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
 		//Q7
 		$fq = new FormQuestion;
-		$fq->questionText = "AbilityOne Eligibility";
+		$fq->questionText = "Other Protected Veteran";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
 		//Q8
 		$fq = new FormQuestion;
-		$fq->questionText = "Person with a Disability";
+		$fq->questionText = "AbilityOne Eligibility";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
 		//Q9
 		$fq = new FormQuestion;
-		$fq->questionText = "Encore Disability Code";
+		$fq->questionText = "Person with a Disabiliity";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
 		//Q10
 		$fq = new FormQuestion;
-		$fq->questionText = "Primary Disability";
+		$fq->questionText = "Encore Disability Code";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
 		$fq->alt_id = 29;
@@ -660,7 +693,7 @@ class SeedForms_Task {
 
 		//Q11
 		$fq = new FormQuestion;
-		$fq->questionText = "Additional Disability 2";
+		$fq->questionText = "Primary Disability";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
 		$fq->alt_id = 29;
@@ -668,13 +701,27 @@ class SeedForms_Task {
 
 		//Q12
 		$fq = new FormQuestion;
+		$fq->questionText = "Additional Disability 1";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+		
+		//Q13
+		$fq = new FormQuestion;
+		$fq->questionText = "Additional Disability 2";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
+
+		//Q14
+		$fq = new FormQuestion;
 		$fq->questionText = "Additional Disability 3";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
 		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
-		//Q13
+		//Q15
 		$fq = new FormQuestion;
 		$fq->questionText = "Additional Disability 4";
 		$fq->questionExample = "";
@@ -682,42 +729,49 @@ class SeedForms_Task {
 		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
-		//Q14
+		//Q16
 		$fq = new FormQuestion;
 		$fq->questionText = "Employee of NPA";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q15
+		//Q17
 		$fq = new FormQuestion;
 		$fq->questionText = "AbilityOn E Direct Labor";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q16
+		//Q18
 		$fq = new FormQuestion;
 		$fq->questionText = "AbilityOn E Indirect Labor";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q17
+		//Q19
 		$fq = new FormQuestion;
 		$fq->questionText = "State Use Projects";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
+		
+		//Q20
+		$fq = new FormQuestion;
+		$fq->questionText = "Other Project";
+		$fq->questionExample = "";
+		$fq->fieldType = 1;
+		$df->questions()->save($fq);
 
-		//Q18
+		//Q21
 		$fq = new FormQuestion;
 		$fq->questionText = "FLSA 14c Certificate";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q19
+		//Q22
 		$fq = new FormQuestion;
 		$fq->questionText = "Eligible for Fringe Benefits";
 		$fq->questionExample = "";
