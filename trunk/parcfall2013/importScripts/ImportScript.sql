@@ -215,6 +215,7 @@ BEGIN
 	DECLARE general_form_id INT;
 	DECLARE first_name_id INT;
 	DECLARE last_name_id INT;
+	DECLARE maiden_name_id INT;
 	DECLARE status_id INT;
 	DECLARE education_id INT;
 	DECLARE person_number_id INT;
@@ -332,10 +333,13 @@ BEGIN
 
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 	
+	SET program1_id = (SELECT id FROM program WHERE programName = 'General' ORDER BY id desc LIMIT 1);
+	
 	-- General Form id's
 	SET general_form_id = (SELECT id FROM form WHERE formName = 'General Information Form' ORDER BY created_at desc LIMIT 1);
 	SET first_name_id = (SELECT id FROM formquestion WHERE questionText = 'First Name' AND dataform_id = general_form_id limit 1);
 	SET last_name_id = (SELECT id FROM formquestion WHERE questionText = 'Last Name' AND dataform_id = general_form_id limit 1);
+	SET maiden_name_id = (SELECT id FROM formquestion WHERE questionText = 'Maiden Name' AND dataform_id = general_form_id limit 1);
 	SET status_id = (SELECT id FROM formquestion WHERE questionText = 'Status' AND dataform_id = general_form_id limit 1);
 	SET education_id = (SELECT id FROM formquestion WHERE questionText = 'Education' AND dataform_id = general_form_id limit 1);
 	SET person_number_id = (SELECT id FROM formquestion WHERE questionText = 'Person Number' AND dataform_id = general_form_id limit 1);
@@ -458,10 +462,11 @@ BEGIN
 		SET insert_count = insert_count + 1;
 		SET employee_id = LAST_INSERT_ID();
 		
-		-- add to employeeprogram
-		INSERT INTO employeeprogram (employee_id, program_id, created_at, updated_ad)
-			VALUES (, , NOW(), NOW());
+		-- link employee to programs
+		INSERT INTO employeeprogram (employee_id, program_id, created_at, updated_at)
+			VALUES (employee_id, program1_id, NOW(), NOW());
 		SET insert_count = insert_count + 1;
+		
 		
 		-- General Information Form Records
 		
@@ -478,7 +483,11 @@ BEGIN
 		SET insert_count = insert_count + 1;
 		END IF;
 		-- Maiden Name
-		
+		IF in_maiden_name IS NOT NULL AND in_maiden_name <> '' THEN
+		INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+			VALUES (maiden_name_id, in_name_last, general_form_id, employee_id, NOW(), NOW());
+		SET insert_count = insert_count + 1;
+		END IF;
 		-- Active/Inactive
 		IF in_active IS NOT NULL AND in_active <> '' THEN
 		INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
