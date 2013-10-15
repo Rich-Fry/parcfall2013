@@ -1,4 +1,9 @@
-<div class="row-fluid">
+<ul class="breadcrumb">
+	  <li><a href="/account/manage">Main</a> <span class="divider">/</span></li>
+	  <li class="active">Reports</li>
+</ul>
+
+<div style="row-fluid">
 	<div id="tabs" class="span8">
 		<div id="report"  onclick="">
 			<div class="searchFor">Enter the reports name or id:</div>
