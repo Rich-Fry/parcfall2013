@@ -1,7 +1,7 @@
 <!-- <div id="manageTabs"> how it used to be, remove for conformity -->
 	<ul class="breadcrumb">
 		<li class="active">Main</li>
-		<?php //if(Auth::user()->can('reportGeneration') || Auth::user()->can('reportTemplate')){ ?>
+		<?php //if(Auth::user()->can('reportGeneration') || Auth::user()->can('reportTemplateCreation')){ ?>
 		<!-- <li><a href="#reports">Reports</a></li> -->
 		<?php //} ?>
 	</ul>

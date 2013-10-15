@@ -139,5 +139,22 @@ class Report_Controller extends Base_Controller {
         }
         return Response::eloquent($u);
     }
+	public function action_manage()
+	{
+		if(Auth::user()->can('reportGeneration') || Auth::user()->can('reportTemplate')){
+			$u = Verify\Models\User::where('disabled', '=', 0)->get();
+			$du = Verify\Models\User::where('disabled', '=', 1)->get();
+			$r = Verify\Models\Role::where('deleted', '=', 0)->get();
+			$data = array(
+				'users' => $u,
+				'disabledusers' => $du, 
+				'roles' => $r
+				);
+			$this->layout->content = View::make('Report.manage',$data);	
+		}else{
+			Session::flash('errors', 'You don\'t have permission to create or edit Users');
+			return Redirect::to('account/manage');
+		}
+	}
 
 }
