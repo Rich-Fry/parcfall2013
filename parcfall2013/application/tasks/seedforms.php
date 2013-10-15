@@ -38,6 +38,7 @@ class SeedForms_Task {
 		$fq->questionText = "First Name";
 		$fq->questionExample = "First Name";
 		$fq->fieldType = 1;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q2
@@ -53,6 +54,7 @@ class SeedForms_Task {
 		$fq->questionText = "Last Name";
 		$fq->questionExample = "Last Name";
 		$fq->fieldType = 1;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q4
@@ -60,6 +62,7 @@ class SeedForms_Task {
 		$fq->questionText = "Birthdate";
 		$fq->questionExample = "MM/DD/YEAR";
 		$fq->fieldType = 3;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q5
@@ -67,7 +70,8 @@ class SeedForms_Task {
 		$fq->questionText = "Social Security Number";
 		$fq->questionExample = "XXX-XX-XXXX";
 		$fq->fieldType = 1;
-          $fq->validate = "^\d{3}-?\d{2}-?\d{4}$";
+        $fq->validate = "^\d{3}-?\d{2}-?\d{4}$";
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q6
@@ -75,13 +79,14 @@ class SeedForms_Task {
 		$fq->questionText = "Address";
 		$fq->questionExample = "Address Line 1";
 		$fq->fieldType = 1;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q7
 		$fq = new FormQuestion;
 		$fq->questionText = "Address Line 2";
 		$fq->questionExample = "Address Line 2";
-		$fq->fieldType = 1;
+		$fq->fieldType = 0;
 		$df->questions()->save($fq);
 
 		//Q8
@@ -89,6 +94,7 @@ class SeedForms_Task {
 		$fq->questionText = "City";
 		$fq->questionExample = "City";
 		$fq->fieldType = 1;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q9
@@ -96,6 +102,7 @@ class SeedForms_Task {
 		$fq->questionText = "State Code";
 		$fq->questionExample = "2 Digit Code";
 		$fq->fieldType = 2;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q10
@@ -103,6 +110,7 @@ class SeedForms_Task {
 		$fq->questionText = "Zip Code";
 		$fq->questionExample = "Zip Code";
 		$fq->fieldType = 1;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q11
@@ -110,137 +118,154 @@ class SeedForms_Task {
 		$fq->questionText = "Country";
 		$fq->questionExample = "Country";
 		$fq->fieldType = 1;
+		$fq->required = 1;
+		$df->questions()->save($fq);
+		
+		//Q12
+		$fq = new FormQuestion;
+		$fq->questionText = "Maiden Name";
+		$fq->questionExample = "Maiden Name";
+		$fq->fieldType = 0;
 		$df->questions()->save($fq);
 
-		//Q12
+		//Q13
 		$fq = new FormQuestion;
 		$fq->questionText = "Home Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
-		//Q13
+		//Q14
 		$fq = new FormQuestion;
 		$fq->questionText = "Work Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q14
+		//Q15
 		$fq = new FormQuestion;
 		$fq->questionText = "Cell Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q15
+		//Q16
 		$fq = new FormQuestion;
 		$fq->questionText = "Fax";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q16
+		//Q17
 		$fq = new FormQuestion;
 		$fq->questionText = "E-mail Address";
 		$fq->questionExample = "JaneDoe@sample.com";
 		$fq->fieldType = 1;
-          $fq->validate = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
-		$df->questions()->save($fq);
-
-		//Q17
-		$fq = new FormQuestion;
-		$fq->questionText = "Status";
-		$fq->questionExample = "Active/Inactive";
-		$fq->fieldType = 2;
+        $fq->validate = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q18
 		$fq = new FormQuestion;
-		$fq->questionText = "Employee Number";
-		$fq->questionExample = "000000";
-		$fq->fieldType = 4;
+		$fq->questionText = "Status";
+		$fq->questionExample = "Active/Inactive";
+		$fq->fieldType = 2;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q19
 		$fq = new FormQuestion;
-		$fq->questionText = "Hire Date";
-		$fq->questionExample = "MM/DD/YEAR";
-		$fq->fieldType = 3;
+		$fq->questionText = "Employee Number";
+		$fq->questionExample = "000000";
+		$fq->fieldType = 4;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 		//Q20
+		$fq = new FormQuestion;
+		$fq->questionText = "Hire Date";
+		$fq->questionExample = "MM/DD/YEAR";
+		$fq->fieldType = 3;
+		$fq->required = 1;
+		$df->questions()->save($fq);
+
+		//Q21
 		$fq = new FormQuestion;
 		$fq->questionText = "I-9 Renewal Date";
 		$fq->questionExample = "MM/DD/YEAR";
 		$fq->fieldType = 3;
 		$df->questions()->save($fq);
 
-		//Q21
+		//Q22
 		$fq = new FormQuestion;
 		$fq->questionText = "Location";
 		$fq->questionExample = "Location";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q22
+		//Q23
 		$fq = new FormQuestion; 
 		$fq->questionText = "Position";
 		$fq->questionExample = "Position Title";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q23
+		//Q24
 		$fq = new FormQuestion;
 		$fq->questionText = "Department";
 		$fq->questionExample = "Department";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q24
+		//Q25
 		$fq = new FormQuestion;
 		$fq->questionText = "Manager";
 		$fq->questionExample = "Manager Name";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q25
+		//Q26
 		$fq = new FormQuestion;
 		$fq->questionText = "W-4 Status";
 		$fq->questionExample = "Married/Single";
 		$fq->fieldType = 2;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
-		//Q26
+		//Q27
 		$fq = new FormQuestion;
 		$fq->questionText = "Exemptions";
 		$fq->questionExample = "Exemption Code";
 		$fq->fieldType = 1;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
 
-		//Q27
+		//Q28
 		$fq = new FormQuestion;
 		$fq->questionText = "Gender";
 		$fq->questionExample = "Male/Female";
 		$fq->fieldType = 2;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
-		//Q28
+		//Q29
 		$fq = new FormQuestion;
 		$fq->questionText = "EEO Category";
 		$fq->questionExample = "EEO Category";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q29
+		//Q30
 		$fq = new FormQuestion;
 		$fq->questionText = "Disability Code 01";
 		$fq->questionExample = "Primary Code";
 		$fq->fieldType = 2;
+		$fq->required = 1;
 		$df->questions()->save($fq);
 
-		//Q30
+		//Q31
 		$fq = new FormQuestion;
 		$fq->questionText = "Disability Code 02";
 		$fq->questionExample = "Additional Code";
@@ -249,7 +274,7 @@ class SeedForms_Task {
 		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
-		//Q31
+		//Q32
 		$fq = new FormQuestion;
 		$fq->questionText = "Disability Code 03";
 		$fq->questionExample = "Additional Code";
@@ -258,7 +283,7 @@ class SeedForms_Task {
 		$fq->alt_id = 29;
 		$df->questions()->save($fq);
 
-		//Q32
+		//Q33
 		$fq = new FormQuestion;
 		$fq->questionText = "Disability Code 04";
 		$fq->questionExample = "Additional Code";
@@ -267,7 +292,7 @@ class SeedForms_Task {
     	$fq->alt_id = 29;
 		$df->questions()->save($fq);
 		
-		//Q33
+		//Q34
 		$fq = new FormQuestion;
 		$fq->questionText = "Education";
 		$fq->questionExample = "Education";
@@ -275,7 +300,7 @@ class SeedForms_Task {
 		$fq->required = 1;
 		$df->questions()->save($fq);
 		
-		//Q34
+		//Q35
 		$fq = new FormQuestion;
 		$fq->questionText = "Person Number";
 		$fq->questionExample = "Person Number";
@@ -283,7 +308,7 @@ class SeedForms_Task {
 		$fq->required = 1;
 		$df->questions()->save($fq);
 		
-		//Q35
+		//Q36
 		$fq = new FormQuestion;
 		$fq->questionText = "Ethnicity";
 		$fq->questionExample = "Ethnicity";
