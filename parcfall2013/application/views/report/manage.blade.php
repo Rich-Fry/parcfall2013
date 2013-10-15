@@ -13,7 +13,7 @@
 			<div class="selectList" id="reportSelectListContent"></div>
 		</div>
 	</div>
-	<form action="" method="POST" id="reportButtons" class="span4">
+	<form action="" method="POST" id="reportButtons" class="span3">
 		<input type="hidden" name="reportID" value="" id="reportID" />
 		<?php if(Auth::user()->can('reportTemplateCreation')){ ?>
 		<button id="editReportButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitReport('report/edit')"><i class="icon-edit icon4x"></i>Edit</button>

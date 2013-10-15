@@ -57,7 +57,7 @@
 			    @endif
 			    </ul>
 			    @if(Auth::check())
-			    <?php if(Auth::user()->can('userCreation') || Auth::user()->can('programCreation') || Auth::user()->can('categoryCreation')){ ?>
+			    <?php if(Auth::user()->can('userCreation') || Auth::user()->can('programCreation') || Auth::user()->can('categoryCreation') || Auth::user()->can('reportGeneration')){ ?>
 			    <ul class="breadcrumb" >
 					<?php if(Auth::user()->can('userCreation') ){ ?>
 		    			<li> {{HTML::link("user/manage", "Users");}}</li>
@@ -67,6 +67,9 @@
 					<?php } ?>
 					<?php if(Auth::user()->can('categoryCreation') ){ ?>
 		    			<li> <span class="divider"><i class="icon-double-angle-right"></i></span> {{HTML::link("trackedcategory/manage", "Categories");}}</li>
+					<?php } ?>
+					<?php if(Auth::user()->can('reportGeneration') || Auth::user()->can('reportTemplate') ){ ?>
+		    			<li> <span class="divider"><i class="icon-double-angle-right"></i></span> {{HTML::link("report/manage", "Reports");}}</li>
 					<?php } ?>
 				</ul>
 				<?php } ?>
