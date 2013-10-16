@@ -38,13 +38,22 @@
 											if($question->fieldtype == 2) {
 												if($question->alt_id != NULL){
 													$comboValues = Comboboxfield::getCombo($question->alt_id);
+													$defaultValues = Comboboxfield::getDefault($question->alt_id);
 												}else{
 													$comboValues = Comboboxfield::getCombo($question->id);
+													$defaultValues = Comboboxfield::getDefault($question->id);
 												}?>
-													<select name="combo" id="input{{$question->id}}" value="{{$val}}">
+
+													<select name="combo" id="input{{$question->id}}" placeholder="{{$question->questionexample}}"  value="{{$val}}" class="combobox" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
 														<option></option>
-													@foreach ($comboValues as $key)
-														<option value="{{$key->id}}"{{($val == $key->id?'selected':'')}}>{{$key->id}}</option>
+													@foreach ($comboValues as $key)													
+														<option value="{{$key->id}}"
+													<?php if ($val == $key->id){
+																echo ' selected="selected"';
+															}else if ($key->id == 'UT' || $key->id == 'Active'){
+																echo ' selected="selected"';
+															}?>
+															>{{$key->id}} </option>
 													@endforeach
 													</select>
 
@@ -85,6 +94,7 @@
         </div>
 </div>
 @section('styles')
+<link rel="stylesheet" href="/styles/css/selectList.css">
 <style type="text/css">
 	.innerTabs .control-group{
 		float:left;
@@ -117,26 +127,15 @@
 	}
      .errorMessage{
           color:#F00;
-     }
-.ui-combobox {
-    position: relative;
-    display: inline-block;
-  }
-.ui-combobox-toggle {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	margin-left: -1px;
-	padding: 0;
-	/* support: IE7
-	*height: 1.7em;
-	*top: 0.1em;
-	*/
-}
-.ui-combobox-input {
-	margin: 0;
-	padding: 0.3em;
-}
+    }
+	.combobox {
+		font-size: 16px;
+	 	width: 320px;
+	 	height: auto;
+	 	margin-bottom: 15px;
+        padding: 7px 9px;
+ 	}
+
 </style>
 @endsection
 @section('scripts')

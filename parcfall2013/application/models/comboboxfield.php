@@ -7,7 +7,11 @@ class Comboboxfield extends Eloquent
 	{
 		return  Comboboxfield::select('comboboxfields.comboValue as id')->where('comboboxfields.formQuestion_id','=',$id)->get();	 		
 	}
-	
+	public static function getDefault($id)
+	{
+		return  Comboboxfield::select('comboboxfields.defaultValue as dv_id')->where('comboboxfields.formQuestion_id','=',$id)->get();	 		
+	}
+		
 	public function formQuestion()
 	{
 		return $this->has_many('formquestion');
