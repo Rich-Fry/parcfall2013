@@ -5,6 +5,8 @@ class SeedCombo_Task {
 	public function run($args)
 	{
 		Bundle::start('verify');
+		
+
 		// States
 		Verify\Models\Comboboxfield::create(array(
 				'formQuestion_id' => '9',
@@ -229,7 +231,9 @@ class SeedCombo_Task {
 			Verify\Models\Comboboxfield::create(array(
 				'formQuestion_id' => '9',
 				'roles_id' => 0,
+				'defaultValue' => 1,
 				'comboValue' => 'UT'
+				
 			));
 			Verify\Models\Comboboxfield::create(array(
 				'formQuestion_id' => '9',
@@ -263,160 +267,162 @@ class SeedCombo_Task {
 			));
 			//Gender
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '27',
+				'formQuestion_id' => '28',
 				'roles_id' => 0,
 				'comboValue' => 'FEMALE'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '27',
+				'formQuestion_id' => '28',
 				'roles_id' => 0,
 				'comboValue' => 'MALE'
 			));
 			//Employment Status
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '17',
+				'formQuestion_id' => '18',
 				'roles_id' => 0,
-				'comboValue' => 'Active'
+				'comboValue' => 'Active',
+				'defaultValue' => 1
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '17',
+				'formQuestion_id' => '18',
 				'roles_id' => 0,
 				'comboValue' => 'Inactive'
 			));
 			//W-4 Status
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '25',
+				'formQuestion_id' => '26',
 				'roles_id' => 0,
 				'comboValue' => 'Married'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '25',
+				'formQuestion_id' => '26',
 				'roles_id' => 0,
 				'comboValue' => 'Single'
 			));
 			//disability codes			
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'ID - Mild'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'ID - Moderate'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'ID - Severe'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Borderline intellectual functioning'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Learning Disability'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Autism spectrum disorders'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Other Neurological impairments'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Other developmental disabilities'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Traumatic brain injury'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Mental illness - mood and affective disorders, schizophrenia'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Mental illness - other'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Legal blindness'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Visual impairments, other than legal blindness'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Hearing impairment'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Cerebral palsy'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Diseases of the musculoskeletal system and connective tissue; includes arthritis'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Endocrine, nutritional, and metabolic diseases; includes diabetes and immune system diseases'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Other physical disorders; includes injuries and congenital abnormalities'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Substance abuse/alcoholism'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Other severe disabilities'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Other disabilities not meeting the standard for severe'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'No disability'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '29',
+				'formQuestion_id' => '30',
 				'roles_id' => 0,
 				'comboValue' => 'Not known'
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '58',
+				'formQuestion_id' => '61',
 				'roles_id' => 0,
-				'comboValue' => 'Full time'
+				'comboValue' => 'Full time',
+				'defaultValue' => 1
 			));
 			Verify\Models\Comboboxfield::create(array(
-				'formQuestion_id' => '58',
+				'formQuestion_id' => '61',
 				'roles_id' => 0,
 				'comboValue' => 'Part time'
 			));
