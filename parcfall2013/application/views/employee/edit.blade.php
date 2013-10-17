@@ -25,7 +25,7 @@
 							<div id="form_{{$form->id}}">
 								<input type="hidden" class="formIDs" value="{{$form->id}}">
 								<?php foreach ($form->questions as $question): ?>
-									<div class="control-group span2">
+									<div class="control-group">
 										<label class="control-label" data-questionID="{{$question->id}}" for="input{{$question->id}}">{{$question->questiontext}}: <span class="errorMessage"></span></label>
 										<div class="controls">
 											<?php
@@ -69,7 +69,7 @@
 												<input type="checkbox" checked="{{$val}}"/>
 											<?php } else { ?>
 												<!-- This is the standard textbox like we had before -->
-												<input id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
+												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
 											<?php } ?>
 										</div>
 									</div>
@@ -107,7 +107,7 @@
 
 	input[type="text"], input[type="password"] {
         font-size: 16px;
-        width: auto;
+        width: 200px;
         height: auto;
         margin-bottom: 15px;
         padding: 7px 9px;
@@ -128,7 +128,7 @@
     }
 	.combobox {
 		font-size: 16px;
-	 	width: 200px;
+	 	width: 320px;
 	 	height: auto;
 	 	margin-bottom: 15px;
         padding: 7px 9px;
