@@ -50,8 +50,6 @@
 														<option value="{{$key->id}}"
 													<?php if ($val == $key->id){
 																echo ' selected="selected"';
-															}else if ($key->id == 'UT' || $key->id == 'Active'){
-																echo ' selected="selected"';
 															}?>
 															>{{$key->id}} </option>
 													@endforeach
