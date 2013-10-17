@@ -16,7 +16,7 @@ CREATE TEMPORARY TABLE tmp_data_import (
 	shift VARCHAR(100) NULL,
 	person_number VARCHAR(100) NULL,
 	gender VARCHAR(100) NULL,
-	dob VARCHAR(100) NULL,
+	dob DATE NULL,
 	year_of_birth VARCHAR(100) NULL,
 	age VARCHAR(100) NULL,
 	full_address VARCHAR(500) NULL,
@@ -164,9 +164,6 @@ BEGIN
 	DECLARE in_shift VARCHAR(100);
 	DECLARE in_person_number VARCHAR(100);
 	DECLARE in_gender VARCHAR(100);
-	DECLARE in_dob VARCHAR(100);
-	DECLARE in_year_of_birth VARCHAR(100);
-	DECLARE in_age VARCHAR(100);
 	DECLARE in_full_zip VARCHAR(100);
 	DECLARE in_race_and_ethnicity VARCHAR(100);
 	DECLARE in_marital_status VARCHAR(100);
@@ -301,9 +298,7 @@ BEGIN
 		shift,
 		person_number,
 		gender,
-		dob,
-		year_of_birth,
-		age,
+		STR_TO_DATE(CONCAT(SPLIT_STR(dob, '/', 1), ',', SPLIT_STR(dob, '/', 2), ',', year_of_birth), '%c,%d,%Y') correct_dob, 
 		full_zip,
 		race_and_ethnicity,
 		marital_status,
@@ -436,8 +431,6 @@ BEGIN
 		in_person_number,
 		in_gender,
 		in_dob,
-		in_year_of_birth,
-		in_age,
 		in_full_zip,
 		in_race_and_ethnicity,
 		in_marital_status,
