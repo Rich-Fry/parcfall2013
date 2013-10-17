@@ -9,7 +9,7 @@ class Formquestions {
 			$table->integer('dataform_id')->unsigned();
 			$table->string('questionText');
 			$table->string('questionExample');
-		    $table->boolean('required')->default(true);
+		    $table->boolean('required')->default(false);
 		    $table->string('validate', 256)->nullable()->default(null);
 			$table->timestamps();
 	});

@@ -46,7 +46,7 @@
 
 													<select name="combo" id="input{{$question->id}}" placeholder="{{$question->questionexample}}"  value="{{$val}}" class="combobox" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
 														<option></option>
-													@foreach ($comboValues as $key)													
+													@foreach ($comboValues as $key)
 														<option value="{{$key->id}}"
 													<?php if ($val == $key->id){
 																echo ' selected="selected"';
@@ -164,10 +164,13 @@
                  }
             });
             $('input[data-validate]').focusout(function(){
-                 var regex = new RegExp($(this).attr('data-validate'));
-                 var id = $(this).attr("id");
-                 if(!regex.test($(this).val())){
-                      $('label[for='+id+'] .errorMessage').text('Not Valid');
+            	  var validate = $(this).attr('data-validate');
+            	  if(!/Address1|Address2|City|State|Zip/.test(validate)){
+	                 var regex = new RegExp(validate);
+	                 var id = $(this).attr("id");
+	                 if(!regex.test($(this).val())){
+	                      $('label[for='+id+'] .errorMessage').text('Not Valid');
+	                 }
                  }
             });
 	});
@@ -186,6 +189,32 @@
 	               $(this).focusout();
 	          }
 	     });
+
+		var address1 = $("input[data-validate='Address1']").val();
+		var address2 = $("input[data-validate='Address2']").val();
+		var city = $("input[data-validate='City']").val();
+		var state = $("input[data-validate='State']").val();
+		var zip = $("input[data-validate='Zip']").val();
+
+		$.ajax({
+			url:"/employee/validateAddress",
+			data:{
+				"Address1":address1,
+				"Address2":address2,
+				"City":city,
+				"State":state,
+				"Zip":zip
+			},
+			type: "POST",
+			dataType: "json",
+			error: function(data, status, error){
+				// throw some kind of error
+			},
+			success: function(data){
+				console.log(data);
+			}
+		});
+
 	     if(valid === true){
 	          var promises = [];
 	          $(".formIDs").map(function(){

@@ -173,16 +173,25 @@ class Employee_Controller extends Base_Controller {
      //function to validate addresses
      public function action_validateAddress(){
           $v = new uspsAddressValidation;
-          $address1 = Input::get('Address1');
+          $address1 = Input::get('Address1', null);
+		$address2 = Input::get('Address2', null);
+		$city = Input::get('City', null);
+		$state = Input::get('State', null);
+		$zip = Input::get('Zip', null);
+
+		if(!is_null($address1) && !is_null($address2) && !is_null($city) && !is_null($state) && !is_null($zip)){
+	          return $v->validate(array(
+	               "Address1"=>$address1,
+	               "Address2"=>$address2,
+	               "City"=>$city,
+	               "State"=>$state,
+	               "Zip5"=>$zip,
+	               "Zip4"=>""
+	          ));
+		}else{
+			return json_encode(array("Error"=>"Wrong parameters passed to server"));
+		}
 
 
-          return $v->validate(array(
-               "Address1"=>"",
-               "Address2"=>"6406 Ivy Lane",
-               "City"=>"",
-               "State"=>"",
-               "Zip5"=>"",
-               "Zip4"=>""
-          ));
      }
 }
