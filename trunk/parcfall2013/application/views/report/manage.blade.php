@@ -29,7 +29,7 @@
 	</form>
 </div>
 @section('scripts')
-@parent
+<!-- @parent -->
 <script type="text/javascript" src="/js/SelectList.js"></script>
 <script type="text/javascript" src="/js/jQuery/jquery.blockUI.js"></script>
 <script type="text/javascript">
@@ -113,7 +113,7 @@
 </script>
 @endsection
 @section('styles')
-@parent
+<!-- @parent -->
 <style type="text/css">
 	.column1{
 	width:          48%;
