@@ -46,7 +46,6 @@ class SeedForms_Task {
 		$fq->questionText = "Middle Initial";
 		$fq->questionExample = "M.I.";
 		$fq->fieldType = 1;
-		$fq->required = 0;
 		$df->questions()->save($fq);
 
 		//Q3
@@ -79,7 +78,7 @@ class SeedForms_Task {
 		$fq->questionText = "Address";
 		$fq->questionExample = "Address Line 1";
 		$fq->fieldType = 1;
-		$fq->required = 1;
+		$fq->validate = "Address1";
 		$df->questions()->save($fq);
 
 		//Q7
@@ -87,6 +86,7 @@ class SeedForms_Task {
 		$fq->questionText = "Address Line 2";
 		$fq->questionExample = "Address Line 2";
 		$fq->fieldType = 0;
+		$fq->validate = "Address2";
 		$df->questions()->save($fq);
 
 		//Q8
@@ -95,6 +95,7 @@ class SeedForms_Task {
 		$fq->questionExample = "City";
 		$fq->fieldType = 1;
 		$fq->required = 1;
+		$fq->validate = "City";
 		$df->questions()->save($fq);
 
 		//Q9
@@ -103,6 +104,7 @@ class SeedForms_Task {
 		$fq->questionExample = "2 Digit Code";
 		$fq->fieldType = 2;
 		$fq->required = 1;
+		$fq->validate = "State";
 		$df->questions()->save($fq);
 
 		//Q10
@@ -111,6 +113,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Zip Code";
 		$fq->fieldType = 1;
 		$fq->required = 1;
+		$fq->validate = "Zip";
 		$df->questions()->save($fq);
 
 		//Q11
@@ -120,7 +123,7 @@ class SeedForms_Task {
 		$fq->fieldType = 1;
 		$fq->required = 1;
 		$df->questions()->save($fq);
-		
+
 		//Q12
 		$fq = new FormQuestion;
 		$fq->questionText = "Maiden Name";
@@ -205,7 +208,7 @@ class SeedForms_Task {
 		$df->questions()->save($fq);
 
 		//Q23
-		$fq = new FormQuestion; 
+		$fq = new FormQuestion;
 		$fq->questionText = "Position";
 		$fq->questionExample = "Position Title";
 		$fq->fieldType = 1;
@@ -264,7 +267,7 @@ class SeedForms_Task {
 		// $fq->fieldType = 2;
 		// $fq->required = 1;
 		// $df->questions()->save($fq);
-// 
+//
 		// //Q31
 		// $fq = new FormQuestion;
 		// $fq->questionText = "Disability Code 02";
@@ -273,7 +276,7 @@ class SeedForms_Task {
 		// $fq->required = 0;
 		// $fq->alt_id = 30;
 		// $df->questions()->save($fq);
-// 
+//
 		// //Q32
 		// $fq = new FormQuestion;
 		// $fq->questionText = "Disability Code 03";
@@ -282,7 +285,7 @@ class SeedForms_Task {
 		// $fq->required = 0;
 		// $fq->alt_id = 30;
 		// $df->questions()->save($fq);
-// 
+//
 		// //Q33
 		// $fq = new FormQuestion;
 		// $fq->questionText = "Disability Code 04";
@@ -291,7 +294,7 @@ class SeedForms_Task {
 		// $fq->required = 0;
     	// $fq->alt_id = 30;
 		// $df->questions()->save($fq);
-		
+
 		//Q34
 		$fq = new FormQuestion;
 		$fq->questionText = "Education";
@@ -299,7 +302,7 @@ class SeedForms_Task {
 		$fq->fieldType = 1;
 		$fq->required = 1;
 		$df->questions()->save($fq);
-		
+
 		//Q35
 		$fq = new FormQuestion;
 		$fq->questionText = "Person Number";
@@ -307,7 +310,7 @@ class SeedForms_Task {
 		$fq->fieldType = 1;
 		$fq->required = 1;
 		$df->questions()->save($fq);
-		
+
 		//Q36
 		$fq = new FormQuestion;
 		$fq->questionText = "Ethnicity";
@@ -508,7 +511,7 @@ class SeedForms_Task {
 		//TODO: update below line to associate with correct program or programs
 		$programs=Program::where('programName', '=', 'General')->get();
 		$df->program()->attach($programs[0]);
-		
+
 		//Create the questions
 
 		//Q1
@@ -639,7 +642,7 @@ class SeedForms_Task {
 		$df->formName = 'Additional Information';
 		$df->formDescription = 'Additional Information';
 		$df->save();
-		
+
 		//TODO: update below line to associate with correct program or programs
 		$programs=Program::where('programName', '=', 'General')->get();
 		$df->program()->attach($programs[0]);
@@ -680,7 +683,7 @@ class SeedForms_Task {
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
-		
+
 		//Q6
 		$fq = new FormQuestion;
 		$fq->questionText = "Veteran Date of Separation";
@@ -732,7 +735,7 @@ class SeedForms_Task {
 		$fq->fieldType = 2;
 		$fq->alt_id = 30;
 		$df->questions()->save($fq);
-		
+
 		//Q13
 		$fq = new FormQuestion;
 		$fq->questionText = "Additional Disability 2";
@@ -784,7 +787,7 @@ class SeedForms_Task {
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
-		
+
 		//Q20
 		$fq = new FormQuestion;
 		$fq->questionText = "Other Project";
