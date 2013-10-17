@@ -5,10 +5,6 @@
 
 <div style="row-fluid">
 	<div class="tabs span8">
-		<ul>
-			<li><a href="#report" onclick="tabFlag=0;">Reports</a></li>
-			<li><a href="#otherreport"onclick="tabFlag=1;">Clients</a></li>
-		</ul>
 		<div id="report"  onclick="">
 			<div class="searchFor">Enter the reports name or id:</div>
 				<div class="searchBox">
@@ -21,18 +17,6 @@
 			</div>
 			<div class="selectList" id="reportSelectListContent"></div>
 		</div>
-		<div id="otherreport"  onclick="">
-			<div class="searchFor">Enter the reports name or id:</div>
-				<div class="searchBox">
-					<input type="text" name="reportSelectList_criteria" id="oreportSelectList_criteria" maxlength="100" style="width:80%" >
-					<button id="osearchReportsButton" class="searchButton" onclick="updateReportSelectList();"><i class="icon-search icon4x"></i>Go</button>
-				</div>
-			<div class="listColumns">
-				<div class="listColumn column1" >Name</div>
-				<div class="listColumn column2" >ID</div>
-			</div>
-			<div class="selectList" id="oreportSelectListContent"></div>
-		</div>
 	</div>
 	<form action="" method="POST" id="reportButtons" class="span3">
 		<input type="hidden" name="reportID" value="" id="reportID" />
@@ -44,9 +28,8 @@
 		<?php } ?>
 	</form>
 </div>
-
 @section('scripts')
-<!-- @parent -->
+@parent
 <script type="text/javascript" src="/js/SelectList.js"></script>
 <script type="text/javascript" src="/js/jQuery/jquery.blockUI.js"></script>
 <script type="text/javascript">
@@ -129,58 +112,8 @@
 	reportSelectList.updateButtons = myReportsButtons;
 </script>
 @endsection
-
 @section('styles')
-	<link rel="stylesheet" href="/styles/css/selectList.css">
-	<link rel="stylesheet" href="/styles/css/ui.css">
-<style>
-.column1{
-	width: 48%;
-    float:left;
-    border-right:solid 1px;
-    padding: 0 4px;
-    white-space: nowrap;
-}
-.column2{
-    float:left;
-    padding: 0 4px;
-    white-space: nowrap;
-}
-
-.modalHeader{
-	background-color:#00A305;
-	font-size:medium;
-	color:white;
-}
-.ui-datepicker-trigger{
-	margin-top:-10px;
-}
-.control-label{
-	font-size:medium;
-}
-.controls{
-	margin-left:2%;
-}
-.listColumn{
-	background-color:#00A305;
-	color:white;
-	font-size:medium;
-}
-.searchButton{
-	margin-top:-8px;
-}
-#buttons button{
-	margin-left:0;
-}
-input[type='radio']{
-		margin-top:-2px;
-	}
-</style>
-@endsection
-<!--
-@section('styles')
-<!-- @parent -->
-<!--
+@parent
 <style type="text/css">
 	.column1{
 	width:          48%;
@@ -211,4 +144,3 @@ div[id^="form_"]{
 </style>
 <link rel="stylesheet" href="/styles/css/selectList.css">
 @endsection
--->
