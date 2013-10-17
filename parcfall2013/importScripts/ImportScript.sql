@@ -148,6 +148,13 @@ BEGIN
 	DECLARE in_name_first VARCHAR(100);
 	DECLARE in_maiden_name VARCHAR(100);
 	DECLARE in_active VARCHAR(100);
+	DECLARE in_address VARCHAR(100);
+	DECLARE in_city VARCHAR(100);
+	DECLARE in_state VARCHAR(100);
+	DECLARE in_zip VARCHAR(100);
+	DECLARE in_city2 VARCHAR(100);
+	DECLARE in_state2 VARCHAR(100);
+	DECLARE in_zip2 VARCHAR(100);
 	DECLARE in_classified VARCHAR(100);
 	DECLARE in_referal_source VARCHAR(100);
 	DECLARE in_work_location_code VARCHAR(100);
@@ -160,7 +167,6 @@ BEGIN
 	DECLARE in_dob VARCHAR(100);
 	DECLARE in_year_of_birth VARCHAR(100);
 	DECLARE in_age VARCHAR(100);
-	DECLARE in_full_address VARCHAR(500);
 	DECLARE in_full_zip VARCHAR(100);
 	DECLARE in_race_and_ethnicity VARCHAR(100);
 	DECLARE in_marital_status VARCHAR(100);
@@ -199,12 +205,7 @@ BEGIN
 	DECLARE in_ssn VARCHAR(100);
 	
 	-- values created during process
-	
-	DECLARE address1 VARCHAR(100);
-	DECLARE city VARCHAR(100);
-	DECLARE state VARCHAR(100);
-	DECLARE zip VARCHAR(100);
-	
+
 	-- temporary values for client records
 	DECLARE employee_id INT; -- client id
 	DECLARE program1_id INT; -- form program id 1
@@ -217,6 +218,10 @@ BEGIN
 	DECLARE last_name_id INT;
 	DECLARE maiden_name_id INT;
 	DECLARE status_id INT;
+	DECLARE address_id INT;
+	DECLARE city_id INT;
+	DECLARE state_id INT;
+	DECLARE zip_id INT;
 	DECLARE education_id INT;
 	DECLARE person_number_id INT;
 	DECLARE gender_id INT;
@@ -280,6 +285,13 @@ BEGIN
 		SPLIT_STR(name_last_first, ', ', 2) as first,
 		maiden_name,
 		active,
+		SPLIT_STR(full_address, ', ', 1) as address,
+		SPLIT_STR(full_address, ', ', 2) as city,
+		SPLIT_STR(full_address, ', ', 3) as state,
+		SPLIT_STR(full_address, ', ', 4) as zip,
+		SPLIT_STR(SPLIT_STR(full_address, '\n', 2), ', ', 1) as city2,
+		SPLIT_STR(full_address, ', ', 2) as state2,
+		SPLIT_STR(full_address, ', ', 3) as zip2,
 		classified,
 		referal_source,
 		work_location_code,
@@ -292,7 +304,6 @@ BEGIN
 		dob,
 		year_of_birth,
 		age,
-		full_address,
 		full_zip,
 		race_and_ethnicity,
 		marital_status,
@@ -341,6 +352,10 @@ BEGIN
 	SET last_name_id = (SELECT id FROM formquestion WHERE questionText = 'Last Name' AND dataform_id = general_form_id limit 1);
 	SET maiden_name_id = (SELECT id FROM formquestion WHERE questionText = 'Maiden Name' AND dataform_id = general_form_id limit 1);
 	SET status_id = (SELECT id FROM formquestion WHERE questionText = 'Status' AND dataform_id = general_form_id limit 1);
+	SET address_id = (SELECT id FROM formquestion WHERE questionText = 'Address' AND dataform_id = general_form_id limit 1);
+	SET city_id = (SELECT id FROM formquestion WHERE questionText = 'City' AND dataform_id = general_form_id limit 1);
+	SET state_id = (SELECT id FROM formquestion WHERE questionText = 'State Code' AND dataform_id = general_form_id limit 1);
+	SET zip_id = (SELECT id FROM formquestion WHERE questionText = 'Zip Code' AND dataform_id = general_form_id limit 1);
 	SET education_id = (SELECT id FROM formquestion WHERE questionText = 'Education' AND dataform_id = general_form_id limit 1);
 	SET person_number_id = (SELECT id FROM formquestion WHERE questionText = 'Person Number' AND dataform_id = general_form_id limit 1);
 	SET gender_id = (SELECT id FROM formquestion WHERE questionText = 'Gender' AND dataform_id = general_form_id limit 1);
@@ -404,6 +419,13 @@ BEGIN
 		in_name_first,
 		in_maiden_name,
 		in_active,
+		in_address,
+		in_city,
+		in_state,
+		in_zip,
+		in_city2,
+		in_state2,
+		in_zip2,
 		in_classified,
 		in_referal_source,
 		in_work_location_code,
@@ -416,7 +438,6 @@ BEGIN
 		in_dob,
 		in_year_of_birth,
 		in_age,
-		in_full_address,
 		in_full_zip,
 		in_race_and_ethnicity,
 		in_marital_status,
@@ -467,7 +488,6 @@ BEGIN
 			VALUES (employee_id, program1_id, NOW(), NOW());
 		SET insert_count = insert_count + 1;
 		
-		
 		-- General Information Form Records
 		
 		-- First Name
@@ -494,6 +514,63 @@ BEGIN
 			VALUES (status_id, in_active, general_form_id, employee_id, NOW(), NOW());
 		SET insert_count = insert_count + 1;
 		END IF;
+		-- Address
+		IF in_address IS NOT NULL AND in_address <> '' THEN
+		INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+			VALUES (address_id, in_address, general_form_id, employee_id, NOW(), NOW());
+		SET insert_count = insert_count + 1;
+		END IF;
+		
+		-- if zip is null or '' use approach 2 for address parsing
+		IF in_zip IS NULL OR in_zip THEN
+			-- city2
+			IF in_city2 IS NOT NULL AND in_city2 <> '' THEN
+				INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+					VALUES (city_id, in_city2, general_form_id, employee_id, NOW(), NOW());
+				SET insert_count = insert_count + 1;
+			END IF;
+			-- state2
+			IF in_state2 IS NOT NULL AND in_state2 <> '' THEN
+				INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+					VALUES (state_id, in_state2, general_form_id, employee_id, NOW(), NOW());
+				SET insert_count = insert_count + 1;
+			END IF;
+			-- zip2
+			IF in_full_zip IS NOT NULL AND in_full_zip <> '' THEN
+				INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+					VALUES (zip_id, in_full_zip, general_form_id, employee_id, NOW(), NOW());
+				SET insert_count = insert_count + 1;
+			ELSEIF in_zip2 IS NOT NULL AND in_zip2 <> '' THEN
+				INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+					VALUES (zip_id, in_zip2, general_form_id, employee_id, NOW(), NOW());
+				SET insert_count = insert_count + 1;
+			END IF;
+		ELSE
+			-- city
+			IF in_city IS NOT NULL AND in_city <> '' THEN
+				INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+					VALUES (city_id, in_city, general_form_id, employee_id, NOW(), NOW());
+				SET insert_count = insert_count + 1;
+			END IF;
+			-- state
+			IF in_state IS NOT NULL AND in_state <> '' THEN
+				INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+					VALUES (state_id, in_state, general_form_id, employee_id, NOW(), NOW());
+				SET insert_count = insert_count + 1;
+			END IF;
+			-- zip
+			IF in_full_zip IS NOT NULL AND in_full_zip <> '' THEN
+				INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+					VALUES (zip_id, in_full_zip, general_form_id, employee_id, NOW(), NOW());
+				SET insert_count = insert_count + 1;
+			ELSEIF in_zip IS NOT NULL AND in_zip <> '' THEN
+				INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
+					VALUES (zip_id, in_zip, general_form_id, employee_id, NOW(), NOW());
+				SET insert_count = insert_count + 1;
+			END IF;
+		END IF;
+		
+		
 		-- Education
 		IF in_education IS NOT NULL AND in_education <> '' THEN
 		INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
@@ -515,8 +592,6 @@ BEGIN
 		-- DOB in_dob  not sure?
 		-- Year of Birth  not sure?
 		-- Age  not sure?
-		-- Home Address, FULL PARSE!!!
-		-- Full Zip How?
 		-- Race and Ethnicity
 		IF in_race_and_ethnicity IS NOT NULL AND in_race_and_ethnicity <> '' THEN
 		INSERT INTO questionresponse (formquestion_id, response, dataform_id, employee_id, created_at, updated_at)
@@ -778,14 +853,14 @@ DELIMITER ;
 -- -------------------------------------------------------
 -- Call Procedure
 -- -------------------------------------------------------
-CALL convert_records();
+ CALL convert_records();
 -- SELECT COUNT(*) from questionresponse;
 
 
 -- -------------------------------------------------------
 -- Drop Procedures
 -- -------------------------------------------------------
-DROP PROCEDURE IF EXISTS convert_records;
-DROP FUNCTION IF EXISTS SPLIT_STR;
+ DROP PROCEDURE IF EXISTS convert_records;
+ DROP FUNCTION IF EXISTS SPLIT_STR;
 
 
