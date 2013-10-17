@@ -207,14 +207,14 @@
   	}
 	function saveForm (formID) {
 		var questions=[];
+		var valid = true;
 		$("#"+formID).children('div').map(function(){
 			var qID = $(this).find('label').attr('data-questionID');
 			if($('#input'+qID).val() && $('#input'+qID).val().length > 0){
 				questions.push({questionid: qID, response: $(this).find('#input'+qID).val()});
 			}
 		});
-		// console.log(questions);
-		if(questions.length){
+		if(questions.length && valid){
 			$("#"+formID).block({
 				message:'<div style="font-family:Arial;font-weight:bold;">Saving . . . <img src="/img/loading.gif" style="vertical-align:middle;"></div>',
 				css: {

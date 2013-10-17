@@ -14,7 +14,7 @@ class Employee_Controller extends Base_Controller {
 		}
 		$p = Program::where_not_in('programName', array('General', 'General Employee', 'General Client'))->get();
 		$data =  array('programs' => $p );
-		$this->layout->content = View::make('employee.create',$data);		
+		$this->layout->content = View::make('employee.create',$data);
 	}
 	public function action_create() {
 		if(!Auth::user()->can('employeeCreation')){
@@ -46,12 +46,12 @@ class Employee_Controller extends Base_Controller {
 			array_push($p, 1);
 			array_push($p, ($data['client']==0?2:3));
 			try{
-				
+
 				$e = Employee::create($data);
 				foreach ($p as $program) {
 					$e->programs()->attach(Program::find($program));
 				}
-				
+
 				//Store the information needed to save the person's first name in the questionresponse table
 				$responseFirstName = array(
 					'formquestion_id' =>1,
@@ -59,7 +59,7 @@ class Employee_Controller extends Base_Controller {
 					'dataform_id'	=>1,
 					'employee_id'	=>$e->id,
 					);
-					
+
 				//Store the information needed to save the person's last name in the questionresponse table
 				$responseLastName = array(
 					'formquestion_id' =>3,
@@ -67,11 +67,11 @@ class Employee_Controller extends Base_Controller {
 					'dataform_id'	=>1,
 					'employee_id'	=>$e->id,
 					);
-					
+
 				//Then save the names into the table
 				QuestionResponse::create($responseFirstName);
 				QuestionResponse::create($responseLastName);
-				
+
 				return Redirect::to('employee/edit/'.$e->id);
 			}
 			catch(Exception $e){
@@ -107,7 +107,7 @@ class Employee_Controller extends Base_Controller {
 		else
 		{
 			return json_encode(array('success'=>false));
-		}	
+		}
 	}
 	public function action_find( $clientFlag ) {
 		$criteria = e( Input::get( 'criteria' ) );
@@ -127,7 +127,7 @@ class Employee_Controller extends Base_Controller {
 
 	// 	$this->layout->content = View::make( 'employee.manage' );
 	// }
-	
+
 	//function to edit employee info in a form
 	public function action_edit( $id ) {
 		if ( Auth::can('employeeCreation') ) {
@@ -155,7 +155,7 @@ class Employee_Controller extends Base_Controller {
 			return Redirect::to( 'account/manage' );
 		}
 	}
-	
+
 	//function to save the edited form
 	public function action_saveForm()
 	{
@@ -169,4 +169,20 @@ class Employee_Controller extends Base_Controller {
 		}
 		return $e->formResponses()->save($responses);
 	}
+
+     //function to validate addresses
+     public function action_validateAddress(){
+          $v = new uspsAddressValidation;
+          $address1 = Input::get('Address1');
+
+
+          return $v->validate(array(
+               "Address1"=>"",
+               "Address2"=>"6406 Ivy Lane",
+               "City"=>"",
+               "State"=>"",
+               "Zip5"=>"",
+               "Zip4"=>""
+          ));
+     }
 }
