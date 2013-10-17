@@ -257,40 +257,40 @@ class SeedForms_Task {
 		$fq->fieldType = 1;
 		$df->questions()->save($fq);
 
-		//Q30
-		$fq = new FormQuestion;
-		$fq->questionText = "Disability Code 01";
-		$fq->questionExample = "Primary Code";
-		$fq->fieldType = 2;
-		$fq->required = 1;
-		$df->questions()->save($fq);
-
-		//Q31
-		$fq = new FormQuestion;
-		$fq->questionText = "Disability Code 02";
-		$fq->questionExample = "Additional Code";
-		$fq->fieldType = 2;
-		$fq->required = 0;
-		$fq->alt_id = 30;
-		$df->questions()->save($fq);
-
-		//Q32
-		$fq = new FormQuestion;
-		$fq->questionText = "Disability Code 03";
-		$fq->questionExample = "Additional Code";
-		$fq->fieldType = 2;
-		$fq->required = 0;
-		$fq->alt_id = 30;
-		$df->questions()->save($fq);
-
-		//Q33
-		$fq = new FormQuestion;
-		$fq->questionText = "Disability Code 04";
-		$fq->questionExample = "Additional Code";
-		$fq->fieldType = 2;
-		$fq->required = 0;
-    	$fq->alt_id = 30;
-		$df->questions()->save($fq);
+		// //Q30
+		// $fq = new FormQuestion;
+		// $fq->questionText = "Disability Code 01";
+		// $fq->questionExample = "Primary Code";
+		// $fq->fieldType = 2;
+		// $fq->required = 1;
+		// $df->questions()->save($fq);
+// 
+		// //Q31
+		// $fq = new FormQuestion;
+		// $fq->questionText = "Disability Code 02";
+		// $fq->questionExample = "Additional Code";
+		// $fq->fieldType = 2;
+		// $fq->required = 0;
+		// $fq->alt_id = 30;
+		// $df->questions()->save($fq);
+// 
+		// //Q32
+		// $fq = new FormQuestion;
+		// $fq->questionText = "Disability Code 03";
+		// $fq->questionExample = "Additional Code";
+		// $fq->fieldType = 2;
+		// $fq->required = 0;
+		// $fq->alt_id = 30;
+		// $df->questions()->save($fq);
+// 
+		// //Q33
+		// $fq = new FormQuestion;
+		// $fq->questionText = "Disability Code 04";
+		// $fq->questionExample = "Additional Code";
+		// $fq->fieldType = 2;
+		// $fq->required = 0;
+    	// $fq->alt_id = 30;
+		// $df->questions()->save($fq);
 		
 		//Q34
 		$fq = new FormQuestion;
