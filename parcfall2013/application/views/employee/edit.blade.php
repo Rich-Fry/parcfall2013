@@ -43,15 +43,16 @@
 													$comboValues = Comboboxfield::getCombo($question->id);
 													$defaultValues = Comboboxfield::getDefault($question->id);
 												}?>
-
-													<select name="combo" id="input{{$question->id}}" placeholder="{{$question->questionexample}}"  value="{{$val}}" class="combobox" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
+													<select name="combo" id="input{{$question->id}}" placeholder="{{$question->questionexample}}"  value="{{$val}}" class = "combobox" <?php echo ($question->required ? "required" : "");?>/>
 														<option></option>
 													@foreach ($comboValues as $key)
 														<option value="{{$key->id}}"
-													<?php if ($val == $key->id){
-																echo ' selected="selected"';
-															}?>
-															>{{$key->id}} </option>
+													<?php 
+															if ($val == $key->id)
+																echo 'selected="selected"';																				
+															else if($key->id == 'AL' || $key->id == 'Active' && $val == '')
+																echo 'selected="selected"';	?>															
+														>{{$key->id}} </option>
 													@endforeach
 													</select>
 
@@ -128,8 +129,8 @@
     }
 	.combobox {
 		font-size: 16px;
-	 	width: 320px;
 	 	height: auto;
+	 	width: 220px;
 	 	margin-bottom: 15px;
         padding: 7px 9px;
  	}
