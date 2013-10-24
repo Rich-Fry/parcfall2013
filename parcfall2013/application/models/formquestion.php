@@ -1,6 +1,6 @@
 <?php
 
-class FormQuestion extends Eloquent 
+class FormQuestion extends Eloquent
 {
 	public static $table = 'FormQuestion';
 	public function form()

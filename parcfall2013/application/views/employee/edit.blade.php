@@ -43,15 +43,15 @@
 													$comboValues = Comboboxfield::getCombo($question->id);
 													$defaultValues = Comboboxfield::getDefault($question->id);
 												}?>
-													<select name="combo" id="input{{$question->id}}" placeholder="{{$question->questionexample}}"  value="{{$val}}" class = "combobox" <?php echo ($question->required ? "required" : "");?>/>
+													<select name="combo" id="input{{$question->id}}" placeholder="{{$question->questionexample}}"  value="{{$val}}" class = "combobox" <?php echo ($question->required ? "required" : "");?> <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?>/>
 														<option></option>
 													@foreach ($comboValues as $key)
 														<option value="{{$key->id}}"
-													<?php 
+													<?php
 															if ($val == $key->id)
-																echo 'selected="selected"';																				
+																echo 'selected="selected"';
 															else if($key->id == 'AL' || $key->id == 'Active' && $val == '')
-																echo 'selected="selected"';	?>															
+																echo 'selected="selected"';	?>
 														>{{$key->id}} </option>
 													@endforeach
 													</select>
@@ -185,18 +185,27 @@
 	          }
 	     });
 	     $('input[data-validate]').each(function(index){
-	          var regex = new RegExp($(this).attr('data-validate'));
-	          if(!regex.test($(this).val())){
-	               valid = false;
-	               $(this).focusout();
-	          }
+			var validate = $(this).attr('data-validate');
+			if(!/Address1|Address2|City|State|Zip/.test(validate)){
+				var regex = new RegExp(validate);
+				if(!regex.test($(this).val())){
+					valid = false;
+					$(this).focusout();
+				}
+			}
 	     });
 
 		var address1 = $("input[data-validate='Address1']").val();
 		var address2 = $("input[data-validate='Address2']").val();
 		var city = $("input[data-validate='City']").val();
-		var state = $("input[data-validate='State']").val();
+		var state = $("select[data-validate='State']").val();
 		var zip = $("input[data-validate='Zip']").val();
+
+		var address1Id = $("input[data-validate='Address1']").attr('id');
+		var address2Id = $("input[data-validate='Address2']").attr('id');
+		var cityId = $("input[data-validate='City']").attr('id');
+		var stateId = $("select[data-validate='State']").attr('id');
+		var zipId = $("input[data-validate='Zip']").attr('id');
 
 		$.ajax({
 			url:"/employee/validateAddress",
@@ -214,27 +223,36 @@
 			},
 			success: function(data){
 				console.log(data);
+				if(data.Error == true){
+					console.log(address1Id);
+
+					$('label[for='+address1Id+'] .errorMessage').text('Not Valid');
+					$('label[for='+address2Id+'] .errorMessage').text('Not Valid');
+					$('label[for='+cityId+'] .errorMessage').text('Not Valid');
+					$('label[for='+stateId+'] .errorMessage').text('Not Valid');
+					$('label[for='+zipId+'] .errorMessage').text('Not Valid');
+					valid = false;
+				}
+			     if(valid === true){
+			          var promises = [];
+			          $(".formIDs").map(function(){
+			               promises.push(saveForm('form_'+$(this).val()));
+			          });
+			          $.when(promises).done(function(){
+			               window.location = "/account/manage";
+			          })
+			     }else{
+			          $('#saveAlert').dialog({
+			               modal: true,
+			               buttons: {
+			                    Close: function(){
+			                         $(this).dialog('close');
+			                    }
+			               }
+			          });
+			     }
 			}
 		});
-
-	     if(valid === true){
-	          var promises = [];
-	          $(".formIDs").map(function(){
-	               promises.push(saveForm('form_'+$(this).val()));
-	          });
-	          $.when(promises).done(function(){
-	               window.location = "/account/manage";
-	          })
-	     }else{
-	          $('#saveAlert').dialog({
-	               modal: true,
-	               buttons: {
-	                    Close: function(){
-	                         $(this).dialog('close');
-	                    }
-	               }
-	          });
-	     }
   	}
 	function saveForm (formID) {
 		var questions=[];
