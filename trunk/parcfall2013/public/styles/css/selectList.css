@@ -80,7 +80,7 @@
 }
 
 .selectButtons input {
-    margin-bottom:          15px;
+    /*margin-bottom:          15px;
     /* width:                  200px; */
 }
 
@@ -111,7 +111,7 @@
     display: inline-block;
     margin: 0;
     padding: .5em 2em .55em;
-    /* width: 100%; */
+    width: 100%;
     outline: none;
     -webkit-border-radius: .5em; 
     -moz-border-radius: .5em;
@@ -124,7 +124,7 @@
     text-shadow: 0 1px 1px rgba(0,0,0,.3);
     font: 14px/100% Arial, Helvetica, sans-serif;
     cursor: pointer;
-    /* -webkit-appearance: button; */
+    -webkit-appearance: button;
 }*/
 .button:hover {
     text-decoration: none;
