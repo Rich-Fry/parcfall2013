@@ -98,6 +98,7 @@
 	.innerTabs .control-group{
 		float:left;
 		padding-right:15px;
+		height: 75px
 	}
 	.button{
 		float:right;
@@ -106,7 +107,7 @@
 		clear:both;
 	}
 
-	input[type="text"], input[type="password"] {
+	input[type="text"], input[type="password"], .combo {
         font-size: 16px;
         width: 200px;
         height: auto;
