@@ -43,6 +43,10 @@ class Employee_Controller extends Base_Controller {
 		}
 
 		else{
+			if(!$p){
+				Session::flash('errors', 'Program is required.');
+				return Redirect::to('employee/createForm');
+			}
 			array_push($p, 1);
 			array_push($p, ($data['client']==0?2:3));
 			try{
