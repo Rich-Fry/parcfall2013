@@ -39,6 +39,7 @@ class SeedForms_Task {
 		$fq->questionExample = "First Name";
 		$fq->fieldType = 1;
 		$fq->required = 1;
+		$fq->view_order = 1;
 		$df->questions()->save($fq);
 
 		//Q2
@@ -46,89 +47,100 @@ class SeedForms_Task {
 		$fq->questionText = "Middle Initial";
 		$fq->questionExample = "M.I.";
 		$fq->fieldType = 1;
+		$fq->view_order = 2;
 		$df->questions()->save($fq);
 
 		//Q3
+		$fq = new FormQuestion;
+		$fq->questionText = "Maiden Name";
+		$fq->questionExample = "Maiden Name";
+		$fq->fieldType = 0;
+		$fq->view_order = 3;
+		$df->questions()->save($fq);
+
+		//Q4
 		$fq = new FormQuestion;
 		$fq->questionText = "Last Name";
 		$fq->questionExample = "Last Name";
 		$fq->fieldType = 1;
 		$fq->required = 1;
+		$fq->view_order = 4;
 		$df->questions()->save($fq);
 
-		//Q4
+		//Q5
 		$fq = new FormQuestion;
 		$fq->questionText = "Birthdate";
 		$fq->questionExample = "MM/DD/YEAR";
 		$fq->fieldType = 3;
 		$fq->required = 1;
+		$fq->view_order = 5;
 		$df->questions()->save($fq);
 
-		//Q5
+		//Q6
 		$fq = new FormQuestion;
 		$fq->questionText = "Social Security Number";
 		$fq->questionExample = "XXX-XX-XXXX";
 		$fq->fieldType = 1;
         $fq->validate = "^\d{3}-?\d{2}-?\d{4}$";
 		$fq->required = 1;
+		$fq->view_order = 6;
 		$df->questions()->save($fq);
 
-		//Q6
+		//Q7
 		$fq = new FormQuestion;
 		$fq->questionText = "Address";
 		$fq->questionExample = "Address Line 1";
 		$fq->fieldType = 1;
 		$fq->validate = "Address1";
+		$fq->view_order = 7;
 		$df->questions()->save($fq);
 
-		//Q7
+		//Q8
 		$fq = new FormQuestion;
 		$fq->questionText = "Address Line 2";
 		$fq->questionExample = "Address Line 2";
 		$fq->fieldType = 0;
 		$fq->validate = "Address2";
+		$fq->view_order = 8;
 		$df->questions()->save($fq);
 
-		//Q8
+		//Q9
 		$fq = new FormQuestion;
 		$fq->questionText = "City";
 		$fq->questionExample = "City";
 		$fq->fieldType = 1;
 		$fq->required = 1;
 		$fq->validate = "City";
+		$fq->view_order = 9;
 		$df->questions()->save($fq);
 
-		//Q9
+		//Q10
 		$fq = new FormQuestion;
 		$fq->questionText = "State Code";
 		$fq->questionExample = "2 Digit Code";
 		$fq->fieldType = 2;
 		$fq->required = 1;
 		$fq->validate = "State";
+		$fq->view_order = 10;
 		$df->questions()->save($fq);
 
-		//Q10
+		//Q11
 		$fq = new FormQuestion;
 		$fq->questionText = "Zip Code";
 		$fq->questionExample = "Zip Code";
 		$fq->fieldType = 1;
 		$fq->required = 1;
 		$fq->validate = "Zip";
+		$fq->view_order = 11;
 		$df->questions()->save($fq);
 
-		//Q11
+		//Q12
 		$fq = new FormQuestion;
 		$fq->questionText = "Country";
 		$fq->questionExample = "Country";
 		$fq->fieldType = 1;
 		$fq->required = 1;
-		$df->questions()->save($fq);
-
-		//Q12
-		$fq = new FormQuestion;
-		$fq->questionText = "Maiden Name";
-		$fq->questionExample = "Maiden Name";
-		$fq->fieldType = 0;
+		$fq->view_order = 12;
 		$df->questions()->save($fq);
 
 		//Q13
@@ -137,6 +149,7 @@ class SeedForms_Task {
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
 		$fq->required = 1;
+		$fq->view_order = 13;
 		$df->questions()->save($fq);
 
 		//Q14
@@ -144,6 +157,7 @@ class SeedForms_Task {
 		$fq->questionText = "Work Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 14;
 		$df->questions()->save($fq);
 
 		//Q15
@@ -151,6 +165,7 @@ class SeedForms_Task {
 		$fq->questionText = "Cell Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 15;
 		$df->questions()->save($fq);
 
 		//Q16
@@ -158,6 +173,7 @@ class SeedForms_Task {
 		$fq->questionText = "Fax";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 16;
 		$df->questions()->save($fq);
 
 		//Q17
@@ -167,6 +183,7 @@ class SeedForms_Task {
 		$fq->fieldType = 1;
         $fq->validate = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
 		$fq->required = 1;
+		$fq->view_order = 17;
 		$df->questions()->save($fq);
 
 		//Q18
@@ -175,6 +192,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Active/Inactive";
 		$fq->fieldType = 2;
 		$fq->required = 1;
+		$fq->view_order = 18;
 		$df->questions()->save($fq);
 
 		//Q19
@@ -183,6 +201,7 @@ class SeedForms_Task {
 		$fq->questionExample = "000000";
 		$fq->fieldType = 4;
 		$fq->required = 1;
+		$fq->view_order = 19;
 		$df->questions()->save($fq);
 
 		//Q20
@@ -191,6 +210,7 @@ class SeedForms_Task {
 		$fq->questionExample = "MM/DD/YEAR";
 		$fq->fieldType = 3;
 		$fq->required = 1;
+		$fq->view_order = 20;
 		$df->questions()->save($fq);
 
 		//Q21
@@ -198,6 +218,7 @@ class SeedForms_Task {
 		$fq->questionText = "I-9 Renewal Date";
 		$fq->questionExample = "MM/DD/YEAR";
 		$fq->fieldType = 3;
+		$fq->view_order = 21;
 		$df->questions()->save($fq);
 
 		//Q22
@@ -205,6 +226,7 @@ class SeedForms_Task {
 		$fq->questionText = "Location";
 		$fq->questionExample = "Location";
 		$fq->fieldType = 1;
+		$fq->view_order = 22;
 		$df->questions()->save($fq);
 
 		//Q23
@@ -212,6 +234,7 @@ class SeedForms_Task {
 		$fq->questionText = "Position";
 		$fq->questionExample = "Position Title";
 		$fq->fieldType = 1;
+		$fq->view_order = 23;
 		$df->questions()->save($fq);
 
 		//Q24
@@ -219,6 +242,7 @@ class SeedForms_Task {
 		$fq->questionText = "Department";
 		$fq->questionExample = "Department";
 		$fq->fieldType = 1;
+		$fq->view_order = 24;
 		$df->questions()->save($fq);
 
 		//Q25
@@ -226,6 +250,7 @@ class SeedForms_Task {
 		$fq->questionText = "Manager";
 		$fq->questionExample = "Manager Name";
 		$fq->fieldType = 1;
+		$fq->view_order = 25;
 		$df->questions()->save($fq);
 
 		//Q26
@@ -234,6 +259,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Married/Single";
 		$fq->fieldType = 2;
 		$fq->required = 1;
+		$fq->view_order = 26;
 		$df->questions()->save($fq);
 
 		//Q27
@@ -242,6 +268,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Exemption Code";
 		$fq->fieldType = 1;
 		$fq->required = 1;
+		$fq->view_order = 27;
 		$df->questions()->save($fq);
 
 
@@ -251,6 +278,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Male/Female";
 		$fq->fieldType = 2;
 		$fq->required = 1;
+		$fq->view_order = 28;
 		$df->questions()->save($fq);
 
 		//Q29
@@ -258,6 +286,7 @@ class SeedForms_Task {
 		$fq->questionText = "EEO Category";
 		$fq->questionExample = "EEO Category";
 		$fq->fieldType = 1;
+		$fq->view_order = 29;
 		$df->questions()->save($fq);
 
 		// //Q30
@@ -301,6 +330,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Education";
 		$fq->fieldType = 1;
 		$fq->required = 1;
+		$fq->view_order = 30;
 		$df->questions()->save($fq);
 
 		//Q35
@@ -309,6 +339,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Person Number";
 		$fq->fieldType = 1;
 		$fq->required = 1;
+		$fq->view_order = 31;
 		$df->questions()->save($fq);
 
 		//Q36
@@ -317,6 +348,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Ethnicity";
 		$fq->fieldType = 1;
 		$fq->required = 1;
+		$fq->view_order = 32;
 		$df->questions()->save($fq);
 
 	}
@@ -342,6 +374,7 @@ class SeedForms_Task {
 		$fq->questionText = "Primary Contact Name";
 		$fq->questionExample = "Full Name";
 		$fq->fieldType = 1;
+		$fq->view_order = 1;
 		$df->questions()->save($fq);
 
 		//Q2
@@ -349,6 +382,7 @@ class SeedForms_Task {
 		$fq->questionText = "P.C. Relationship";
 		$fq->questionExample = "Sibling/Father/Mother/Etc";
 		$fq->fieldType = 1;
+		$fq->view_order = 2;
 		$df->questions()->save($fq);
 
 		//Q3
@@ -356,6 +390,7 @@ class SeedForms_Task {
 		$fq->questionText = "P.C. Address";
 		$fq->questionExample = "Address Line 1";
 		$fq->fieldType = 1;
+		$fq->view_order = 3;
 		$df->questions()->save($fq);
 
 		//Q4
@@ -363,6 +398,7 @@ class SeedForms_Task {
 		$fq->questionText = "P.C. Address Line 2";
 		$fq->questionExample = "Address Line 2";
 		$fq->fieldType = 1;
+		$fq->view_order = 4;
 		$df->questions()->save($fq);
 
 		//Q5
@@ -370,6 +406,7 @@ class SeedForms_Task {
 		$fq->questionText = "P.C. City";
 		$fq->questionExample = "City";
 		$fq->fieldType = 1;
+		$fq->view_order = 5;
 		$df->questions()->save($fq);
 
 		//Q6
@@ -377,6 +414,7 @@ class SeedForms_Task {
 		$fq->questionText = "P.C. State Code";
 		$fq->questionExample = "2 Digit Code";
 		$fq->fieldType = 2;
+		$fq->view_order = 6;
 		$fq->alt_id = 9;
 		$df->questions()->save($fq);
 
@@ -385,6 +423,7 @@ class SeedForms_Task {
 		$fq->questionText = "P.C. Zip Code";
 		$fq->questionExample = "Zip Code";
 		$fq->fieldType = 1;
+		$fq->view_order = 7;
 		$df->questions()->save($fq);
 
 		//Q8
@@ -392,6 +431,7 @@ class SeedForms_Task {
 		$fq->questionText = "P.C. Home Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 8;
 		$df->questions()->save($fq);
 
 		//Q9
@@ -399,6 +439,7 @@ class SeedForms_Task {
 		$fq->questionText = "P.C. Work Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 9;
 		$df->questions()->save($fq);
 
 		//Q10
@@ -406,6 +447,7 @@ class SeedForms_Task {
 		$fq->questionText = "P.C. Cell Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 10;
 		$df->questions()->save($fq);
 
 		//Q11
@@ -413,6 +455,7 @@ class SeedForms_Task {
 		$fq->questionText = "Secondary Contact Name";
 		$fq->questionExample = "Full Name";
 		$fq->fieldType = 1;
+		$fq->view_order = 11;
 		$df->questions()->save($fq);
 
 		//Q12
@@ -420,6 +463,7 @@ class SeedForms_Task {
 		$fq->questionText = "S.C. Relationship";
 		$fq->questionExample = "Sibling/Father/Mother/Etc";
 		$fq->fieldType = 1;
+		$fq->view_order = 12;
 		$df->questions()->save($fq);
 
 		//Q13
@@ -427,6 +471,7 @@ class SeedForms_Task {
 		$fq->questionText = "S.C. Address";
 		$fq->questionExample = "Address Line 1";
 		$fq->fieldType = 1;
+		$fq->view_order = 13;
 		$df->questions()->save($fq);
 
 		//Q14
@@ -434,6 +479,7 @@ class SeedForms_Task {
 		$fq->questionText = "S.C. Address Line 2";
 		$fq->questionExample = "Address Line 2";
 		$fq->fieldType = 1;
+		$fq->view_order = 14;
 		$df->questions()->save($fq);
 
 		//Q15
@@ -441,6 +487,7 @@ class SeedForms_Task {
 		$fq->questionText = "S.C. City";
 		$fq->questionExample = "City";
 		$fq->fieldType = 1;
+		$fq->view_order = 15;
 		$df->questions()->save($fq);
 
 		//Q16
@@ -448,6 +495,7 @@ class SeedForms_Task {
 		$fq->questionText = "S.C. State Code";
 		$fq->questionExample = "2 Digit Code";
 		$fq->fieldType = 2;
+		$fq->view_order = 16;
 		$fq->alt_id = 9;
 		$df->questions()->save($fq);
 
@@ -456,6 +504,7 @@ class SeedForms_Task {
 		$fq->questionText = "S.C. Zip Code";
 		$fq->questionExample = "Zip Code";
 		$fq->fieldType = 1;
+		$fq->view_order = 17;
 		$df->questions()->save($fq);
 
 		//Q18
@@ -463,6 +512,7 @@ class SeedForms_Task {
 		$fq->questionText = "S.C. Home Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 18;
 		$df->questions()->save($fq);
 
 		//Q19
@@ -470,6 +520,7 @@ class SeedForms_Task {
 		$fq->questionText = "S.C. Work Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 19;
 		$df->questions()->save($fq);
 
 		//Q20
@@ -477,6 +528,7 @@ class SeedForms_Task {
 		$fq->questionText = "S.C. Cell Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 20;
 		$df->questions()->save($fq);
 
 		//Q21
@@ -484,6 +536,7 @@ class SeedForms_Task {
 		$fq->questionText = "Physician Name";
 		$fq->questionExample = "Physician Name";
 		$fq->fieldType = 1;
+		$fq->view_order = 21;
 		$df->questions()->save($fq);
 
 		//Q22
@@ -491,6 +544,7 @@ class SeedForms_Task {
 		$fq->questionText = "Physician Phone";
 		$fq->questionExample = "555-555-5555";
 		$fq->fieldType = 1;
+		$fq->view_order = 22;
 		$df->questions()->save($fq);
 
 		//Q23
@@ -498,6 +552,7 @@ class SeedForms_Task {
 		$fq->questionText = "Special Notes";
 		$fq->questionExample = "Allergies/Health Conditions/Etc";
 		$fq->fieldType = 1;
+		$fq->view_order = 23;
 		$df->questions()->save($fq);
 	}
 
@@ -519,6 +574,7 @@ class SeedForms_Task {
 		$fq->questionText = "Work Location Code";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 1;
 		$df->questions()->save($fq);
 
 		//Q2
@@ -526,6 +582,7 @@ class SeedForms_Task {
 		$fq->questionText = "Job Title";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 2;
 		$df->questions()->save($fq);
 
 		//Q3
@@ -533,6 +590,7 @@ class SeedForms_Task {
 		$fq->questionText = "Full Time / PT";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
+		$fq->view_order = 3;
 		$fq->alt_id = 61;
 		$df->questions()->save($fq);
 
@@ -541,6 +599,7 @@ class SeedForms_Task {
 		$fq->questionText = "Shift";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 4;
 		$df->questions()->save($fq);
 
 		//Q5
@@ -548,6 +607,7 @@ class SeedForms_Task {
 		$fq->questionText = "Hire Date";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 5;
 		$df->questions()->save($fq);
 
 		//Q6
@@ -555,6 +615,7 @@ class SeedForms_Task {
 		$fq->questionText = "Training Wage";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 6;
 		$df->questions()->save($fq);
 
 		//Q7
@@ -562,6 +623,7 @@ class SeedForms_Task {
 		$fq->questionText = "Productivity in Primary Job";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 7;
 		$df->questions()->save($fq);
 
 		//Q8
@@ -569,6 +631,7 @@ class SeedForms_Task {
 		$fq->questionText = "Basis for Productivity";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 8;
 		$df->questions()->save($fq);
 
 		//Q9
@@ -576,6 +639,7 @@ class SeedForms_Task {
 		$fq->questionText = "Separation Date";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 9;
 		$df->questions()->save($fq);
 
 		//Q10
@@ -583,6 +647,7 @@ class SeedForms_Task {
 		$fq->questionText = "Separation Type";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 10;
 		$df->questions()->save($fq);
 
 		//Q11
@@ -590,6 +655,7 @@ class SeedForms_Task {
 		$fq->questionText = "Separation Reason";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 11;
 		$df->questions()->save($fq);
 
 		//Q12
@@ -597,6 +663,7 @@ class SeedForms_Task {
 		$fq->questionText = "Add Separation Comments";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 12;
 		$df->questions()->save($fq);
 
 		//Q13
@@ -604,6 +671,7 @@ class SeedForms_Task {
 		$fq->questionText = "Exit Interview - Like most about job";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 13;
 		$df->questions()->save($fq);
 
 
@@ -612,6 +680,7 @@ class SeedForms_Task {
 		$fq->questionText = "Exit Interview - Like least about job";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 14;
 		$df->questions()->save($fq);
 
 		//Q15
@@ -619,6 +688,7 @@ class SeedForms_Task {
 		$fq->questionText = "Exit Interview - Add Comments";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 15;
 		$df->questions()->save($fq);
 
 		//Q16
@@ -626,6 +696,7 @@ class SeedForms_Task {
 		$fq->questionText = "Tenure (Months)";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 16;
 		$df->questions()->save($fq);
 
 		//Q17
@@ -633,6 +704,7 @@ class SeedForms_Task {
 		$fq->questionText = "Tenure (Years)";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 17;
 		$df->questions()->save($fq);
 	}
 
@@ -654,6 +726,7 @@ class SeedForms_Task {
 		$fq->questionText = "Classified/Non";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 1;
 		$df->questions()->save($fq);
 
 		//Q2
@@ -661,6 +734,7 @@ class SeedForms_Task {
 		$fq->questionText = "Hiring/Referral Source";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 2;
 		$df->questions()->save($fq);
 
 		//Q3
@@ -668,6 +742,7 @@ class SeedForms_Task {
 		$fq->questionText = "Veteran";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 3;
 		$df->questions()->save($fq);
 
 		//Q4
@@ -675,6 +750,7 @@ class SeedForms_Task {
 		$fq->questionText = "Special Disabled Veteran";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 4;
 		$df->questions()->save($fq);
 
 		//Q5
@@ -682,6 +758,7 @@ class SeedForms_Task {
 		$fq->questionText = "Vietnam Veteran";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 5;
 		$df->questions()->save($fq);
 
 		//Q6
@@ -689,6 +766,7 @@ class SeedForms_Task {
 		$fq->questionText = "Veteran Date of Separation";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 6;
 		$df->questions()->save($fq);
 
 		//Q7
@@ -696,6 +774,7 @@ class SeedForms_Task {
 		$fq->questionText = "Other Protected Veteran";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 7;
 		$df->questions()->save($fq);
 
 		//Q8
@@ -703,6 +782,7 @@ class SeedForms_Task {
 		$fq->questionText = "AbilityOne Eligibility";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 8;
 		$df->questions()->save($fq);
 
 		//Q9
@@ -710,6 +790,7 @@ class SeedForms_Task {
 		$fq->questionText = "Person with a Disabiliity";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 9;
 		$df->questions()->save($fq);
 
 		//Q10
@@ -717,6 +798,7 @@ class SeedForms_Task {
 		$fq->questionText = "Encore Disability Code";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
+		$fq->view_order = 10;
 		$fq->alt_id = 30;
 		$df->questions()->save($fq);
 
@@ -725,6 +807,7 @@ class SeedForms_Task {
 		$fq->questionText = "Primary Disability";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
+		$fq->view_order = 11;
 		$fq->alt_id = 30;
 		$df->questions()->save($fq);
 
@@ -733,6 +816,7 @@ class SeedForms_Task {
 		$fq->questionText = "Additional Disability 1";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
+		$fq->view_order = 12;
 		$fq->alt_id = 30;
 		$df->questions()->save($fq);
 
@@ -741,6 +825,7 @@ class SeedForms_Task {
 		$fq->questionText = "Additional Disability 2";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
+		$fq->view_order = 13;
 		$fq->alt_id = 30;
 		$df->questions()->save($fq);
 
@@ -749,6 +834,7 @@ class SeedForms_Task {
 		$fq->questionText = "Additional Disability 3";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
+		$fq->view_order = 14;
 		$fq->alt_id = 30;
 		$df->questions()->save($fq);
 
@@ -757,6 +843,7 @@ class SeedForms_Task {
 		$fq->questionText = "Additional Disability 4";
 		$fq->questionExample = "";
 		$fq->fieldType = 2;
+		$fq->view_order = 15;
 		$fq->alt_id = 30;
 		$df->questions()->save($fq);
 
@@ -765,6 +852,7 @@ class SeedForms_Task {
 		$fq->questionText = "Employee of NPA";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 16;
 		$df->questions()->save($fq);
 
 		//Q17
@@ -772,6 +860,7 @@ class SeedForms_Task {
 		$fq->questionText = "AbilityOn E Direct Labor";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 17;
 		$df->questions()->save($fq);
 
 		//Q18
@@ -779,6 +868,7 @@ class SeedForms_Task {
 		$fq->questionText = "AbilityOn E Indirect Labor";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 18;
 		$df->questions()->save($fq);
 
 		//Q19
@@ -786,6 +876,7 @@ class SeedForms_Task {
 		$fq->questionText = "State Use Projects";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 19;
 		$df->questions()->save($fq);
 
 		//Q20
@@ -793,6 +884,7 @@ class SeedForms_Task {
 		$fq->questionText = "Other Project";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 20;
 		$df->questions()->save($fq);
 
 		//Q21
@@ -800,6 +892,7 @@ class SeedForms_Task {
 		$fq->questionText = "FLSA 14c Certificate";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 21;
 		$df->questions()->save($fq);
 
 		//Q22
@@ -807,6 +900,7 @@ class SeedForms_Task {
 		$fq->questionText = "Eligible for Fringe Benefits";
 		$fq->questionExample = "";
 		$fq->fieldType = 1;
+		$fq->view_order = 22;
 		$df->questions()->save($fq);
 }
 }

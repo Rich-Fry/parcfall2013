@@ -418,7 +418,6 @@ function unarchiveItem () {
 </script>
 @endsection
 @section('styles')
-@parent
 	<link rel="stylesheet" href="/styles/css/selectList.css">
 	<link rel="stylesheet" href="/styles/css/ui.css">
 <style>
