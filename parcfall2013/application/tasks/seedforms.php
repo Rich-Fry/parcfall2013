@@ -415,7 +415,7 @@ class SeedForms_Task {
 		$fq->questionExample = "2 Digit Code";
 		$fq->fieldType = 2;
 		$fq->view_order = 6;
-		$fq->alt_id = 9;
+		$fq->alt_id = 10;
 		$df->questions()->save($fq);
 
 		//Q7
@@ -496,7 +496,7 @@ class SeedForms_Task {
 		$fq->questionExample = "2 Digit Code";
 		$fq->fieldType = 2;
 		$fq->view_order = 16;
-		$fq->alt_id = 9;
+		$fq->alt_id = 10;
 		$df->questions()->save($fq);
 
 		//Q17
