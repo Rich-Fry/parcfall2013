@@ -36,13 +36,17 @@
 											?>
 											<?php //FieldTypes 1=textbox 2=combobox 3=datepicker 4=numeric 5=checkbox
 											if($question->fieldtype == 2) {
-												if($question->alt_id != NULL){
+												if($question->alt_id != NULL && $question->alt_id != 0){
+													echo $question->alt_id;
 													$comboValues = Comboboxfield::getCombo($question->alt_id);
 													$defaultValues = Comboboxfield::getDefault($question->alt_id);
 												}else{
+													echo $question->id;
 													$comboValues = Comboboxfield::getCombo($question->id);
 													$defaultValues = Comboboxfield::getDefault($question->id);
-												}?>
+												}
+												?>
+
 													<select name="combo" id="input{{$question->id}}" placeholder="{{$question->questionexample}}"  value="{{$val}}" class = "combobox" <?php echo ($question->required ? "required" : "");?> <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?>/>
 														<option></option>
 													@foreach ($comboValues as $key)
@@ -195,6 +199,28 @@
 			}
 	     });
 
+		//TODO: Remove this when moved to production server with usps
+	     if(valid === true){
+	          var promises = [];
+	          $(".formIDs").map(function(){
+	               promises.push(saveForm('form_'+$(this).val()));
+	          });
+	          $.when(promises).done(function(){
+	               window.location = "/account/manage";
+	          })
+	     }else{
+	          $('#saveAlert').dialog({
+	               modal: true,
+	               buttons: {
+	                    Close: function(){
+	                         $(this).dialog('close');
+	                    }
+	               }
+	          });
+	     }
+	     //TODO: Remove to here
+
+		/*TODO: Uncomment the following when moved to production server
 		var address1 = $("input[data-validate='Address1']").val();
 		var address2 = $("input[data-validate='Address2']").val();
 		var city = $("input[data-validate='City']").val();
@@ -253,6 +279,7 @@
 			     }
 			}
 		});
+		*/
   	}
 	function saveForm (formID) {
 		var questions=[];

@@ -1,15 +1,23 @@
 <?php
 class uspsAddressValidation{
-     private static $endpoint = "http://production.shippingapis.com/ShippingAPITest.dll";
+     private static $endpoint = "http://production.shippingapis.com/ShippingAPITest.dll"; //change this value when moved to production server
      private static $userId = "305PARC04203";
      private static $password = "177CM21GN702";
      private $requestURL;
      private $response;
 
+	/**
+	 * Validate an address
+	 * TODO: double check what's returned and whatnot when we are on the production server with usps
+	 *
+	 * @param array $data
+	 * @return array $success
+	 */
      public function validate($data){
           $this->buildURL($data);
           $this->sendRequest();
           $response = new SimpleXMLElement($this->response);
+
           if(isset($response->Address->Error)){
                return json_encode(array("Error"=>true,"ErrorMsg"=>(string)$response->Address->Error->Description));
           }
