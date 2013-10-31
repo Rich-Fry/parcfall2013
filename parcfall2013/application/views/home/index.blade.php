@@ -14,7 +14,7 @@
 		background: -ms-linear-gradient(top, #cdd1ce 0%,#dce3c4 41%,#fefefd 100%); /* IE10+ */
 		background: linear-gradient(to bottom, #cdd1ce 0%,#dce3c4 41%,#fefefd 100%); /* W3C */
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdd1ce', endColorstr='#fefefd',GradientType=0 ); /* IE6-9 */
-        border-top: 25px solid #00A305; 
+        border-top: 25px solid #00A305;
 		border-radius:20px;
 		-moz-border-radius:20px; /* Old Firefox */
 		box-shadow: 7px 7px 5px #2B452D;
@@ -75,8 +75,14 @@
 			    </div>
 			</div>
 		</div>
-		  <?php 
+		  <?php
 		  echo Form::token();
 		  ?>
 	</form>
-</div>	
+</div>
+<div>
+	<?php
+	$phpExcel = new PHPExcel();
+
+	?>
+</div>
