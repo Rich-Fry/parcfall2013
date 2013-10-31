@@ -37,11 +37,9 @@
 											<?php //FieldTypes 1=textbox 2=combobox 3=datepicker 4=numeric 5=checkbox
 											if($question->fieldtype == 2) {
 												if($question->alt_id != NULL && $question->alt_id != 0){
-													echo $question->alt_id;
 													$comboValues = Comboboxfield::getCombo($question->alt_id);
 													$defaultValues = Comboboxfield::getDefault($question->alt_id);
 												}else{
-													echo $question->id;
 													$comboValues = Comboboxfield::getCombo($question->id);
 													$defaultValues = Comboboxfield::getDefault($question->id);
 												}
