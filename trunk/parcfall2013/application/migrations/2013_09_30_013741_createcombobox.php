@@ -10,16 +10,13 @@ class CreatecomboBox {
 			$table->integer('roles_id')->unsigned();
 			$table->string('comboValue');
 			$table->timestamps();
-		//	$table->foreign('formQuestion_id')->references('id')->on('formquestion');
-		
-	});
+		});
 
     }    
 
 	public function down()
     {
 		Schema::drop('comboboxfields');
-
     }
 
 }

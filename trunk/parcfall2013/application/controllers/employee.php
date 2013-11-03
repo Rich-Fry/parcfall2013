@@ -57,16 +57,18 @@ class Employee_Controller extends Base_Controller {
 				}
 
 				//Store the information needed to save the person's first name in the questionresponse table
+				$questionID = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'First Name')->get();
 				$responseFirstName = array(
-					'formquestion_id' =>1,
+					'formquestion_id' =>$questionID,
 					'response' => e(Input::get('firstname')),
 					'dataform_id'	=>1,
 					'employee_id'	=>$e->id,
 					);
 
 				//Store the information needed to save the person's last name in the questionresponse table
+				$questionID = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Last Name')->get();
 				$responseLastName = array(
-					'formquestion_id' =>3,
+					'formquestion_id' =>$questionID,
 					'response' => e(Input::get('lastname')),
 					'dataform_id'	=>1,
 					'employee_id'	=>$e->id,
