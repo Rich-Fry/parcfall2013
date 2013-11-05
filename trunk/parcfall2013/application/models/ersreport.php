@@ -14,13 +14,12 @@ class ErsReport extends Eloquent
 		$objPHPExcel = ErsReport::generateDisabilityCategoryTab($objPHPExcel);
 		
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-		$objWriter->save('test.xlsx');
+		$objWriter->save('SpeedERS_'.date("Y_m_d").'.xlsx');
+		//$objWriter->save('SpeedERS.xlsx');
 	}
 	
 	private static function generateDemographics($objPHPExcel)
 	{
-		$employees = Employee::select('employee.id as id')->get();
-	
 		// Create a new worksheet
 		$myWorkSheet = new PHPExcel_Worksheet($objPHPExcel, 'Demographics');
 		$objPHPExcel->addSheet($myWorkSheet, 0);
@@ -100,6 +99,7 @@ class ErsReport extends Eloquent
 		
 
 		$indexer = 2;//Leave a row for the titles on the excel 1-based spreadsheet
+		$employees = Employee::select('employee.id as id')->get();
 		
 		foreach ($employees as $employee) {
 			$id = $employee->id;
@@ -147,91 +147,92 @@ class ErsReport extends Eloquent
 			if(sizeOf($employeeNumber) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('A'.$indexer, $employeeNumber[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('A'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('A'.$indexer, "NOT RECORDED");
 			if(sizeOf($gender) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('B'.$indexer, $gender[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('B'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('B'.$indexer, "NOT RECORDED");
 			if(sizeOf($birthdate) > 0)
-				$objPHPExcel->getActiveSheet()->setCellValue('C'.$indexer, $birthdate[0]->response);
+				$objPHPExcel->getActiveSheet()->setCellValue('C'.$indexer, substr($birthdate[0]->response, 0, 4));
+				//We need to figure out if newly entered dates are being inserted with this same format or create a transform to make them do so
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('C'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('C'.$indexer, "NOT RECORDED");
 			if(sizeOf($zipCode) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('D'.$indexer, $zipCode[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('D'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('D'.$indexer, "NOT RECORDED");
 			if(sizeOf($ethnicity) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('E'.$indexer, $ethnicity[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('E'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('E'.$indexer, "NOT RECORDED");
 			if(sizeOf($w4Status) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('F'.$indexer, $w4Status[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('F'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('F'.$indexer, "NOT RECORDED");
 			if(sizeOf($veteran) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('G'.$indexer, $veteran[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('G'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('G'.$indexer, "NOT RECORDED");
 			if(sizeOf($specialDisabledVeteran) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('H'.$indexer, $specialDisabledVeteran[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('H'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('H'.$indexer, "NOT RECORDED");
 			if(sizeOf($veteranDateOfSeparation) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('I'.$indexer, $veteranDateOfSeparation[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('I'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('I'.$indexer, "NOT RECORDED");
 			if(sizeOf($hireDate) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('J'.$indexer, $hireDate[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('J'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('J'.$indexer, "NOT RECORDED");
 			if(sizeOf($abilityOneEligibility) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('K'.$indexer, $abilityOneEligibility[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('K'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('K'.$indexer, "NOT RECORDED");
 			if(sizeOf($personWithADisabiliity) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('L'.$indexer, $personWithADisabiliity[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('L'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('L'.$indexer, "NOT RECORDED");
 			if(sizeOf($primaryDisability) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('M'.$indexer, $primaryDisability[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('M'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('M'.$indexer, "NOT RECORDED");
 			if(sizeOf($additionalDisability1) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('N'.$indexer, $additionalDisability1[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('N'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('N'.$indexer, "NOT RECORDED");
 			if(sizeOf($additionalDisability2) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('O'.$indexer, $additionalDisability2[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('O'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('O'.$indexer, "NOT RECORDED");
 			if(sizeOf($additionalDisability3) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('P'.$indexer, $additionalDisability3[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('P'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('P'.$indexer, "NOT RECORDED");
 			if(sizeOf($employeeOfNPA) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('Q'.$indexer, $employeeOfNPA[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('Q'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('Q'.$indexer, "NOT RECORDED");
 			if(sizeOf($abilityOnEDirectLabor) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('R'.$indexer, $abilityOnEDirectLabor[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('R'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('R'.$indexer, "NOT RECORDED");
 			if(sizeOf($abilityOnEIndirectLabor) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('S'.$indexer, $abilityOnEIndirectLabor[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('S'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('S'.$indexer, "NOT RECORDED");
 			if(sizeOf($stateUseProjects) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('T'.$indexer, $stateUseProjects[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('T'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('T'.$indexer, "NOT RECORDED");
 			if(sizeOf($otherProject) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('U'.$indexer, $otherProject[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('U'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('U'.$indexer, "NOT RECORDED");
 			if(sizeOf($workLocationCode) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('V'.$indexer, $workLocationCode[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('V'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('V'.$indexer, "NOT RECORDED");
 	
 	
 			//TODO: insert Encore data here
@@ -240,39 +241,39 @@ class ErsReport extends Eloquent
 			if(sizeOf($trainingWage) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('AC'.$indexer, $trainingWage[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('AC'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('AC'.$indexer, "NOT RECORDED");
 			if(sizeOf($fLSA14cCertificate) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('AD'.$indexer, $fLSA14cCertificate[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('AD'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('AD'.$indexer, "NOT RECORDED");
 			if(sizeOf($productivityInPrimaryJob) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('AE'.$indexer, $productivityInPrimaryJob[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('AE'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('AE'.$indexer, "NOT RECORDED");
 			if(sizeOf($basisForProductivity) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('AF'.$indexer, $basisForProductivity[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('AF'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('AF'.$indexer, "NOT RECORDED");
 			if(sizeOf($eligibleForFringeBenefits) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('AG'.$indexer, $eligibleForFringeBenefits[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('AG'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('AG'.$indexer, "NOT RECORDED");
 			if(sizeOf($separationDate) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, $separationDate[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, "NOT RECORDED");
 			if(sizeOf($separationType) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('AI'.$indexer, $separationType[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('AI'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('AI'.$indexer, "NOT RECORDED");
 			if(sizeOf($separationReason) > 0)
 				$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$indexer, $separationReason[0]->response);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$indexer, "NOT RECORDED");
 			if($socialHash)
 				$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, $socialSecurityNumber);
 			else
-				$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, "NOT RECORDED,");
+				$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, "NOT RECORDED");
 		 	
 			$indexer++;
 		} 
