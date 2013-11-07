@@ -57,18 +57,21 @@ class Employee_Controller extends Base_Controller {
 				}
 
 				//Store the information needed to save the person's first name in the questionresponse table
-				$questionID = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'First Name')->get();
+				$questionID = FormQuestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'First Name')->get();
+				echo "<pre>";
+				print_r($questionID);
+				echo "</pre>";
 				$responseFirstName = array(
-					'formquestion_id' =>$questionID,
+					'formquestion_id' => $questionID[0]->id,
 					'response' => e(Input::get('firstname')),
 					'dataform_id'	=>1,
 					'employee_id'	=>$e->id,
 					);
 
 				//Store the information needed to save the person's last name in the questionresponse table
-				$questionID = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Last Name')->get();
+				$questionID = FormQuestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Last Name')->get();
 				$responseLastName = array(
-					'formquestion_id' =>$questionID,
+					'formquestion_id' => $questionID[0]->id,
 					'response' => e(Input::get('lastname')),
 					'dataform_id'	=>1,
 					'employee_id'	=>$e->id,
@@ -82,7 +85,7 @@ class Employee_Controller extends Base_Controller {
 			}
 			catch(Exception $e){
 				Session::flash('errors', 'There was a problem creating your employee, please try again. Errors:'.json_encode($e->getMessage()));
-				return Redirect::to('employee/createForm');
+				//return Redirect::to('employee/createForm');
 			}
 		}
 	}
