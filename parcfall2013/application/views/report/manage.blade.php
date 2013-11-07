@@ -8,7 +8,7 @@
 		<div id="report"  onclick="">
 			<div class="searchFor">Enter the reports name or id:</div>
 				<div class="searchBox">
-					<input type="text" name="reportSelectList_criteria" id="reportSelectList_criteria" maxlength="100" style="width:80%" >
+					<input type="text" name="reportSelectList_criteria" id="reportSelectList_criteria" maxlength="100" style="width:80%" value="Modular Reports: To Be Implemented">
 					<button id="searchReportsButton" class="searchButton" onclick="updateReportSelectList();"><i class="icon-search icon4x"></i>Go</button>
 				</div>
 			<div class="listColumns">
@@ -18,15 +18,20 @@
 			<div class="selectList" id="reportSelectListContent"></div>
 		</div>
 	</div>
-	<form action="" method="POST" id="reportButtons" class="span3">
-		<input type="hidden" name="reportID" value="" id="reportID" />
-		<?php if(Auth::user()->can('reportTemplateCreation')){ ?>
-		<button id="editReportButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitReport('report/edit')"><i class="icon-edit icon4x"></i>Edit</button>
-		<?php } ?>
-		<?php if(Auth::user()->can('reportGeneration')){ ?>
-		<button id="generateReportButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitReport('report/generate')"><i class="icon-plus-sign icon4x"></i>Generate Report</button>
-		<?php } ?>
-	</form>
+	<div  class="span3">
+		<form action="" method="POST" id="reportButtons">
+			<input type="hidden" name="reportID" value="" id="reportID" />
+			<?php if(Auth::user()->can('reportTemplateCreation')){ ?>
+			<button id="editReportButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitReport('report/edit')"><i class="icon-edit icon4x"></i>Edit</button>
+			<?php } ?>
+			<?php if(Auth::user()->can('reportGeneration')){ ?>
+			<button id="generateReportButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitReport('report/generate')"><i class="icon-plus-sign icon4x"></i>Generate Report</button>
+			<?php } ?>
+			<?php if(Auth::user()->can('reportGeneration')){ ?>
+			<button id="generateERSReportButton" class="span12"><i class="icon-plus-sign icon4x"></i>Generate ERS Report</button>
+			<?php } ?>
+		</form>
+	</div>
 </div>
 @section('scripts')
 <!-- @parent -->
@@ -36,7 +41,13 @@
 	var reportSelectList = new SelectList('reportSelectList');
 	$(function () {
 		$("button").button();
-		updateReportSelectList(); 
+		updateReportSelectList();
+		$('#generateERSReportButton').click(function(event){
+			event.preventDefault();
+			if(!buttonDisabled(this)){
+				submitERSReport();
+			}
+		}); 
 	});
 	function updateReportSelectList(){
 		var content= "reportSelectListContent";
@@ -99,6 +110,22 @@
 				$("#reportButtons").submit();
 		}
 	}
+	function submitERSReport () {
+		$.ajax({
+			url: "/report/generateERS",
+			type: "POST",
+			dataType: "json",
+			error: function(XMLHttpRequest, textStatus, errorThrown){
+				alert("Request failed: getting ERS: " + textStatus + " " + errorThrown);
+			},
+			success: function(msg){
+					var iframe = document.createElement("iframe");
+					iframe.style.display = "none";
+					iframe.src = msg.filename;
+					$('body').append(iframe);
+			}
+		});
+	}
 	function myReportsButtons(){
 			var disabled = (reportSelectList.selectedItem == 0);
 			if (disabled){
@@ -107,7 +134,6 @@
 			else{
 				$("button").button('enable')
 			}
-
 		}
 	reportSelectList.updateButtons = myReportsButtons;
 </script>

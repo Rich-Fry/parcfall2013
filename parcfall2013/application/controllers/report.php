@@ -156,5 +156,10 @@ class Report_Controller extends Base_Controller {
 			return Redirect::to('account/manage');
 		}
 	}
-
+	public function action_generateERS()
+	{
+		$filename = ErsReport::generate();
+		return json_encode(array("filename"=>$filename));
+	}
+	
 }
