@@ -14,8 +14,27 @@ class ErsReport extends Eloquent
 		$objPHPExcel = ErsReport::generateDisabilityCategoryTab($objPHPExcel);
 		
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-		$objWriter->save('SpeedERS_'.date("Y_m_d").'.xlsx');
+		$objWriter->save($_SERVER['DOCUMENT_ROOT'].'/ERS/SpeedERS_'.date("Y_m_d").'.xlsx');
+		return('/ERS/SpeedERS_'.date("Y_m_d").'.xlsx');
 		//$objWriter->save('SpeedERS.xlsx');
+	}
+	
+	public static function download()
+	{
+		header ('Content-Type: application/vnd.ms-excel; charset=utf-8');
+		header ('Content-Disposition: attachment; filename="ERS Reports\SpeedERS_'.date("Y_m_d").'.xlsx"'); 
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("Cache-Control: private",false);
+		
+		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+		$objPHPExcel = new PHPExcel();
+		$objPHPExcel = $objReader->load('ERS Reports\SpeedERS_'.date("Y_m_d").'.xlsx');
+		
+		//$objPHPExcel->load('ERS Reports\SpeedERS_'.date("Y_m_d").'.xlsx');
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+		$objWriter->save('php://output');
+		//readfile('ERS Reports\SpeedERS_'.date("Y_m_d").'.xlsx');
 	}
 	
 	private static function generateDemographics($objPHPExcel)
