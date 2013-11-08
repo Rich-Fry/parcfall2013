@@ -58,9 +58,6 @@ class Employee_Controller extends Base_Controller {
 
 				//Store the information needed to save the person's first name in the questionresponse table
 				$questionID = FormQuestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'First Name')->get();
-				echo "<pre>";
-				print_r($questionID);
-				echo "</pre>";
 				$responseFirstName = array(
 					'formquestion_id' => $questionID[0]->id,
 					'response' => e(Input::get('firstname')),
@@ -85,7 +82,7 @@ class Employee_Controller extends Base_Controller {
 			}
 			catch(Exception $e){
 				Session::flash('errors', 'There was a problem creating your employee, please try again. Errors:'.json_encode($e->getMessage()));
-				//return Redirect::to('employee/createForm');
+				return Redirect::to('employee/createForm');
 			}
 		}
 	}
