@@ -191,7 +191,7 @@ class ErsReport extends Eloquent
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('D'.$indexer, "NOT RECORDED");
 				if(sizeOf($birthdate) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('E'.$indexer, substr($birthdate[0]->response, 5, 4));
+					$objPHPExcel->getActiveSheet()->setCellValue('E'.$indexer, substr($birthdate[0]->response, 5, 5));
 					//We need to figure out if newly entered dates are being inserted with this same format or create a transform to make them do so
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('E'.$indexer, "NOT RECORDED");
