@@ -13,6 +13,7 @@ class ErsReport extends Eloquent
 		$objPHPExcel = ErsReport::generateWorkLocationTab($objPHPExcel);
 		$objPHPExcel = ErsReport::generateDisabilityCategoryTab($objPHPExcel);
 
+		$objPHPExcel->setActiveSheetIndexByName('Demographics');
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 		$objWriter->save($_SERVER['DOCUMENT_ROOT'].'/ERS/SpeedERS_'.date("Y_m_d").'.xlsx');
 		return('/ERS/SpeedERS_'.date("Y_m_d").'.xlsx');
