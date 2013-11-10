@@ -44,15 +44,14 @@
 													$defaultValues = Comboboxfield::getDefault($question->id);
 												}
 												?>
-
-													<select name="combo" id="input{{$question->id}}" placeholder="{{$question->questionexample}}"  value="{{$val}}" class = "combobox" <?php echo ($question->required ? "required" : "");?> <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?>/>
-														<option></option>
+												<select name="combo"  id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?> combobox" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
+												<option></option>
 													@foreach ($comboValues as $key)
 														<option value="{{$key->id}}"
 													<?php
 															if ($val == $key->id)
 																echo 'selected="selected"';
-															else if($key->id == 'AL' || $key->id == 'Active' && $val == '')
+															else if($key->id == 'UT' || $key->id == 'Active' && $val == '')
 																echo 'selected="selected"';	?>
 														>{{$key->id}} </option>
 													@endforeach
