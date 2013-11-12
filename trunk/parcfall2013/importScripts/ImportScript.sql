@@ -354,7 +354,7 @@ BEGIN
 	SET state_id = (SELECT id FROM FormQuestion WHERE questionText = 'State Code' AND dataform_id = general_form_id limit 1);
 	SET zip_id = (SELECT id FROM FormQuestion WHERE questionText = 'Zip Code' AND dataform_id = general_form_id limit 1);
 	SET education_id = (SELECT id FROM FormQuestion WHERE questionText = 'Education' AND dataform_id = general_form_id limit 1);
-	SET person_number_id = (SELECT id FROM FormQuestion WHERE questionText = 'Person Number' AND dataform_id = general_form_id limit 1);
+	SET person_number_id = (SELECT id FROM FormQuestion WHERE questionText = 'Employee Number' AND dataform_id = general_form_id limit 1);
 	SET gender_id = (SELECT id FROM FormQuestion WHERE questionText = 'Gender' AND dataform_id = general_form_id limit 1);
 	SET dob_id = (SELECT id FROM FormQuestion WHERE questionText = 'Birthdate' AND dataform_id = general_form_id limit 1);
 	SET ethnicity_id = (SELECT id FROM FormQuestion WHERE questionText = 'Ethnicity' AND dataform_id = general_form_id limit 1);

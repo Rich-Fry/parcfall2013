@@ -334,13 +334,13 @@ class SeedForms_Task {
 		$df->questions()->save($fq);
 
 		//Q35
-		$fq = new FormQuestion;
-		$fq->questionText = "Person Number";
-		$fq->questionExample = "Person Number";
-		$fq->fieldType = 1;
-		$fq->required = 1;
-		$fq->view_order = 31;
-		$df->questions()->save($fq);
+//		$fq = new FormQuestion;
+//		$fq->questionText = "Person Number";
+//		$fq->questionExample = "Person Number";
+//		$fq->fieldType = 1;
+//		$fq->required = 1;
+//		$fq->view_order = 31;
+//		$df->questions()->save($fq);
 
 		//Q36
 		$fq = new FormQuestion;
@@ -348,7 +348,7 @@ class SeedForms_Task {
 		$fq->questionExample = "Ethnicity";
 		$fq->fieldType = 1;
 		$fq->required = 1;
-		$fq->view_order = 32;
+		$fq->view_order = 31;
 		$df->questions()->save($fq);
 
 	}
