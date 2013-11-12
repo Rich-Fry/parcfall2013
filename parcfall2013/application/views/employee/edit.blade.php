@@ -47,13 +47,7 @@
 												<select name="combo"  id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?> combobox" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
 												<option></option>
 													@foreach ($comboValues as $key)
-														<option value="{{$key->id}}"
-													<?php
-															if ($val == $key->id)
-																echo 'selected="selected"';
-															else if($key->id == 'UT' || $key->id == 'Active' && $val == '')
-																echo 'selected="selected"';	?>
-														>{{$key->id}} </option>
+														<option value="{{$key->id}}"<?php if ($val == $key->id) echo 'selected="selected"';?> >{{$key->id}} </option>
 													@endforeach
 													</select>
 
