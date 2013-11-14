@@ -192,22 +192,18 @@ class Employee_Controller extends Base_Controller {
 
      //function to validate addresses
      public function action_validateAddress(){
-          $v = new uspsAddressValidation;
-          $address1 = Input::get('Address1', null);
-		$address2 = Input::get('Address2', null);
-		$city = Input::get('City', null);
-		$state = Input::get('State', null);
-		$zip = Input::get('Zip', null);
+          $v = new addressValidation;
+		$address = array(
+			"Address1"=>Input::get('Address1', null),
+			"Address2"=>Input::get('Address2', null),
+			"City"=>Input::get('City', null),
+			"State"=>Input::get('State', null),
+			"Zip5"=>Input::get('Zip', null),
+			"Zip4"=>""
+		);
 
-		if(!is_null($address1) && !is_null($address2) && !is_null($city) && !is_null($state) && !is_null($zip)){
-	          return $v->validate(array(
-	               "Address1"=>$address1,
-	               "Address2"=>$address2,
-	               "City"=>$city,
-	               "State"=>$state,
-	               "Zip5"=>$zip,
-	               "Zip4"=>""
-	          ));
+		if(!is_null($address['Address1']) && !is_null($address['Address2']) && !is_null($address['City']) && !is_null($address['State']) && !is_null($address['Zip5'])){
+	          return json_encode($v->validate($address));
 		}else{
 			return json_encode(array("Error"=>"Wrong parameters passed to server"));
 		}

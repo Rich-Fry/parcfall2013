@@ -190,28 +190,6 @@
 			}
 	     });
 
-		//TODO: Remove this when moved to production server with usps
-	     if(valid === true){
-	          var promises = [];
-	          $(".formIDs").map(function(){
-	               promises.push(saveForm('form_'+$(this).val()));
-	          });
-	          $.when(promises).done(function(){
-	               window.location = "/account/manage";
-	          })
-	     }else{
-	          $('#saveAlert').dialog({
-	               modal: true,
-	               buttons: {
-	                    Close: function(){
-	                         $(this).dialog('close');
-	                    }
-	               }
-	          });
-	     }
-	     //TODO: Remove to here
-
-		/*TODO: Uncomment the following when moved to production server
 		var address1 = $("input[data-validate='Address1']").val();
 		var address2 = $("input[data-validate='Address2']").val();
 		var city = $("input[data-validate='City']").val();
@@ -249,6 +227,12 @@
 					$('label[for='+stateId+'] .errorMessage').text('Not Valid');
 					$('label[for='+zipId+'] .errorMessage').text('Not Valid');
 					valid = false;
+				}else{
+					$("#"+address1Id).val(data.Address1);
+					$("#"+address2Id).val(data.Address2);
+					$("#"+cityId).val(data.City);
+					$("#"+zipId).val(data.Zip5+"-"+data.Zip4);
+					$("#"+stateId).val(data.State);
 				}
 			     if(valid === true){
 			          var promises = [];
@@ -270,7 +254,6 @@
 			     }
 			}
 		});
-		*/
   	}
 	function saveForm (formID) {
 		var questions=[];
