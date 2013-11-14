@@ -30,7 +30,7 @@ class ErsReport extends Eloquent
 		//Set the titles for each column
 		$objPHPExcel->getActiveSheet()->setCellValue('A1', 'Employee Name');
 		$objPHPExcel->getActiveSheet()->setCellValue('B1', 'Shift');
-		$objPHPExcel->getActiveSheet()->setCellValue('C1', 'Person Number');
+		$objPHPExcel->getActiveSheet()->setCellValue('C1', 'Employee Number');
 		$objPHPExcel->getActiveSheet()->setCellValue('D1', 'Gender');
 		$objPHPExcel->getActiveSheet()->setCellValue('E1', 'Date of Birth');
 		$objPHPExcel->getActiveSheet()->setCellValue('F1', 'Year of Birth');
@@ -76,7 +76,7 @@ class ErsReport extends Eloquent
 		$firstNameId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'First Name')->get();
 		$lastNameId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Last Name')->get();
 		$shiftID = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Shift')->get();
-		$employeeNumberId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Person Number')->get();
+		$employeeNumberId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Employee Number')->get();
 		$genderId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Gender')->get();
 		$birthdateId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Birthdate')->get();
 		$addressId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Address')->get();
@@ -113,8 +113,6 @@ class ErsReport extends Eloquent
 		$separationTypeId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Separation Type')->get();
 		$separationReasonId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Separation Reason')->get();
 		$socialSecurityNumberId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Social Security Number')->get();
-		
-
 
 		$indexer = 2;//Leave a row for the titles on the excel 1-based spreadsheet
 		$employees = Employee::select('Employee.id as id')->get();
