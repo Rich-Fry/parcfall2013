@@ -166,13 +166,27 @@ class Employee_Controller extends Base_Controller {
 	public function action_saveForm()
 	{
 		$e = Employee::find(e(Input::get('employeeID')));
+		$firstNameId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'First Name')->get();
+		$lastNameId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Last Name')->get();
 		$questions = Input::get('questions');
 		$responses = array();
 		if(isset($questions) && count($questions) > 0)
 		foreach ($questions as $q) {
 			if(array_key_exists('questionid', $q) && array_key_exists('response', $q) && strlen($q['response']) > 0)
+			{
 				array_push($responses, array('formquestion_ID' => $q['questionid'], 'response' => $q['response'], 'dataform_id' => e(Input::get('formID'))));
+				if($q['questionid'] == $firstNameId[0]->id){
+					$e->firstName = $q['response'];
+				}
+				if($q['questionid'] == $lastNameId[0]->id){
+					$e->lastName = $q['response'];
+				}
+			}
 		}
+
+		//Save it off into the other table too
+		$e->save();//This doesn't seem to be getting called when I think it should
+
 		return $e->formResponses()->save($responses);
 	}
 
