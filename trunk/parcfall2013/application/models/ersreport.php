@@ -73,98 +73,98 @@ class ErsReport extends Eloquent
 		$objPHPExcel->getActiveSheet()->setCellValue('AQ1', 'ERS Identifier');
 
 		//Initialize the ids
-		$firstNameId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'First Name')->get();
-		$lastNameId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Last Name')->get();
-		$shiftID = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Shift')->get();
-		$employeeNumberId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Employee Number')->get();
-		$genderId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Gender')->get();
-		$birthdateId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Birthdate')->get();
-		$addressId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Address')->get();
-		$addressLine2Id = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Address Line 2')->get();
-		$cityId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'City')->get();
-		$stateCodeId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'State Code')->get();
-		$zipCodeId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Zip Code')->get();
-		$ethnicityId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Ethnicity')->get();
-		$w4StatusId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'W-4 Status')->get();
-		$veteranId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Veteran')->get();
-		$specialDisabledVeteranId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Special Disabled Veteran')->get();
-		$vietnamVeteranId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Vietnam Veteran')->get();
-		$veteranDateOfSeparationId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Veteran Date of Separation')->get();
-		$otherProtectedVeteranId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Other Protected Veteran')->get();
-		$hireDateId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Hire Date')->get();
-		$abilityOneEligibilityId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'AbilityOne Eligibility')->get();
-		$personWithADisabiliityId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Person with a Disabiliity')->get();
-		$primaryDisabilityId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Primary Disability')->get();
-		$additionalDisability1Id = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Additional Disability 1')->get();
-		$additionalDisability2Id = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Additional Disability 2')->get();
-		$additionalDisability3Id = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Additional Disability 3')->get();
-		$employeeOfNPAId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Employee of NPA')->get();
-		$abilityOnEDirectLaborId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'AbilityOn E Direct Labor')->get();
-		$abilityOnEIndirectLaborId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'AbilityOn E Indirect Labor')->get();
-		$stateUseProjectsId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'State Use Projects')->get();
-		$otherProjectId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Other Project')->get();
-		$workLocationCodeId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Work Location Code')->get();
-		$trainingWageId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Training Wage')->get();
-		$fLSA14cCertificateId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'FLSA 14c Certificate')->get();
-		$productivityInPrimaryJobId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Productivity in Primary Job')->get();
-		$basisForProductivityId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Basis for Productivity')->get();
-		$eligibleForFringeBenefitsId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Eligible for Fringe Benefits')->get();
-		$separationDateId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Separation Date')->get();
-		$separationTypeId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Separation Type')->get();
-		$separationReasonId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Separation Reason')->get();
-		$socialSecurityNumberId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Social Security Number')->get();
+		$firstNameId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'First Name')->get();
+		$lastNameId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Last Name')->get();
+		$shiftID = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Shift')->get();
+		$employeeNumberId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Employee Number')->get();
+		$genderId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Gender')->get();
+		$birthdateId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Birthdate')->get();
+		$addressId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Address')->get();
+		$addressLine2Id = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Address Line 2')->get();
+		$cityId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'City')->get();
+		$stateCodeId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'State Code')->get();
+		$zipCodeId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Zip Code')->get();
+		$ethnicityId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Ethnicity')->get();
+		$w4StatusId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'W-4 Status')->get();
+		$veteranId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Veteran')->get();
+		$specialDisabledVeteranId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Special Disabled Veteran')->get();
+		$vietnamVeteranId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Vietnam Veteran')->get();
+		$veteranDateOfSeparationId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Veteran Date of Separation')->get();
+		$otherProtectedVeteranId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Other Protected Veteran')->get();
+		$hireDateId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Hire Date')->get();
+		$abilityOneEligibilityId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'AbilityOne Eligibility')->get();
+		$personWithADisabiliityId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Person with a Disabiliity')->get();
+		$primaryDisabilityId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Primary Disability')->get();
+		$additionalDisability1Id = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Additional Disability 1')->get();
+		$additionalDisability2Id = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Additional Disability 2')->get();
+		$additionalDisability3Id = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Additional Disability 3')->get();
+		$employeeOfNPAId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Employee of NPA')->get();
+		$abilityOnEDirectLaborId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'AbilityOn E Direct Labor')->get();
+		$abilityOnEIndirectLaborId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'AbilityOn E Indirect Labor')->get();
+		$stateUseProjectsId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'State Use Projects')->get();
+		$otherProjectId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Other Project')->get();
+		$workLocationCodeId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Work Location Code')->get();
+		$trainingWageId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Training Wage')->get();
+		$fLSA14cCertificateId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'FLSA 14c Certificate')->get();
+		$productivityInPrimaryJobId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Productivity in Primary Job')->get();
+		$basisForProductivityId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Basis for Productivity')->get();
+		$eligibleForFringeBenefitsId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Eligible for Fringe Benefits')->get();
+		$separationDateId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Separation Date')->get();
+		$separationTypeId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Separation Type')->get();
+		$separationReasonId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Separation Reason')->get();
+		$socialSecurityNumberId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Social Security Number')->get();
 
 		$indexer = 2;//Leave a row for the titles on the excel 1-based spreadsheet
 		$employees = Employee::select('Employee.id as id')->get();
 
 		foreach ($employees as $employee) {
 			$id = $employee->id;
-			
-			$abilityOneEligibility = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $abilityOneEligibilityId[0]->id)->get();
-			
+
+			$abilityOneEligibility = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $abilityOneEligibilityId[0]->id)->get();
+
 			if(sizeOf($abilityOneEligibility) > 0)//This is our indicator that the person should be included in the ERSReport
 			{
-				$firstName = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $firstNameId[0]->id)->get();
-				$lastName = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $lastNameId[0]->id)->get();
-				$shift = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $shiftID[0]->id)->get();
-				$employeeNumber = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $employeeNumberId[0]->id)->get();
-				$gender = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $genderId[0]->id)->get();
-				$birthdate = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $birthdateId[0]->id)->get();
-				$address = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $addressId[0]->id)->get();
-				$addressLine2 = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $addressLine2Id[0]->id)->get();
-				$city = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $cityId[0]->id)->get();
-				$stateCode = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $stateCodeId[0]->id)->get();
-				$zipCode = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $zipCodeId[0]->id)->get();
-				$ethnicity = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $ethnicityId[0]->id)->get();
-				$w4Status = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $w4StatusId[0]->id)->get();
-				$veteran = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $veteranId[0]->id)->get();
-				$specialDisabledVeteran = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $specialDisabledVeteranId[0]->id)->get();
-				$vietnamVeteran = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $vietnamVeteranId[0]->id)->get();
-				$veteranDateOfSeparation = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $veteranDateOfSeparationId[0]->id)->get();
-				$otherProtectedVeteran = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $otherProtectedVeteranId[0]->id)->get();
-				$hireDate = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $hireDateId[0]->id)->get();
-				
-				$personWithADisabiliity = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $personWithADisabiliityId[0]->id)->get();
-				$primaryDisability = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $primaryDisabilityId[0]->id)->get();
-				$additionalDisability1 = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $additionalDisability1Id[0]->id)->get();
-				$additionalDisability2 = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $additionalDisability2Id[0]->id)->get();
-				$additionalDisability3 = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $additionalDisability3Id[0]->id)->get();
-				$employeeOfNPA = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $employeeOfNPAId[0]->id)->get();
-				$abilityOnEDirectLabor = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $abilityOnEDirectLaborId[0]->id)->get();
-				$abilityOnEIndirectLabor = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $abilityOnEIndirectLaborId[0]->id)->get();
-				$stateUseProjects = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $stateUseProjectsId[0]->id)->get();
-				$otherProject = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $otherProjectId[0]->id)->get();
-				$workLocationCode = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $workLocationCodeId[0]->id)->get();
-				$trainingWage = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $trainingWageId[0]->id)->get();
-				$fLSA14cCertificate = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $fLSA14cCertificateId[0]->id)->get();
-				$productivityInPrimaryJob = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $productivityInPrimaryJobId[0]->id)->get();
-				$basisForProductivity = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $basisForProductivityId[0]->id)->get();
-				$eligibleForFringeBenefits = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $eligibleForFringeBenefitsId[0]->id)->get();
-				$separationDate = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $separationDateId[0]->id)->get();
-				$separationType = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $separationTypeId[0]->id)->get();
-				$separationReason = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $separationReasonId[0]->id)->get();
-				$socialSecurityNumber = Questionresponse::select('questionresponse.response as response')->where('questionresponse.employee_id','=',$id)->where('questionresponse.formquestion_id', '=', $socialSecurityNumberId[0]->id)->get();
-				
+				$firstName = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $firstNameId[0]->id)->get();
+				$lastName = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $lastNameId[0]->id)->get();
+				$shift = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $shiftID[0]->id)->get();
+				$employeeNumber = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $employeeNumberId[0]->id)->get();
+				$gender = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $genderId[0]->id)->get();
+				$birthdate = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $birthdateId[0]->id)->get();
+				$address = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $addressId[0]->id)->get();
+				$addressLine2 = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $addressLine2Id[0]->id)->get();
+				$city = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $cityId[0]->id)->get();
+				$stateCode = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $stateCodeId[0]->id)->get();
+				$zipCode = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $zipCodeId[0]->id)->get();
+				$ethnicity = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $ethnicityId[0]->id)->get();
+				$w4Status = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $w4StatusId[0]->id)->get();
+				$veteran = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $veteranId[0]->id)->get();
+				$specialDisabledVeteran = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $specialDisabledVeteranId[0]->id)->get();
+				$vietnamVeteran = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $vietnamVeteranId[0]->id)->get();
+				$veteranDateOfSeparation = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $veteranDateOfSeparationId[0]->id)->get();
+				$otherProtectedVeteran = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $otherProtectedVeteranId[0]->id)->get();
+				$hireDate = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $hireDateId[0]->id)->get();
+
+				$personWithADisabiliity = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $personWithADisabiliityId[0]->id)->get();
+				$primaryDisability = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $primaryDisabilityId[0]->id)->get();
+				$additionalDisability1 = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $additionalDisability1Id[0]->id)->get();
+				$additionalDisability2 = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $additionalDisability2Id[0]->id)->get();
+				$additionalDisability3 = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $additionalDisability3Id[0]->id)->get();
+				$employeeOfNPA = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $employeeOfNPAId[0]->id)->get();
+				$abilityOnEDirectLabor = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $abilityOnEDirectLaborId[0]->id)->get();
+				$abilityOnEIndirectLabor = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $abilityOnEIndirectLaborId[0]->id)->get();
+				$stateUseProjects = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $stateUseProjectsId[0]->id)->get();
+				$otherProject = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $otherProjectId[0]->id)->get();
+				$workLocationCode = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $workLocationCodeId[0]->id)->get();
+				$trainingWage = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $trainingWageId[0]->id)->get();
+				$fLSA14cCertificate = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $fLSA14cCertificateId[0]->id)->get();
+				$productivityInPrimaryJob = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $productivityInPrimaryJobId[0]->id)->get();
+				$basisForProductivity = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $basisForProductivityId[0]->id)->get();
+				$eligibleForFringeBenefits = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $eligibleForFringeBenefitsId[0]->id)->get();
+				$separationDate = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $separationDateId[0]->id)->get();
+				$separationType = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $separationTypeId[0]->id)->get();
+				$separationReason = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $separationReasonId[0]->id)->get();
+				$socialSecurityNumber = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $socialSecurityNumberId[0]->id)->get();
+
 				//encrypt the social security with sha256 hash algorithm
 				$socialHash = false;
 				if(sizeof($socialSecurityNumber) > 0)
@@ -172,7 +172,7 @@ class ErsReport extends Eloquent
 					$socialSecurityNumber = hash("sha256", $socialSecurityNumber[0]->response);
 					$socialHash = true;
 				}
-				
+
 				if(sizeOf($firstName) > 0 && sizeOf($lastName) > 0)
 					$objPHPExcel->getActiveSheet()->setCellValue('A'.$indexer, $lastName[0]->response.", ".$firstName[0]->response);
 				else
@@ -296,11 +296,11 @@ class ErsReport extends Eloquent
 					$objPHPExcel->getActiveSheet()->setCellValue('AB'.$indexer, substr($workLocationCode[0]->response, 0, 4));
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AB'.$indexer, "NOT RECORDED");
-		
-		
+
+
 				//TODO: insert Encore data here
-		
-		
+
+
 				if(sizeOf($trainingWage) > 0)
 					$objPHPExcel->getActiveSheet()->setCellValue('AI'.$indexer, $trainingWage[0]->response);
 				else
@@ -309,13 +309,13 @@ class ErsReport extends Eloquent
 					$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$indexer, $fLSA14cCertificate[0]->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$indexer, "NOT RECORDED");
-				
+
 				//This is from Encore too
 				//if(sizeOf($productivityInPrimaryJob) > 0)
 				//	$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, $productivityInPrimaryJob[0]->response);
 				//else
 				//	$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, "NOT RECORDED");
-				
+
 				if(sizeOf($basisForProductivity) > 0)
 					$objPHPExcel->getActiveSheet()->setCellValue('AL'.$indexer, $basisForProductivity[0]->response);
 				else
@@ -340,10 +340,10 @@ class ErsReport extends Eloquent
 					$objPHPExcel->getActiveSheet()->setCellValue('AQ'.$indexer, $socialSecurityNumber);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AQ'.$indexer, "NOT RECORDED");
-			 	
+
 				$indexer++;
 			}
-			
+
 		}
 
 		return $objPHPExcel;
