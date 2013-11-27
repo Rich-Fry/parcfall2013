@@ -81,10 +81,14 @@
 			<?php } ?>
 		<?php endforeach ?>
 	</div>
-	<button class="button" onclick="saveAll();"><i class="icon-folder-close icon4x"></i>Done &amp; Save All</button>
+	<button class="button" onclick="saveAll();"><i class="icon-folder-close icon4x"></i> Done &amp; Save All</button>
+	<button class="button" onclick="validateAddress();"><i class="icon-check icon4x"></i> Validate Address</button>
 	<!-- Modal -->
         <div id="saveAlert" title="Oops!" style="display:none">
              <p>You have some errors in the form that need to be fixed before you can move on.</p>
+        </div>
+        <div id="addressError" title="Address didn't validate." style="display:none">
+        	   <p>Sorry, the address you entered didn't validate.</p>
         </div>
 </div>
 @section('styles')
@@ -171,25 +175,7 @@
                  }
             });
 	});
-	function saveAll () {
-	     var valid = true;
-	     $('.required').each(function(index){
-	          if($(this).val() == "" || $(this).val() == null || $.trim($(this).val()) == ""){
-	               valid = false;
-	               $(this).focusout();
-	          }
-	     });
-	     $('input[data-validate]').each(function(index){
-			var validate = $(this).attr('data-validate');
-			if(!/Address1|Address2|City|State|Zip/.test(validate)){
-				var regex = new RegExp(validate);
-				if(!regex.test($(this).val())){
-					valid = false;
-					$(this).focusout();
-				}
-			}
-	     });
-
+	function validateAddress(){
 		var address1 = $("input[data-validate='Address1']").val();
 		var address2 = $("input[data-validate='Address2']").val();
 		var city = $("input[data-validate='City']").val();
@@ -219,14 +205,14 @@
 			success: function(data){
 				console.log(data);
 				if(data.Error == true){
-					console.log(address1Id);
-
-					$('label[for='+address1Id+'] .errorMessage').text('Not Valid');
-					$('label[for='+address2Id+'] .errorMessage').text('Not Valid');
-					$('label[for='+cityId+'] .errorMessage').text('Not Valid');
-					$('label[for='+stateId+'] .errorMessage').text('Not Valid');
-					$('label[for='+zipId+'] .errorMessage').text('Not Valid');
-					valid = false;
+					$('#addressError').dialog({
+						modal: true,
+						buttons: {
+							Close: function(){
+								$(this).dialog('close');
+							}
+						}
+					});
 				}else{
 					$("#"+address1Id).val(data.Address1);
 					$("#"+address2Id).val(data.Address2);
@@ -234,26 +220,46 @@
 					$("#"+zipId).val(data.Zip5+"-"+data.Zip4);
 					$("#"+stateId).val(data.State);
 				}
-			     if(valid === true){
-			          var promises = [];
-			          $(".formIDs").map(function(){
-			               promises.push(saveForm('form_'+$(this).val()));
-			          });
-			          $.when(promises).done(function(){
-			               window.location = "/account/manage";
-			          })
-			     }else{
-			          $('#saveAlert').dialog({
-			               modal: true,
-			               buttons: {
-			                    Close: function(){
-			                         $(this).dialog('close');
-			                    }
-			               }
-			          });
-			     }
 			}
 		});
+	}
+	function saveAll () {
+	     var valid = true;
+	     $('.required').each(function(index){
+	          if($(this).val() == "" || $(this).val() == null || $.trim($(this).val()) == ""){
+	               valid = false;
+	               $(this).focusout();
+	          }
+	     });
+	     $('input[data-validate]').each(function(index){
+			var validate = $(this).attr('data-validate');
+			if(!/Address1|Address2|City|State|Zip/.test(validate)){
+				var regex = new RegExp(validate);
+				if(!regex.test($(this).val())){
+					valid = false;
+					$(this).focusout();
+				}
+			}
+	     });
+
+	     if(valid === true){
+	          var promises = [];
+	          $(".formIDs").map(function(){
+	               promises.push(saveForm('form_'+$(this).val()));
+	          });
+	          $.when(promises).done(function(){
+	               window.location = "/account/manage";
+	          })
+	     }else{
+	          $('#saveAlert').dialog({
+	               modal: true,
+	               buttons: {
+	                    Close: function(){
+	                         $(this).dialog('close');
+	                    }
+	               }
+	          });
+	     }
   	}
 	function saveForm (formID) {
 		var questions=[];
