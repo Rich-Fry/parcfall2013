@@ -1,4 +1,11 @@
 <?php
+/**
+ * Class: addressValidation
+ * Author: Ryan Born
+ *
+ * Description: validates mailing addresses using
+ * smartystreets API.
+ */
 class addressValidation{
 	private static $endpoint = "https://api.smartystreets.com/street-address";
 	private static $authId = "55d1caf0-8687-4c74-881a-40562cbd8b5a";
@@ -16,10 +23,19 @@ class addressValidation{
 		$this->buildURL($data);
 		$this->sendRequest();
 
+		if(isset($this->response['Error'])){
+			return $this->response;
+		}
 		$response = $this->buildResponse();
 		return $response;
 	}
 
+	/**
+	 * Builds request url
+	 *
+	 * @param array $data
+	 * @return void
+	 */
 	private function buildURL($data){
 		foreach($data as &$element){
 			$element = str_replace(" ","+",$element);
@@ -28,12 +44,30 @@ class addressValidation{
 		$this->requestURL = self::$endpoint.'?street='.$data['Address1'].'&city='.$data['City'].'&state='.$data['State'].'zipcode='.$data['Zip5'].'&candidates=1&auth-id='.self::$authId.'&auth-token='.self::$authToken;
 	}
 
+	/**
+	 * sends the request to request url
+	 *
+	 * @return void
+	 */
 	private function sendRequest(){
-		$this->response = file_get_contents($this->requestURL);
+		// use curl to better handle errors
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, $this->requestURL);
+
+		$this->response = curl_exec($ch);
+		if(curl_errno($ch) === 0){
+			$this->response = false;
+		}
 	}
 
+	/**
+	 * parses response from API and builds return array
+	 *
+	 * @return array $response
+	 */
 	private function buildResponse(){
-		if($this->response == "[]"){
+		if($this->response == false){
 			return array("Error"=>true);
 		}else{
 			$this->response = json_decode($this->response);
