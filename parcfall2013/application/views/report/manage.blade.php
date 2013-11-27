@@ -111,6 +111,7 @@
 		}
 	}
 	function submitERSReport () {
+		$("#generateERSReportButton").attr('disabled', 'disabled');
 		$.ajax({
 			url: "/report/generateERS",
 			type: "POST",
@@ -123,6 +124,7 @@
 					iframe.style.display = "none";
 					iframe.src = msg.filename;
 					$('body').append(iframe);
+					$("#generateERSReportButton").removeAttr('disabled', 'disabled');
 			}
 		});
 	}
