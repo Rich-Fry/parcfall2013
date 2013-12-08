@@ -148,7 +148,8 @@
 		$(".date-picker").datepicker({
 		  changeYear:true,
 		  changeMonth:true,
-		  yearRange:"1900:"+(today.getFullYear()+10)
+		  yearRange:"1900:"+(today.getFullYear()+10),
+		  dateFormat:"yy-mm-dd"
 		});
           $('.required').focusout(function(){
                  if($(this).val() == "" || $(this).val() == null || $.trim($(this).val()) == ""){

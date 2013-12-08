@@ -80,9 +80,3 @@
 		  ?>
 	</form>
 </div>
-<div>
-	<?php
-	$phpExcel = new PHPExcel();
-
-	?>
-</div>

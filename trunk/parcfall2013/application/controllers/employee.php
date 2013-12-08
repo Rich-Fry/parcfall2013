@@ -166,8 +166,8 @@ class Employee_Controller extends Base_Controller {
 	public function action_saveForm()
 	{
 		$e = Employee::find(e(Input::get('employeeID')));
-		$firstNameId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'First Name')->get();
-		$lastNameId = Formquestion::select('formquestion.id as id')->where('formquestion.questionText', '=', 'Last Name')->get();
+		$firstNameId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'First Name')->get();
+		$lastNameId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Last Name')->get();
 		$questions = Input::get('questions');
 		$responses = array();
 		if(isset($questions) && count($questions) > 0)
@@ -175,6 +175,7 @@ class Employee_Controller extends Base_Controller {
 			if(array_key_exists('questionid', $q) && array_key_exists('response', $q) && strlen($q['response']) > 0)
 			{
 				array_push($responses, array('formquestion_ID' => $q['questionid'], 'response' => $q['response'], 'dataform_id' => e(Input::get('formID'))));
+				
 				if($q['questionid'] == $firstNameId[0]->id){
 					$e->firstName = $q['response'];
 				}
