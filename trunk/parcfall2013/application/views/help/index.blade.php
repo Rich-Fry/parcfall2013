@@ -128,6 +128,9 @@ $(function () {
 			<li>
 				<a href="/help/guide/createeditcategory">Create/Edit Personnel Record Categories<i class="icon-chevron-right"></i></a>
 			</li>
+            <li>
+				<a href="/help/guide/ersreport">Generate ERS Report<i class="icon-chevron-right"></i></a>
+			</li>
 			<li>
 				<a href="/help/guide/credits">Credits<i class="icon-chevron-right"></i></a>
 			</li>
