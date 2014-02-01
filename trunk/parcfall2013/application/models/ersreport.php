@@ -113,6 +113,8 @@ class ErsReport extends Eloquent
 		$separationTypeId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Separation Type')->get();
 		$separationReasonId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Separation Reason')->get();
 		$socialSecurityNumberId = Formquestion::select('FormQuestion.id as id')->where('FormQuestion.questionText', '=', 'Social Security Number')->get();
+		
+
 
 		$indexer = 2;//Leave a row for the titles on the excel 1-based spreadsheet
 		$employees = Employee::select('Employee.id as id')->get();
@@ -164,7 +166,17 @@ class ErsReport extends Eloquent
 				$separationType = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $separationTypeId[0]->id)->get();
 				$separationReason = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $separationReasonId[0]->id)->get();
 				$socialSecurityNumber = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $socialSecurityNumberId[0]->id)->get();
-
+				
+				//from encore table
+				$paidAbilityOneHoursInQuarter = Encore::select('Encore.paid_hours as response')->where('Encore.employee_id','=',$id)->get();		
+				$abilityOneCompensationInQuarterExcludingHealthWelfare = Encore::select('Encore.non_compensation as response')->where('Encore.employee_id','=',$id)->get();	
+				$abilityOneHealthWelfarePaymentsInQuarter = Encore::select('Encore.compensation as response')->where('Encore.employee_id','=',$id)->get();	
+				$paidNonAbilityOneHoursInQuarter = Encore::select('Encore.paid_hours as response')->where('Encore.employee_id','=',$id)->get();	
+				$nonAbilityOneCompensationInQuarter = Encore::select('Encore.non_compensation as response')->where('Encore.employee_id','=',$id)->get();	
+				$nonAbilityOneHealthWelfarePaymentsInQuarter = Encore::select('Encore.compensation as response')->where('Encore.employee_id','=',$id)->get();	
+				$productivityInPrimaryJob= Encore::select('Encore.productivity as response')->where('Encore.employee_id','=',$id)->get();	
+				
+				
 				//encrypt the social security with sha256 hash algorithm
 				$socialHash = false;
 				if(sizeof($socialSecurityNumber) > 0)
@@ -298,7 +310,35 @@ class ErsReport extends Eloquent
 					$objPHPExcel->getActiveSheet()->setCellValue('AB'.$indexer, "NOT RECORDED");
 
 
-				//TODO: insert Encore data here
+				//Encore data 
+			
+				if(sizeOf($paidAbilityOneHoursInQuarter) > 0)
+					$objPHPExcel->getActiveSheet()->setCellValue('AC'.$indexer, $paidAbilityOneHoursInQuarter[0]->response);
+				else
+					$objPHPExcel->getActiveSheet()->setCellValue('AC'.$indexer, "NOT RECORDED");	
+
+				 if(sizeOf($abilityOneCompensationInQuarterExcludingHealthWelfare) > 0)
+					 $objPHPExcel->getActiveSheet()->setCellValue('AD'.$indexer, $abilityOneCompensationInQuarterExcludingHealthWelfare[0]->response);
+				 else
+					 $objPHPExcel->getActiveSheet()->setCellValue('AD'.$indexer, "NOT RECORDED");
+				 if(sizeOf($abilityOneHealthWelfarePaymentsInQuarter) > 0)
+					 $objPHPExcel->getActiveSheet()->setCellValue('AE'.$indexer, $abilityOneHealthWelfarePaymentsInQuarter[0]->response);
+				 else
+					 $objPHPExcel->getActiveSheet()->setCellValue('AE'.$indexer, "NOT RECORDED");				
+				 if(sizeOf($paidNonAbilityOneHoursInQuarter) > 0)
+					 $objPHPExcel->getActiveSheet()->setCellValue('AF'.$indexer, $paidNonAbilityOneHoursInQuarter[0]->response);
+				 else
+					 $objPHPExcel->getActiveSheet()->setCellValue('AF'.$indexer, "NOT RECORDED");	
+				 if(sizeOf($nonAbilityOneCompensationInQuarter) > 0)
+					 $objPHPExcel->getActiveSheet()->setCellValue('AG'.$indexer, $nonAbilityOneCompensationInQuarter[0]->response);
+				 else
+					 $objPHPExcel->getActiveSheet()->setCellValue('AG'.$indexer, "NOT RECORDED");	
+				 if(sizeOf($nonAbilityOneHealthWelfarePaymentsInQuarter) > 0)
+					 $objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, $nonAbilityOneHealthWelfarePaymentsInQuarter[0]->response);
+				 else
+					 $objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, "NOT RECORDED");
+				
+						
 
 
 				if(sizeOf($trainingWage) > 0)
@@ -311,10 +351,10 @@ class ErsReport extends Eloquent
 					$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$indexer, "NOT RECORDED");
 
 				//This is from Encore too
-				//if(sizeOf($productivityInPrimaryJob) > 0)
-				//	$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, $productivityInPrimaryJob[0]->response);
-				//else
-				//	$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, "NOT RECORDED");
+				if(sizeOf($productivityInPrimaryJob) > 0)
+					$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, $productivityInPrimaryJob[0]->response);
+				else
+					$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, "NOT RECORDED");
 
 				if(sizeOf($basisForProductivity) > 0)
 					$objPHPExcel->getActiveSheet()->setCellValue('AL'.$indexer, $basisForProductivity[0]->response);
