@@ -25,6 +25,7 @@ class Employee_Controller extends Base_Controller {
 			'firstName' => 'required|match:/[A-z]*/|max:32|min:1',
 			'lastName' => 'required|match:/[A-z]*/|max:32|min:1',
 			'client' => 'required|match:/[0-1]/',
+	//		'program' => 'required',
 			);
 
 		$data = array(

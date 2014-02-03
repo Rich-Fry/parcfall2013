@@ -1,4 +1,4 @@
-<div style="row-fluid">
+	<div style="row-fluid">
 	<div class="tabs span8">
 		<ul>
 			<li><a href="#clients" onclick="tabFlag=false;clientSelectList.updateButtons();">Clients</a></li>
