@@ -1,4 +1,4 @@
-<?php
+hh<?php
 class temp {
 		public $response = "N/A";
 	}

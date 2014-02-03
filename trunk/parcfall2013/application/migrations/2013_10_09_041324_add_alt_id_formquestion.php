@@ -16,8 +16,3 @@ class Add_Alt_Id_Formquestion {
 		});
     }
 }
-
-
-
-
-

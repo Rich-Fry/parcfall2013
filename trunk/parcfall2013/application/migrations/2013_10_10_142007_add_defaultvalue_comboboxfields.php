@@ -16,6 +16,3 @@ class Add_DefaultValue_Comboboxfields {
 		});
     }
 }
-
-    
-    
