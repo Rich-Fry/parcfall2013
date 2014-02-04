@@ -168,13 +168,13 @@ class ErsReport extends Eloquent
 				$socialSecurityNumber = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $socialSecurityNumberId[0]->id)->get();
 				
 				//from encore table
-				$paidAbilityOneHoursInQuarter = encore::select('encore.paid_hours as response')->where('encore.employee_id','=',$id)->get();		
-				$abilityOneCompensationInQuarterExcludingHealthWelfare = encore::select('encore.non_compensation as response')->where('encore.employee_id','=',$id)->get();	
-				$abilityOneHealthWelfarePaymentsInQuarter = encore::select('encore.compensation as response')->where('encore.employee_id','=',$id)->get();	
-				$paidNonAbilityOneHoursInQuarter = ecore::select('encore.paid_hours as response')->where('encore.employee_id','=',$id)->get();	
-				$nonAbilityOneCompensationInQuarter = encore::select('encore.non_compensation as response')->where('encore.employee_id','=',$id)->get();	
-				$nonAbilityOneHealthWelfarePaymentsInQuarter = encore::select('encore.compensation as response')->where('encore.employee_id','=',$id)->get();	
-				$productivityInPrimaryJob= encore::select('encore.productivity as response')->where('encore.employee_id','=',$id)->get();	
+				$paidAbilityOneHoursInQuarter = Encore::select('Encore.paid_hours as response')->where('Encore.employee_id','=',$id)->get();		
+				$abilityOneCompensationInQuarterExcludingHealthWelfare = Encore::select('Encore.non_compensation as response')->where('Encore.employee_id','=',$id)->get();	
+				$abilityOneHealthWelfarePaymentsInQuarter = Encore::select('Encore.compensation as response')->where('Encore.employee_id','=',$id)->get();	
+				$paidNonAbilityOneHoursInQuarter = Encore::select('Encore.paid_hours as response')->where('Encore.employee_id','=',$id)->get();	
+				$nonAbilityOneCompensationInQuarter = Encore::select('Encore.non_compensation as response')->where('Encore.employee_id','=',$id)->get();	
+				$nonAbilityOneHealthWelfarePaymentsInQuarter = Encore::select('Encore.compensation as response')->where('Encore.employee_id','=',$id)->get();	
+				$productivityInPrimaryJob= Encore::select('Encore.productivity as response')->where('Encore.employee_id','=',$id)->get();	
 				
 				
 				//encrypt the social security with sha256 hash algorithm
@@ -337,8 +337,7 @@ class ErsReport extends Eloquent
 					 $objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, $nonAbilityOneHealthWelfarePaymentsInQuarter[0]->response);
 				 else
 					 $objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, "NOT RECORDED");
-				
-						
+									
 
 
 				if(sizeOf($trainingWage) > 0)
