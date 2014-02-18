@@ -36,5 +36,6 @@
 return array(
 
 'verify' => array('auto' => true),
+'chromephp' => array('auto' => true),
 
 );
