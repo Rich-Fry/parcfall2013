@@ -1,7 +1,6 @@
 <?php
 
 class Employee_Controller extends Base_Controller {
-
 	public function __construct() {
 		$this->filter( 'before', 'auth' );
 		parent::__construct();
@@ -127,16 +126,56 @@ class Employee_Controller extends Base_Controller {
 		} else {
 			$u = Employee::with('programs')->where( 'client', '=', intval( $clientFlag ) )->where('deleted','=',0)->get();
 		}
-		// $data= array("columns"=>array("Name", "Programs"), "data"=>$data);
-		return Response::eloquent($u);
+		//$data= array("columns"=>array("Name", "Programs"), "data"=>$data);
+		
+		//ChromePhp::warn('Hit the main part of the function.');
+		//ChromePhp::warn($u);
+		$ru = array();
+		foreach ($u as $key => $value) {
+			//ChromePhp::warn('$value');
+			//ChromePhp::warn($value);
+			// This is what is broken right now
+			$programs = $value->get_programs();
+			//ChromePhp::warn('$programs');
+			//ChromePhp::warn($programs);
+			
+			if (!is_null($programs))
+			{
+				//ChromePhp::warn('Programs not null.');
+				$haveadded = FALSE;
+				foreach ($programs as $key1 => $value1) {
+					//ChromePhp::warn('$value1');
+					//ChromePhp::warn($value1);
+					if ($haveadded == FALSE)
+					{
+						//ChromePhp::warn('Not Added Yet');
+						if (Auth::user()->can(Auth::getRequiredViewRoles($value1)))
+						{
+							//ChromePhp::warn('Allowed!');
+							$ru[] = $value;
+							$haveadded = TRUE;
+							//ChromePhp::warn('Done Adding.');
+						}
+					}
+					//ChromePhp::warn('End of permission foreach');
+				}
+				//ChromePhp::warn('Exiting if');
+			}
+			//ChromePhp::warn('Exiting user foreach!');
+		}
+		
+		//ChromePhp::warn('DONE!!');
+		//ChromePhp::warn($ru);
+		return Response::eloquent($ru);
 	}
+
 	// public function action_index() {
 
 	// 	$this->layout->content = View::make( 'employee.manage' );
 	// }
 
 	//function to edit employee info in a form
-	public function action_edit( $id ) {
+	public function action_edit( $id ){
 		if ( Auth::can('employeeCreation') ) {
 			$u=Employee::find($id);
 			// $u->programs;
@@ -211,5 +250,5 @@ class Employee_Controller extends Base_Controller {
 		}
 
 
-     }
+	 }
 }

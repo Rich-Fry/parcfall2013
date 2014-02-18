@@ -5,7 +5,7 @@ namespace Verify\Models;
 class User extends EloquentVerifyBase
 {
 	
-	public static $accessible = array('username', 'password', 'salt', 'email', 'role_id', 'verified', 'deleted', 'disabled');
+	public static $accessible = array('username', 'password', 'salt', 'email', 'role_id', 'verified', 'deleted', 'disabled', 'viewobjectid');
 	public static $to_check_cache;
 	
 	public function role()
@@ -35,6 +35,12 @@ class User extends EloquentVerifyBase
 	 */
 	public function can($permissions)
 	{
+		// If we aren't checking anything then they get to see it
+		if (is_null($permissions))
+		{
+			return TRUE;
+		}
+		
 		$permissions = !is_array($permissions)
 			? array($permissions)
 			: $permissions;

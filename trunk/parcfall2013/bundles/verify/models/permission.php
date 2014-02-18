@@ -4,6 +4,7 @@ namespace Verify\Models;
 
 class Permission extends EloquentVerifyBase
 {
+	public static $table = 'permissions';
 	
 	public static $accessible = array('name', 'description');
 
