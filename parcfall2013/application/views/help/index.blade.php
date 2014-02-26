@@ -95,7 +95,7 @@ $(function () {
 </ul>
 <div class="row-fluid">
 	<h3 style="text-align:center;">HELP PAGE</h3>
-
+		
 	<div class="span3" style="margin-top:-29px;">
 		<ul class="nav nav-list nav-stacked affix-top sidenav" data-offset-top="2000">
 			<li>
@@ -128,17 +128,11 @@ $(function () {
 			<li>
 				<a href="/help/guide/createeditcategory">Create/Edit Personnel Record Categories<i class="icon-chevron-right"></i></a>
 			</li>
-            <li>
-				<a href="/help/guide/ersreport">Generate ERS Report<i class="icon-chevron-right"></i></a>
-			</li>
-			<li>
-				<a href="/help/guide/credits">Credits<i class="icon-chevron-right"></i></a>
-			</li>
 		</ul>
 	</div>
 
 	<div class="span8 content">
 		{{$content}}
 	</div>
-
+	
 </div>

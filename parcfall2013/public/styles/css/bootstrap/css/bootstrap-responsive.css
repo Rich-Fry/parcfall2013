@@ -114,55 +114,43 @@
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container {
-    width: auto;
+    width: 1170px;
   }
   .span12 {
-    width: 100%;
-    *width: 99.94680851063829%;
+    width: 1170px;
   }
   .span11 {
-    width: 91.45299145299145%;
-    *width: 91.39979996362975%;
+    width: 1070px;
   }
   .span10 {
-    width: 82.90598290598291%;
-    *width: 82.8527914166212%;
+    width: 970px;
   }
   .span9 {
-    width: 74.35897435897436%;
-    *width: 74.30578286961266%;
+    width: 870px;
   }
   .span8 {
-    width: 65.81196581196582%;
-    *width: 65.75877432260411%;
+    width: 770px;
   }
   .span7 {
-    width: 57.26495726495726%;
-    *width: 57.21176577559556%;
+    width: 670px;
   }
   .span6 {
-    width: 48.717948717948715%;
-    *width: 48.664757228587014%;
+    width: 570px;
   }
   .span5 {
-    width: 40.17094017094017%;
-    *width: 40.11774868157847%;
+    width: 470px;
   }
   .span4 {
-    width: 31.623931623931625%;
-    *width: 31.570740134569924%;
+    width: 370px;
   }
   .span3 {
-    width: 23.076923076923077%;
-    *width: 23.023731587561375%;
+    width: 270px;
   }
   .span2 {
-    width: 14.52991452991453%;
-    *width: 14.476723040552828%;
+    width: 170px;
   }
   .span1 {
-    width: 5.982905982905983%;
-    *width: 5.929714493544281%;
+    width: 70px;
   }
   .offset12 {
     margin-left: 1230px;
@@ -827,7 +815,7 @@
   }
   [class*="span"],
   .row-fluid [class*="span"] {
-    display: ;
+    display: block;
     float: none;
     width: 100%;
     margin-left: 0;
@@ -940,7 +928,7 @@
     padding: 5px;
   }
   .navbar .container {
-    width: 100%;
+    width: auto;
     padding: 0;
   }
   .navbar .brand {

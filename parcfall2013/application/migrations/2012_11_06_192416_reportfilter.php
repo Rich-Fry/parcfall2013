@@ -1,6 +1,6 @@
 <?php
 
-class ReportFilter {
+class ReportFilter {    
 
 	public function up()
     {
@@ -12,7 +12,7 @@ class ReportFilter {
 			$table->timestamps();
 	});
 
-    }
+    }    
 
 	public function down()
     {

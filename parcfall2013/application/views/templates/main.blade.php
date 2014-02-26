@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>SPEED 3.1<?php if(defined('$title'))echo " - $title"; ?></title>
+	<title>SPEED 3.0<?php if(defined('$title'))echo " - $title"; ?></title>
 </head>
 <link rel="stylesheet" href="/styles/css/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/styles/css/bootstrap/css/bootstrap-responsive.min.css">
@@ -52,12 +52,12 @@
 			    	<li>Greetings <a href="/user/editForm/{{Auth::user()->id}}" title="Edit your account"><i class='icon-user'></i>{{Auth::user()->username}}</a></li>
 					<li> <span class="divider"><i class="icon-double-angle-right"></i></span> <a href="/account/logout/">Logout</a></li>
 					<li> <span class="divider"><i class="icon-double-angle-right"></i></span> <a href="/help/index">Help</a></li>
-			   @else
-			    	<li><a href="/user/createForm"><i class="icon-user"></i>Create Account</a></li> 
+			    @else
+			    	<li><a href="/user/createForm"><i class="icon-user"></i>Create Account</a></li>
 			    @endif
 			    </ul>
 			    @if(Auth::check())
-			    <?php if(Auth::user()->can('userCreation') || Auth::user()->can('programCreation') || Auth::user()->can('categoryCreation') || Auth::user()->can('reportGeneration')){ ?>
+			    <?php if(Auth::user()->can('userCreation') || Auth::user()->can('programCreation') || Auth::user()->can('categoryCreation')){ ?>
 			    <ul class="breadcrumb" >
 					<?php if(Auth::user()->can('userCreation') ){ ?>
 		    			<li> {{HTML::link("user/manage", "Users");}}</li>
@@ -67,9 +67,6 @@
 					<?php } ?>
 					<?php if(Auth::user()->can('categoryCreation') ){ ?>
 		    			<li> <span class="divider"><i class="icon-double-angle-right"></i></span> {{HTML::link("trackedcategory/manage", "Categories");}}</li>
-					<?php } ?>
-					<?php if(Auth::user()->can('reportGeneration') || Auth::user()->can('reportTemplate') ){ ?>
-		    			<li> <span class="divider"><i class="icon-double-angle-right"></i></span> {{HTML::link("report/manage", "Reports");}}</li>
 					<?php } ?>
 				</ul>
 				<?php } ?>

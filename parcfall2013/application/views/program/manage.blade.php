@@ -41,16 +41,16 @@
 		</div>
 	</div>
 	<div class="span3">
-		<div id="buttons" class="row-fluid">
-			@if(Auth::user()->can('programCreation'))
-				<button id="createItemButton" class="span12" onclick="view('create')"><i class="icon-plus-sign icon4x"></i>Create</button>
-				<button id="editItemButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))view('edit')"><i class="icon-edit icon4x"></i>Edit</button>
-			@endif
-			<button id="viewItemButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))view('view')"><i class="icon-eye-open icon4x"></i>View</button>
-			@if(Auth::user()->can('programDeletion'))
-				<button id="archiveItemButton" class="span12" disabled="disabled" ><i class="icon-trash icon4x"></i>Archive</button>
-			@endif
-		</div>
+	<div id="buttons" class="row-fluid">
+		@if(Auth::user()->can('programCreation'))
+			<button id="createItemButton" class="span12" onclick="view('create')"><i class="icon-plus-sign icon4x"></i>Create</button>
+			<button id="editItemButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))view('edit')"><i class="icon-edit icon4x"></i>Edit</button>
+		@endif
+		<button id="viewItemButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))view('view')"><i class="icon-eye-open icon4x"></i>View</button>
+		@if(Auth::user()->can('programDeletion'))
+			<button id="archiveItemButton" class="span12" disabled="disabled" ><i class="icon-trash icon4x"></i>Archive</button>
+		@endif
+	</div>
 	</div>
 </div>
 <div id="archiveDialog" style="display:none;">
@@ -418,6 +418,7 @@ function unarchiveItem () {
 </script>
 @endsection
 @section('styles')
+
 	<link rel="stylesheet" href="/styles/css/selectList.css">
 	<link rel="stylesheet" href="/styles/css/ui.css">
 <style>

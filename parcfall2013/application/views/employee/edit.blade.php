@@ -11,7 +11,7 @@
 			<?php } ?>
 			<?php endforeach ?>
 		</ul>
-		<?php foreach ($programs as $program): ?>
+		<?php foreach ($programs as $program): ?>	
 			<?php if(count($program->forms) > 0) {?>
 				<div id="prog_{{$program->id}}">
 				<div class="row-fluid">
@@ -19,59 +19,27 @@
 						<ul>
 							<?php foreach ($program->forms as $form): ?>
 								<li><a href="#form_{{$form->id}}">{{$form->formname}}</a></li>
-							<?php endforeach ?>
+							<?php endforeach ?>	
 						</ul>
-						<?php foreach ($program->forms as $form): ?>
+						<?php foreach ($program->forms as $form): ?>			
 							<div id="form_{{$form->id}}">
 								<input type="hidden" class="formIDs" value="{{$form->id}}">
 								<?php foreach ($form->questions as $question): ?>
 									<div class="control-group">
-										<label class="control-label" data-questionID="{{$question->id}}" for="input{{$question->id}}">{{$question->questiontext}}: <span class="errorMessage"></span></label>
+										<label class="control-label" data-questionID="{{$question->id}}" for="input{{$question->id}}">{{$question->questiontext}}:</label>
 										<div class="controls">
-											<?php
+											<?php 
 											if(array_key_exists($form->id, $employee->forms) AND array_key_exists("$question->id", $employee->forms[$form->id]['responses'])) {
 												$val = $employee->forms[$form->id]['responses']["$question->id"];
 											}else
 												$val= ''
 											?>
-											<?php //FieldTypes 1=textbox 2=combobox 3=datepicker 4=numeric 5=checkbox
-											if($question->fieldtype == 2) {
-												if($question->alt_id != NULL && $question->alt_id != 0){
-													$comboValues = Comboboxfield::getCombo($question->alt_id);
-													$defaultValues = Comboboxfield::getDefault($question->alt_id);
-												}else{
-													$comboValues = Comboboxfield::getCombo($question->id);
-													$defaultValues = Comboboxfield::getDefault($question->id);
-												}
-												?>
-												<select name="combo"  id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?> combobox" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
-												<option></option>
-													@foreach ($comboValues as $key)
-														<option value="{{$key->id}}"<?php if ($val == $key->id) echo 'selected="selected"';?> >{{$key->id}} </option>
-													@endforeach
-													</select>
-
-											<?php
-
-											} else if ($question->fieldtype == 3) { ?>
-											<!-- datepicker -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="date-picker<?php echo ($question->required ? " required" : "");?>"/>
-											<?php } else if ($question->fieldtype == 4) { ?>
-											<!-- numeric field -->
-											<!-- TODO: we need to figure out how to restrict our numeric fields - either here or in our validation later -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
-											<?php } else if ($question->fieldtype == 5) { ?>
-											<!-- checkbox - TODO: I'm still not entirely sure how we want to handle checkboxes-->
-												<input type="checkbox" checked="{{$val}}"/>
-											<?php } else { ?>
-												<!-- This is the standard textbox like we had before -->
-												<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}" class="<?php echo ($question->required ? "required" : ""); ?>" <?php echo $question->validate == null ? "" : 'data-validate="'.$question->validate.'"'; ?> />
-											<?php } ?>
+											<input type="text" id="input{{$question->id}}" value="{{$val}}" placeholder="{{$question->questionexample}}">
 										</div>
 									</div>
 								<?php endforeach ?>
 								<div style="clear:both;"></div>
-								<!--<button class="button" onclick="saveForm('form_{{$form->id}}');"><i class="icon-folder-close icon4x"></i>Save</button>-->
+								<button class="button" onclick="saveForm('form_{{$form->id}}');"><i class="icon-folder-close icon4x"></i>Save</button>
 								<div style="clear:both;"></div>
 							</div>
 						<?php endforeach ?>
@@ -81,23 +49,13 @@
 			<?php } ?>
 		<?php endforeach ?>
 	</div>
-	<button class="button" onclick="saveAll();"><i class="icon-folder-close icon4x"></i> Done &amp; Save All</button>
-	<button class="button" onclick="validateAddress();"><i class="icon-check icon4x"></i> Validate Address</button>
-	<!-- Modal -->
-        <div id="saveAlert" title="Oops!" style="display:none">
-             <p>You have some errors in the form that need to be fixed before you can move on.</p>
-        </div>
-        <div id="addressError" title="Address didn't validate." style="display:none">
-        	   <p>Sorry, the address you entered didn't validate.</p>
-        </div>
+	<button class="button" onclick="saveAll();"><i class="icon-folder-close icon4x"></i>Done & Save All</button>
 </div>
 @section('styles')
-<link rel="stylesheet" href="/styles/css/selectList.css">
 <style type="text/css">
 	.innerTabs .control-group{
 		float:left;
 		padding-right:15px;
-		height: 75px
 	}
 	.button{
 		float:right;
@@ -106,9 +64,9 @@
 		clear:both;
 	}
 
-	input[type="text"], input[type="password"], .combo {
+	input[type="text"], input[type="password"] {
         font-size: 16px;
-        width: 200px;
+        width: 300px;
         height: auto;
         margin-bottom: 15px;
         padding: 7px 9px;
@@ -118,160 +76,33 @@
 		font-size:18px;
 		font-weight: bold;
 	}
-	.date-picker{
-
-	}
-	.numeric{
-
-	}
-     .errorMessage{
-          color:#F00;
-    }
-	.combobox {
-		font-size: 16px;
-	 	height: auto;
-	 	width: 220px;
-	 	margin-bottom: 15px;
-        padding: 7px 9px;
- 	}
-
 </style>
 @endsection
 @section('scripts')
 <script type="text/javascript" src="/js/jQuery/jquery.blockUI.js"></script>
 <script type="text/javascript">
 	$(function () {
-	  var today = new Date();
 		$('#outerTabs').tabs();
 		$('.innerTabs').tabs();
 		$(".button").button();
-		$(".date-picker").datepicker({
-		  changeYear:true,
-		  changeMonth:true,
-		  yearRange:"1900:"+(today.getFullYear()+10),
-		  dateFormat:"yy-mm-dd"
-		});
-          $('.required').focusout(function(){
-                 if($(this).val() == "" || $(this).val() == null || $.trim($(this).val()) == ""){
-                      var id = $(this).attr("id");
-                      $('label[for='+id+'] .errorMessage').text('Required!');
-                 }
-            }).focusin(function(){
-                 var id = $(this).attr("id");
-                 $('label[for='+id+'] .errorMessage').text('');
-            }).change(function(){
-                 if($(this).val() != "" && $(this).val() != null){
-                      var id = $(this).attr("id");
-                      $('label[for='+id+'] .errorMessage').text('');
-                 }
-            });
-            $('input[data-validate]').focusout(function(){
-            	  var validate = $(this).attr('data-validate');
-            	  if(!/Address1|Address2|City|State|Zip/.test(validate)){
-	                 var regex = new RegExp(validate);
-	                 var id = $(this).attr("id");
-	                 if(!regex.test($(this).val())){
-	                      $('label[for='+id+'] .errorMessage').text('Not Valid');
-	                 }
-                 }
-            });
 	});
-	function validateAddress(){
-		var address1 = $("input[data-validate='Address1']").val();
-		var address2 = $("input[data-validate='Address2']").val();
-		var city = $("input[data-validate='City']").val();
-		var state = $("select[data-validate='State']").val();
-		var zip = $("input[data-validate='Zip']").val();
-
-		var address1Id = $("input[data-validate='Address1']").attr('id');
-		var address2Id = $("input[data-validate='Address2']").attr('id');
-		var cityId = $("input[data-validate='City']").attr('id');
-		var stateId = $("select[data-validate='State']").attr('id');
-		var zipId = $("input[data-validate='Zip']").attr('id');
-
-		$.ajax({
-			url:"/employee/validateAddress",
-			data:{
-				"Address1":address1,
-				"Address2":address2,
-				"City":city,
-				"State":state,
-				"Zip":zip
-			},
-			type: "POST",
-			dataType: "json",
-			error: function(data, status, error){
-				// throw some kind of error
-			},
-			success: function(data){
-				console.log(data);
-				if(data.Error == true){
-					$('#addressError').dialog({
-						modal: true,
-						buttons: {
-							Close: function(){
-								$(this).dialog('close');
-							}
-						}
-					});
-				}else{
-					$("#"+address1Id).val(data.Address1);
-					$("#"+address2Id).val(data.Address2);
-					$("#"+cityId).val(data.City);
-					$("#"+zipId).val(data.Zip5+"-"+data.Zip4);
-					$("#"+stateId).val(data.State);
-				}
-			}
-		});
-	}
 	function saveAll () {
-	     var valid = true;
-	     $('.required').each(function(index){
-	          if($(this).val() == "" || $(this).val() == null || $.trim($(this).val()) == ""){
-	               valid = false;
-	               $(this).focusout();
-	          }
-	     });
-	     $('input[data-validate]').each(function(index){
-			var validate = $(this).attr('data-validate');
-			if(!/Address1|Address2|City|State|Zip/.test(validate)){
-				var regex = new RegExp(validate);
-				if(!regex.test($(this).val())){
-					valid = false;
-					$(this).focusout();
-				}
-			}
-	     });
-
-	     if(valid === true){
-	          var promises = [];
-	          $(".formIDs").map(function(){
-	               promises.push(saveForm('form_'+$(this).val()));
-	          });
-	          $.when(promises).done(function(){
-	               window.location = "/account/manage";
-	          })
-	     }else{
-	          $('#saveAlert').dialog({
-	               modal: true,
-	               buttons: {
-	                    Close: function(){
-	                         $(this).dialog('close');
-	                    }
-	               }
-	          });
-	     }
-  	}
+		var promises = [];
+		$(".formIDs").map(function () {
+			promises.push(saveForm('form_'+$(this).val()));
+		});
+		$.when(promises).done(function(){window.location="/account/manage"});
+	}
 	function saveForm (formID) {
 		var questions=[];
-		var valid = true;
 		$("#"+formID).children('div').map(function(){
 			var qID = $(this).find('label').attr('data-questionID');
 			if($('#input'+qID).val() && $('#input'+qID).val().length > 0){
 				questions.push({questionid: qID, response: $(this).find('#input'+qID).val()});
 			}
 		});
-		if(questions.length && valid){
+		// console.log(questions);
+		if(questions.length){
 			$("#"+formID).block({
 				message:'<div style="font-family:Arial;font-weight:bold;">Saving . . . <img src="/img/loading.gif" style="vertical-align:middle;"></div>',
 				css: {

@@ -9,6 +9,6 @@ class DataForm extends Eloquent
 	}
 	public function questions()
 	{
-		return $this->has_many('FormQuestion')->order_by("view_order", "asc");
+		return $this->has_many('FormQuestion');
 	}
 }

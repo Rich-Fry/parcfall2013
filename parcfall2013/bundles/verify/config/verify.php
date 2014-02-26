@@ -7,9 +7,6 @@ return array(
 
 	// The User mode to use
 	'user_model'			=> 'Verify\Models\User',
-	
-	// The PermissionView model to use
-	'permissionview_model'	=> 'Verify\Models\PermissionView',
 
 	// The Super Admin role
 	// (returns true for all permissions)

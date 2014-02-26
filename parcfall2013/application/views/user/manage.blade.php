@@ -334,7 +334,7 @@ function view (type) {
 				btnClose.width(btnClose.width() + 25);
 			}
 			if(type!=='view'){
-		//		$(this).find('.roleCombobox').combobox();
+				$(this).find('.roleCombobox').combobox();
         		validator = $("#userForm").validate({
 					rules:rules,
 

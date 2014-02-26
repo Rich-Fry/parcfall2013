@@ -1,5 +1,5 @@
-	<div style="row-fluid">
-	<div class="tabs span8">
+<div class="row-fluid">
+	<div id="tabs" class="span8">
 		<ul>
 			<li><a href="#clients" onclick="tabFlag=false;clientSelectList.updateButtons();">Clients</a></li>
 			<li><a href="#employees" onclick="tabFlag=true;employeeSelectList.updateButtons();">Employees</a></li>
@@ -33,21 +33,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="span3">
-		<div id="buttons" class="row-fluid">
-			<input type="hidden" name="employeeID" value="" id="employeeID" />
-			<?php if(Auth::user()->can('employeeCreation')){ ?>
-			<button id="createEmployee" class="span12" onclick="submitEmployee('employee/createForm');"><i class="icon-plus-sign icon4x"></i>Create</button>
-			<?php } ?>
-			<button id="editEmployeeButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitEmployee('employee/edit');"><i class="icon-edit icon4x"></i>Edit</button>
-			<?php if(Auth::user()->can('employeeDeletion') ){ ?>
-			<button id="deleteEmployee" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))deleteEmployee();"><i class="icon-trash icon4x"></i>Archive</button>
-			<?php } ?>
-			<button id="trackedItem" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitEmployee('trackeditem/manage');"><i class="icon-folder-open icon4x"></i>Personnel File</button>
-		</div>
+	<div id="buttons" class="span4">
+		<input type="hidden" name="employeeID" value="" id="employeeID" />
+		<?php if(Auth::user()->can('employeeCreation')){ ?>
+		<button id="createEmployee" class="span12" onclick="submitEmployee('employee/createForm');"><i class="icon-plus-sign icon4x"></i>Create</button>
+		<?php } ?>
+		<button id="editEmployeeButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitEmployee('employee/edit');"><i class="icon-edit icon4x"></i>Edit</button>
+		<?php if(Auth::user()->can('employeeDeletion') ){ ?>
+		<button id="deleteEmployee" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))deleteEmployee();"><i class="icon-trash icon4x"></i>Archive</button>
+		<?php } ?>
+		<button id="trackedItem" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))submitEmployee('trackeditem/manage');"><i class="icon-folder-open icon4x"></i>Personnel File</button>
 	</div>
 </div>
-
 @section('scripts')
 @parent
 <script type="text/javascript" src="/js/SelectList.js"></script>
@@ -57,7 +54,7 @@
 	var clientSelectList = new SelectList('clientSelectList');
 	var tabFlag=false;
 	$(function () {
-		$(".tabs").tabs();
+		$("#tabs").tabs();
 		$("button").button();
 		updateSelectList(1); 
 		updateSelectList(0);
@@ -178,51 +175,36 @@
 	clientSelectList.updateButtons = myEmployeesButtons;
 </script>
 @endsection
-
 @section('styles')
-	<link rel="stylesheet" href="/styles/css/selectList.css">
-	<link rel="stylesheet" href="/styles/css/ui.css">
-<style>
-.column1{
-	width: 48%;
-    float:left;
-    border-right:solid 1px;
-    padding: 0 4px;
-    white-space: nowrap;
-}
-.column2{
-    float:left;
-    padding: 0 4px;
-    white-space: nowrap;
-}
-
-.modalHeader{
-	background-color:#00A305;
-	font-size:medium;
-	color:white;
-}
-.ui-datepicker-trigger{
-	margin-top:-10px;
-}
-.control-label{
-	font-size:medium;
-}
-.controls{
-	margin-left:2%;
-}
-.listColumn{
-	background-color:#00A305;
-	color:white;
-	font-size:medium;
-}
-.searchButton{
-	margin-top:-8px;
-}
-#buttons button{
-	margin-left:0;
-}
-input[type='radio']{
-		margin-top:-2px;
+@parent
+	<style type="text/css">
+	.col1{
+		width:          48%;
+		float:left;
+    	border-right:solid 1px;
+    	padding: 0 4px;
+    	white-space: nowrap;
+    	
 	}
-</style>
+	.col2{
+
+		float:left;
+    	padding: 0 4px;
+    	white-space: nowrap;
+    
+	}
+	.listColumns{
+		font-size:medium;
+		color:white;
+		background-color:#00A305;
+	}
+	.searchButton{
+		margin-top:-8px;
+	}
+	#buttons{
+		float: right;
+		padding-top: 120px;
+	}
+	</style>
+<link rel="stylesheet" href="/styles/css/selectList.css">
 @endsection

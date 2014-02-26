@@ -1,16 +1,16 @@
 <?php
 
-class Report_Controller extends Base_Controller {
+class Report_Controller extends Base_Controller {    
 
     public function __construct() {
         $this->filter( 'before', 'auth' );
         parent::__construct();
     }
-
+    
 	public function action_index()
     {
 
-    }
+    }    
 
 	public function action_create()
     {
@@ -21,10 +21,10 @@ class Report_Controller extends Base_Controller {
             //'formQuestionid' => 'required|match:/[0-9]*/',
         );
         $data = array(
-            'reportFieldID'  => e(Input::get('reportFieldID')),
+            'reportFieldID'  => e(Input::get('reportFieldID')), 
             //'reportID'       => e(Input::get('reportID')),
             'fieldName'      => e(Input::get('fieldName')),
-            //'formQuestionid' => e(Input::get('formQuestionid')),
+            //'formQuestionid' => e(Input::get('formQuestionid')),    
         );
         $f = Input::get('formquestion');
        // Session::flash('errors', 'Programs'.json_encode($data));
@@ -39,7 +39,7 @@ class Report_Controller extends Base_Controller {
 
         else{
             try{
-
+                
                 $e = Report::create($data);
                 foreach ($f as $formquestion) {
                     $rtf = new ReportTemplateField;
@@ -59,7 +59,7 @@ class Report_Controller extends Base_Controller {
                 return Redirect::to('report/createForm');
             }
         }
-    }
+    }    
 
 	public function action_update()
     {
@@ -67,39 +67,39 @@ class Report_Controller extends Base_Controller {
         $items= Input::get('items');
         $r = ReportTemplate::find($rID);
         $r->questions()->delete();
-        for ($i=0; $i < count($items); $i++) {
+        for ($i=0; $i < count($items); $i++) { 
             $r->questions()->attach($items[$i]);
         }
         // $r->questions($items);
         return json_encode("{success: 'true'}");
-    }
+    }    
 
 	public function action_delete($id)
     {
 		if(Auth::user()->is('admin') OR Auth::user()->is('Super Admin') )
 		{
-
+				
 			$e = ReportTemplate::find($id);
 			$e->deleted = 1;
 			$e->save();
-
+			
 			$rf = $e->items;
-			for($i=0; $i < count($rf); $i++)
+			for($i=0; $i < count($rf); $i++) 
 			{
 				$rf[$i]->deleted = 1;
 				$rf[$i]->filter->deleted = 1;
 				$rf[$i]->filter->save();
 				$rf[$i]->save();
-
+				
 			}
-
+			
 		}
 		else
 		{
 			Session::flash('errors', "You don't have permission to delete.");
 			return Redirect::to('trackeditem/manage');
 		}
-    }
+    }    
 
 	public function action_generate($id)
     {
@@ -139,27 +139,5 @@ class Report_Controller extends Base_Controller {
         }
         return Response::eloquent($u);
     }
-	public function action_manage()
-	{
-		if(Auth::user()->can('reportGeneration') || Auth::user()->can('reportTemplate')){
-			$u = Verify\Models\User::where('disabled', '=', 0)->get();
-			$du = Verify\Models\User::where('disabled', '=', 1)->get();
-			$r = Verify\Models\Role::where('deleted', '=', 0)->get();
-			$data = array(
-				'users' => $u,
-				'disabledusers' => $du, 
-				'roles' => $r
-				);
-			$this->layout->content = View::make('Report.manage',$data);	
-		}else{
-			Session::flash('errors', 'You don\'t have permission to create or edit Users');
-			return Redirect::to('account/manage');
-		}
-	}
-	public function action_generateERS()
-	{
-		$filename = ErsReport::generate();
-		return json_encode(array("filename"=>$filename));
-	}
-	
+
 }

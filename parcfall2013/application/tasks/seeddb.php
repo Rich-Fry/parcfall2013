@@ -38,8 +38,8 @@ class SeedDB_Task {
 				'description' => 'unverified users'
 			));
 
-						
-			Verify\Models\Permission::create(array(
+
+		Verify\Models\Permission::create(array(
 				'name' => 'userCreation',
 				'description' => 'Create edit and verify new users'
 			));

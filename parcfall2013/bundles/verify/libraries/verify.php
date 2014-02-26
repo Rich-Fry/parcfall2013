@@ -192,33 +192,7 @@ class Verify extends \Laravel\Auth\Drivers\Driver
 
 		return $user;
 	}
-	
-	// Create a permissions view model
-	private function createPermissionView()
-	{
-		$model = Config::get('verify::verify.permissionview_model');
-		
-		return new $model;
-	}
-	
-	// Get Required Roles to view an object
-	// You can pass in and object or an int for the viewobjectid
-	public function getRequiredViewRoles($object)
-	{
-		$permissionview = $this->createPermissionView();
-		
-		if(is_int($object))
-		{
-			return $permissionview->rolesRequired($object);
-		}
-		else if (!is_null($object)) {
-			$temp = $object->viewobjectid;
-			return $permissionview->rolesRequired($temp);
-		}
-		else {
-			throw new Exception("Null Object passed to roles required", 1);
-		}
-	}
+
 }
 
 class UserNotFoundException extends Exception {};
