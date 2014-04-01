@@ -15,4 +15,8 @@ class TrackedItem extends Eloquent
 	{
 		return $this->has_many('TrackedItemField');
 	}
+	public function personnelForms()
+	{
+		return $this->has_many('PersonnelFormType');
+	}
 }

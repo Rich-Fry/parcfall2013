@@ -6,7 +6,18 @@ class TrackedItem_Controller extends Base_Controller
 		$this->filter( 'before', 'auth' );
 		parent::__construct();
 	}
-	//look employee find function
+	
+	public function action_createForm()
+	{
+		//$e = Employee::find($empID);
+	//	return $this->layout->content = View::make('trackeditem/createForm');
+		$this->layout->content = View::make('trackeditem.createForm');
+		
+	}
+		public function action_submitCreateForm()
+	{
+		//To be implemented
+	}
 	public function action_create()
 	{
 		//rules or regular expressions to check the input in the fields
@@ -20,7 +31,8 @@ class TrackedItem_Controller extends Base_Controller
 			'employee_id'		=> e(Input::get('employeeID')),
 			'itemName'			=> e(Input::get('itemName')),
 			'itemDescription'	=> e(Input::get('itemDescription')),
-			'trackedcategory_id'		=> e(Input::get('itemCategory')),
+			'trackedcategory_id'=> e(Input::get('itemCategory')),
+			'personnelFormType_id'	=> e(Input::get('personnelFormID')),
 		);
 		if(count(Input::file())>0 && strlen(Input::get('newFile'))>0){
 			$files = Input::file();
@@ -76,6 +88,7 @@ class TrackedItem_Controller extends Base_Controller
 					$ti->fields()->save($fields);
 					$ti->category->template->active = 1;
 					$ti->category->template->save();
+					
 				}
 				return json_encode(array('success'=>true));
 				// return Redirect::to('TrackedItem/manage');
@@ -91,6 +104,7 @@ class TrackedItem_Controller extends Base_Controller
 	public function action_read($empID)
 	{
 		$archived = e(Input::get('archived'));
+	//	$personnelForm = e(Input::get('personnelForm'));
 		$needle = e( Input::get( 'criteria' ) );
 		if ( !is_null( $needle ) and strlen( $needle ) > 0 ) {
 			$ti = TrackedItem::with(array('category', 'category.template', 'fields', 'fields.templateField'))->where('deleted','=',$archived)->where('itemName','LIKE','%'.$needle.'%')->or_where('id', '=', $needle)->where('employee_id','=',$empID)->get();
@@ -107,6 +121,7 @@ class TrackedItem_Controller extends Base_Controller
 		$e = Employee::find($empID);
 		$ti = $e->trackeditems;
 		$ai = $e->archiveditems;
+		$si = $e->supportitems;
 		$tc = TrackedCategory::with(array('template', 'template.templateFields'))->where('deleted', '=',0)->get();
 		
 		//put the variables into the array
@@ -115,6 +130,7 @@ class TrackedItem_Controller extends Base_Controller
 				'trackeditems'=>$ti,
 				'trackedcategories'=>$tc,
 				'archiveditems'=>$ai,
+				'supportitems'=>$si,
 			);
 		//make form for tracked items
 		$this->layout->content = View::make('trackeditem.manage',$data);	
@@ -137,11 +153,16 @@ class TrackedItem_Controller extends Base_Controller
 			'itemName'			=> e(Input::get('itemName')),
 			'itemDescription'	=> e(Input::get('itemDescription')),
 			'trackedcategory_id'		=> e(Input::get('itemCategory')),
+			'personnelForm_id'		=> e(Input::get('personnelFormID')),
 		);
 
 		//if something is in the itemExpiration field
 		if(strlen(Input::get('itemExpiration'))>0){
 			$itemExpiration = Input::get('itemExpiration');
+		}
+		
+		if(Input::get('personnelForm_id')!=0){
+			return Redirect::to('TrackedItem/create');	
 		}
 		
 		$fields = json_decode(Input::get('fields'));
@@ -172,6 +193,7 @@ class TrackedItem_Controller extends Base_Controller
 					$ti->itemurl = '';
 					$ti->save();
 				}
+				
 				//if a new file is added
 				if(count(Input::file())>0 && strlen(Input::get('newFile'))>0){
 					$files = Input::file();
