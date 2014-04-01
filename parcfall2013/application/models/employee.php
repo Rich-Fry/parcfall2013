@@ -17,6 +17,14 @@ class Employee extends Eloquent
 						'fields',
 						'fields.templateField'))->where('employee_id','=',$this->id)->where('deleted','=',1)->get();
 	}
+	public function get_personnelForm()
+	{
+		return TrackedItem::with(array('category',
+						'category.template', 
+						'fields',
+						'fields.templateField'))->where('employee_id','=',$this->id)->where('deleted','=',0)->where('catagory', '=', "Form")->get();
+	}
+	
 	public function items()
 	{
 		return $this->has_many('TrackedItem');
