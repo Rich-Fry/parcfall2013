@@ -1,15 +1,16 @@
-<?php
+ application/ models/ personnelform.php
+ <?php
 
 class PersonnelForm extends Eloquent 
 {
-	public static $table = 'PersonnelForm';
-	public function employee()
-	{
-		return $this->belongs_to('Employee');
-	}
+        public static $table = 'PersonnelForm';
+        public function employee()
+        {
+                return $this->belongs_to('Employee');
+        }
 
-	public function formTitles()
-	{
-		return $this->has_many('PersonnelFormType');
-	}
+        public function formTitles()
+        {
+                return $this->has_many('PersonnelFormType');
+        }
 }

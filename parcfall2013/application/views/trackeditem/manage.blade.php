@@ -60,7 +60,7 @@
 			<button id="unarchiveItemButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))unarchiveItem()"><i class="icon-trash icon4x"></i>Unarchive</button>
 		@endif
 		@if(Auth::user()->can('trackedItemCreation'))
-			<button id="createFormButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))createForm();"><i class="icon-folder-open icon4x"></i>Create Form</button>
+		<button id="createFormButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))createForm();"><i class="icon-folder-open icon4x"></i>Create Form</button>
 		@endif
 	</div>
 	</div>
@@ -334,16 +334,10 @@ function view (type) {
 		msg = itemTmpl({id:'create'});
 		id = 'create';
 		b = {
-				"Create item": function () {
+				Create: function () {
 					if(validator.form()){
 						itemSave('create');
 						$(this).dialog('close');
-					}
-				},
-				"Create Form": function () {
-					if(validator.form()){
-						itemSave('create');
-					 	createForm();
 					}
 				},
 				Cancel: function () {
@@ -460,13 +454,14 @@ function displayDetails (catID, itemID) {
 		$("#details").html("<p>No Details to enter for this category of item</p>");
 	}
 }
+	
+	function createForm () {
+		//$(prev).dialog('close');
+					var idval = {{$employee->id}};
+			//		window.location='/trackeditem/createForm/' + idval;
+				window.location='/trackeditem/createForm'
+	}
 
-function createForm () {
-	//$(prev).dialog('close');
-				var idval = {{$employee->id}};
-		//		window.location='/trackeditem/createForm/' + idval;	
-			window.location='/trackeditem/createForm'
-}
 
 function itemSave (criteria) {
 	var fields = [];
@@ -487,25 +482,64 @@ function itemSave (criteria) {
 		updateSelectList(1);
 	});
 	$("#itemForm").submit();
-function itemSave (criteria) {
-	var fields = [];
-	var i=0;
-	$("#fields").children().each(function () {
-		fields[i] = {};
-			fields[i]['response']= $(this).find('input').val(),
-			fields[i]['trackedtemplatefield_id']= $(this).attr('data-templatefield_id')
-		if($(this).attr('data-id') !== 'undefined')
-			fields[i]['id'] = $(this).attr('data-id');
-		i++;
-	})
-	if(fields.length > 0)
-		$("#fieldJson").val(JSON.stringify(fields));
-	
-	$("#upload_target").load(function () {
-		updateSelectList(0);
-		updateSelectList(1);
-	});
-	$("#itemForm").submit();
+	// if(criteria === 'create'){
+	// 	var d = {
+	// 	  	employeeID: {{ $employee->id }},
+	// 	  	itemName: $('#itemName').val(),
+	// 	  	itemDescription: $('#itemDescription').val(),
+	// 	  	itemCategory: $(".categoryCombobox").val()
+	// 	  	// ,url: ''
+	// 	  };
+	// 	  if($("#itemExpiration").val().length !== 0){
+	// 	  	d.itemExpiration = $("#itemExpiration").val();
+	// 	  }
+	// 	  if($("#file").val().length !== 0){
+	// 	  	d.file = $("#file").val();
+	// 	  }
+	// 	  if(fields.length > 0)
+	// 	  	d.fields = fields;
+	// 	  // if(categories)
+	// 	$.ajax({
+	// 	  url: '/trackeditem/create',
+	// 	  type: 'POST',
+	// 	  dataType: 'json',
+	// 	  data: d,
+	// 	  success: function(data, textStatus, xhr) {
+	// 	    // alert(data);
+	// 	    console.log(data);
+	// 	    $.unblockUI();
+	// 	    updateSelectList(0);
+	// 	  }
+	// 	});
+	// }else{
+	// 	var d = {
+	// 	  	employeeID: {{ $employee->id }},
+	// 	  	itemName: $('#itemName').val(),
+	// 	  	itemDescription: $('#itemDescription').val(),
+	// 	  	itemCategory: $(".categoryCombobox").val(),
+	// 	  	// ,url: ''
+	// 	  };
+	// 	if($("#itemExpiration").val().length !== 0){
+	// 		d.itemExpiration = $("#itemExpiration").val();
+	// 	}
+	// 	if($("#file").val().length !== 0){
+	// 		d.file = $("#file").val();
+	// 	}
+	// 	if(fields.length > 0)
+	// 	  	d.fields = fields;
+
+	// 	$.ajax({
+	// 	  url: '/trackeditem/edit/'+criteria,
+	// 	  type: 'POST',
+	// 	  dataType: 'json',
+	// 	  data: d,
+	// 	  success: function(data, textStatus, xhr) {
+	// 	    // alert(data);
+	// 	    console.log(data);
+	// 	    updateSelectList(0);
+	// 	  }
+	// 	});
+	// }
 }
 function archiveItem () {
 	$("#archiveDialog").dialog({

@@ -17,14 +17,13 @@ class Employee extends Eloquent
 						'fields',
 						'fields.templateField'))->where('employee_id','=',$this->id)->where('deleted','=',1)->get();
 	}
-	public function get_personnelForm()
-	{
-		return TrackedItem::with(array('category',
-						'category.template', 
-						'fields',
-						'fields.templateField'))->where('employee_id','=',$this->id)->where('deleted','=',0)->where('catagory', '=', "Form")->get();
-	}
-	
+	        public function get_personnelForm()
+        {
+                return TrackedItem::with(array('category',
+                                                'category.template', 
+                                                'fields',
+                                                'fields.templateField'))->where('employee_id','=',$this->id)->where('deleted','=',0)->where('catagory', '=', "Form")->get();
+        }
 	public function items()
 	{
 		return $this->has_many('TrackedItem');
@@ -36,18 +35,6 @@ class Employee extends Eloquent
 	public function programs()
 	{
 		return $this->has_many_and_belongs_to('Program','EmployeeProgram', 'employee_id', 'program_id');
-	}
-	public function get_programs()
-	{
-		// You should be able to get this from the function above by getting the user with programs
-		// ... kudos to you if you figure it out... you no longer need this function
-		$programs = DB::table('Program')
-			->join('EmployeeProgram', 'Program.id', '=', 'EmployeeProgram.program_id')
-			->join('Employee', 'EmployeeProgram.employee_id', '=', 'Employee.id')
-			->where('Employee.id', '=', $this->id)
-			->select('Program.*')
-			->get();
-		return $programs;
 	}
 	public function get_questionIDs()
 	{
