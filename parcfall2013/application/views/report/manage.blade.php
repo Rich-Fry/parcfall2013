@@ -48,12 +48,6 @@
 				submitERSReport();
 			}
 		}); 
-		// $('#generateManagerReportButton').click(function(event){
-			// event.preventDefault();
-			// if(!buttonDisabled(this)){
-				// submitManagerReport();
-			// }
-		// }); 
 	});
 	function updateReportSelectList(){
 		var content= "reportSelectListContent";
@@ -131,24 +125,6 @@
 					iframe.src = msg.filename;
 					$('body').append(iframe);
 					$("#generateERSReportButton").removeAttr('disabled', 'disabled');
-			}
-		});
-	}
-		function submitManagerReport () {
-		$("#generateERSReportButton").attr('disabled', 'disabled');
-		$.ajax({
-			url: "/report/generatManager",
-			type: "POST",
-			dataType: "json",
-			error: function(XMLHttpRequest, textStatus, errorThrown){
-				alert("Request failed: getting Manager: " + textStatus + " " + errorThrown);
-			},
-			success: function(msg){
-					var iframe = document.createElement("iframe");
-					iframe.style.display = "none";
-					iframe.src = msg.filename;
-					$('body').append(iframe);
-					$("#generateManagereportButton").removeAttr('disabled', 'disabled');
 			}
 		});
 	}
