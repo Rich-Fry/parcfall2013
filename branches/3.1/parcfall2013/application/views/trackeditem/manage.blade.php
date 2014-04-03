@@ -59,9 +59,9 @@
 		@if(Auth::user()->can('trackedItemCreation'))
 			<button id="unarchiveItemButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))unarchiveItem()"><i class="icon-trash icon4x"></i>Unarchive</button>
 		@endif
-		@if(Auth::user()->can('trackedItemCreation'))
+		
 		<button id="createFormButton" class="span12" disabled="disabled" onclick="if(!buttonDisabled(this))createForm();"><i class="icon-folder-open icon4x"></i>Create Form</button>
-		@endif
+		
 	</div>
 	</div>
 </div>
