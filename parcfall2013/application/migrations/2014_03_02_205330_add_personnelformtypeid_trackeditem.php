@@ -1,13 +1,8 @@
-application/ migrations/ 2014_03_02_205330_add_personnelformtypeid_trackeditem.php
 <?php
 
-class Add_Personnelformid_Trackeditem {
+class Add_Personnelformtypeid_Trackeditem {
 
-        /**
-         * Make changes to the database.
-         *
-         * @return void
-         */
+
         public function up()
         {
                 //
@@ -17,11 +12,7 @@ class Add_Personnelformid_Trackeditem {
                 });
         }
 
-        /**
-         * Revert the changes to the database.
-         *
-         * @return void
-         */
+
         public function down()
         {
                 Schema::table('TrackedItem', function($table)
