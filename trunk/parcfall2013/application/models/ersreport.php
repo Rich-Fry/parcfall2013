@@ -168,144 +168,144 @@ class ErsReport extends Eloquent
 				$socialSecurityNumber = Questionresponse::select('QuestionResponse.response as response')->where('QuestionResponse.employee_id','=',$id)->where('QuestionResponse.formquestion_id', '=', $socialSecurityNumberId[0]->id)->get();
 				
 				//from encore table
-				$paidAbilityOneHoursInQuarter = Encore::select('encore.paid_hours as response')->where('encore.employee_id','=',$employeeNumber[0]->response)->get();		
-				$abilityOneCompensationInQuarterExcludingHealthWelfare = Encore::select('encore.non_compensation as response')->where('encore.employee_id','=',$employeeNumber[0]->response)->get();	
-				$abilityOneHealthWelfarePaymentsInQuarter = Encore::select('encore.compensation as response')->where('encore.employee_id','=',$employeeNumber[0]->response)->get();	
-				$paidNonAbilityOneHoursInQuarter = Encore::select('encore.paid_hours as response')->where('encore.employee_id','=',$employeeNumber[0]->response)->get();	
-				$nonAbilityOneCompensationInQuarter = Encore::select('encore.non_compensation as response')->where('encore.employee_id','=',$employeeNumber[0]->response)->get();	
-				$nonAbilityOneHealthWelfarePaymentsInQuarter = Encore::select('encore.compensation as response')->where('encore.employee_id','=',$employeeNumber[0]->response)->get();	
-				$productivityInPrimaryJob= Encore::select('encore.productivity as response')->where('encore.employee_id','=',$employeeNumber[0]->response)->get();	
+				$paidAbilityOneHoursInQuarter = Encore::select('encore.paid_hours as response')->where('encore.employee_id','=',end($employeeNumber)->response)->get();		
+				$abilityOneCompensationInQuarterExcludingHealthWelfare = Encore::select('encore.non_compensation as response')->where('encore.employee_id','=',end($employeeNumber)->response)->get();	
+				$abilityOneHealthWelfarePaymentsInQuarter = Encore::select('encore.compensation as response')->where('encore.employee_id','=',end($employeeNumber)->response)->get();	
+				$paidNonAbilityOneHoursInQuarter = Encore::select('encore.paid_hours as response')->where('encore.employee_id','=',end($employeeNumber)->response)->get();	
+				$nonAbilityOneCompensationInQuarter = Encore::select('encore.non_compensation as response')->where('encore.employee_id','=',end($employeeNumber)->response)->get();	
+				$nonAbilityOneHealthWelfarePaymentsInQuarter = Encore::select('encore.compensation as response')->where('encore.employee_id','=',end($employeeNumber)->response)->get();	
+				$productivityInPrimaryJob= Encore::select('encore.productivity as response')->where('encore.employee_id','=',end($employeeNumber)->response)->get();	
 				
 				
 				//encrypt the social security with sha256 hash algorithm
 				$socialHash = false;
 				if(sizeof($socialSecurityNumber) > 0)
 				{
-					$socialSecurityNumber = hash("sha256", $socialSecurityNumber[0]->response);
+					$socialSecurityNumber = hash("sha256", end($socialSecurityNumber)->response);
 					$socialHash = true;
 				}
 
 				if(sizeOf($firstName) > 0 && sizeOf($lastName) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('A'.$indexer, $lastName[0]->response.", ".$firstName[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('A'.$indexer, end($lastName)->response.", ".end($firstName)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('A'.$indexer, "");
 				if(sizeOf($shift) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('B'.$indexer, $shift[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('B'.$indexer, end($shift)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('B'.$indexer, "");
 				if(sizeOf($employeeNumber) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('C'.$indexer, $employeeNumber[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('C'.$indexer, end($employeeNumber)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('C'.$indexer, "");
 				if(sizeOf($gender) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('D'.$indexer, $gender[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('D'.$indexer, end($gender)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('D'.$indexer, "");
 				if(sizeOf($birthdate) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('E'.$indexer, substr($birthdate[0]->response, 5, 5));
+					$objPHPExcel->getActiveSheet()->setCellValue('E'.$indexer, substr(end($birthdate)->response, 5, 5));
 					//We need to figure out if newly entered dates are being inserted with this same format or create a transform to make them do so
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('E'.$indexer, "");
 				if(sizeOf($birthdate) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('F'.$indexer, substr($birthdate[0]->response, 0, 4));
+					$objPHPExcel->getActiveSheet()->setCellValue('F'.$indexer, substr(end($birthdate)->response, 0, 4));
 					//We need to figure out if newly entered dates are being inserted with this same format or create a transform to make them do so
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('F'.$indexer, "");
 				if(sizeOf($address) > 0)
 				{
-					$fullAddress = $address[0]->response;
+					$fullAddress = end($address)->response;
 					if(sizeOf($addressLine2) > 0)
-						$fullAddress = $fullAddress." ".$addressLine2[0]->response;
+						$fullAddress = $fullAddress." ".end($addressLine2)->response;
 					if(sizeOf($city) > 0)
-						$fullAddress = $fullAddress." ".$city[0]->response;
+						$fullAddress = $fullAddress." ".end($city)->response;
 					if(sizeOf($stateCode) > 0)
-						$fullAddress = $fullAddress." ".$stateCode[0]->response;
+						$fullAddress = $fullAddress." ".end($stateCode)->response;
 					$objPHPExcel->getActiveSheet()->setCellValue('G'.$indexer, $fullAddress);
 				}
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('G'.$indexer, "");
 				if(sizeOf($zipCode) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('H'.$indexer, $zipCode[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('H'.$indexer, end($zipCode)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('H'.$indexer, "");
 				if(sizeOf($ethnicity) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('I'.$indexer, $ethnicity[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('I'.$indexer, end($ethnicity)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('I'.$indexer, "");
 				if(sizeOf($w4Status) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('J'.$indexer, $w4Status[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('J'.$indexer, end($w4Status)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('J'.$indexer, "");
 				if(sizeOf($veteran) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('K'.$indexer, $veteran[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('K'.$indexer, end($veteran)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('K'.$indexer, "");
 				if(sizeOf($specialDisabledVeteran) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('L'.$indexer, $specialDisabledVeteran[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('L'.$indexer, end($specialDisabledVeteran)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('L'.$indexer, "");
 				if(sizeOf($vietnamVeteran) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('M'.$indexer, $vietnamVeteran[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('M'.$indexer, end($vietnamVeteran)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('M'.$indexer, "");
 				if(sizeOf($veteranDateOfSeparation) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('N'.$indexer, $veteranDateOfSeparation[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('N'.$indexer, end($veteranDateOfSeparation)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('N'.$indexer, "");
 				if(sizeOf($otherProtectedVeteran) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('O'.$indexer, $otherProtectedVeteran[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('O'.$indexer, end($otherProtectedVeteran)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('O'.$indexer, "");
 				if(sizeOf($hireDate) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('P'.$indexer, $hireDate[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('P'.$indexer, end($hireDate)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('P'.$indexer, "");
 				if(sizeOf($abilityOneEligibility) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('Q'.$indexer, $abilityOneEligibility[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('Q'.$indexer, end($abilityOneEligibility)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('Q'.$indexer, "");
 				if(sizeOf($personWithADisabiliity) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('R'.$indexer, $personWithADisabiliity[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('R'.$indexer, end($personWithADisabiliity)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('R'.$indexer, "");
 				if(sizeOf($primaryDisability) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('S'.$indexer, $primaryDisability[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('S'.$indexer, end($primaryDisability)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('S'.$indexer, "");
 				if(sizeOf($additionalDisability1) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('T'.$indexer, $additionalDisability1[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('T'.$indexer, end($additionalDisability1)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('T'.$indexer, "");
 				if(sizeOf($additionalDisability2) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('U'.$indexer, $additionalDisability2[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('U'.$indexer, end($additionalDisability2)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('U'.$indexer, "");
 				if(sizeOf($additionalDisability3) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('V'.$indexer, $additionalDisability3[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('V'.$indexer, end($additionalDisability3)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('V'.$indexer, "");
 				if(sizeOf($employeeOfNPA) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('W'.$indexer, $employeeOfNPA[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('W'.$indexer, end($employeeOfNPA)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('W'.$indexer, "");
 				if(sizeOf($abilityOnEDirectLabor) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('X'.$indexer, $abilityOnEDirectLabor[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('X'.$indexer, end($abilityOnEDirectLabor)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('X'.$indexer, "");
 				if(sizeOf($abilityOnEIndirectLabor) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('Y'.$indexer, $abilityOnEIndirectLabor[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('Y'.$indexer, end($abilityOnEIndirectLabor)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('Y'.$indexer, "");
 				if(sizeOf($stateUseProjects) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('Z'.$indexer, $stateUseProjects[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('Z'.$indexer, end($stateUseProjects)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('Z'.$indexer, "");
 				if(sizeOf($otherProject) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AA'.$indexer, $otherProject[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AA'.$indexer, end($otherProject)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AA'.$indexer, "");
 				if(sizeOf($workLocationCode) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AB'.$indexer, substr($workLocationCode[0]->response, 0, 4));
+					$objPHPExcel->getActiveSheet()->setCellValue('AB'.$indexer, substr(end($workLocationCode)->response, 0, 4));
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AB'.$indexer, "");
 
@@ -313,66 +313,66 @@ class ErsReport extends Eloquent
 				//Encore data 
 			
 				if(sizeOf($paidAbilityOneHoursInQuarter) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AC'.$indexer, $paidAbilityOneHoursInQuarter[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AC'.$indexer, end($paidAbilityOneHoursInQuarter)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AC'.$indexer, "");	
 
 				 if(sizeOf($abilityOneCompensationInQuarterExcludingHealthWelfare) > 0)
-					 $objPHPExcel->getActiveSheet()->setCellValue('AD'.$indexer, $abilityOneCompensationInQuarterExcludingHealthWelfare[0]->response);
+					 $objPHPExcel->getActiveSheet()->setCellValue('AD'.$indexer, end($abilityOneCompensationInQuarterExcludingHealthWelfare)->response);
 				 else
 					 $objPHPExcel->getActiveSheet()->setCellValue('AD'.$indexer, "");
 				 if(sizeOf($abilityOneHealthWelfarePaymentsInQuarter) > 0)
-					 $objPHPExcel->getActiveSheet()->setCellValue('AE'.$indexer, $abilityOneHealthWelfarePaymentsInQuarter[0]->response);
+					 $objPHPExcel->getActiveSheet()->setCellValue('AE'.$indexer, end($abilityOneHealthWelfarePaymentsInQuarter)->response);
 				 else
 					 $objPHPExcel->getActiveSheet()->setCellValue('AE'.$indexer, "");				
 				 if(sizeOf($paidNonAbilityOneHoursInQuarter) > 0)
-					 $objPHPExcel->getActiveSheet()->setCellValue('AF'.$indexer, $paidNonAbilityOneHoursInQuarter[0]->response);
+					 $objPHPExcel->getActiveSheet()->setCellValue('AF'.$indexer, end($paidNonAbilityOneHoursInQuarter)->response);
 				 else
 					 $objPHPExcel->getActiveSheet()->setCellValue('AF'.$indexer, "");	
 				 if(sizeOf($nonAbilityOneCompensationInQuarter) > 0)
-					 $objPHPExcel->getActiveSheet()->setCellValue('AG'.$indexer, $nonAbilityOneCompensationInQuarter[0]->response);
+					 $objPHPExcel->getActiveSheet()->setCellValue('AG'.$indexer, end($nonAbilityOneCompensationInQuarter)->response);
 				 else
 					 $objPHPExcel->getActiveSheet()->setCellValue('AG'.$indexer, "");	
 				 if(sizeOf($nonAbilityOneHealthWelfarePaymentsInQuarter) > 0)
-					 $objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, $nonAbilityOneHealthWelfarePaymentsInQuarter[0]->response);
+					 $objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, end($nonAbilityOneHealthWelfarePaymentsInQuarter)->response);
 				 else
 					 $objPHPExcel->getActiveSheet()->setCellValue('AH'.$indexer, "");
 									
 
 
 				if(sizeOf($trainingWage) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AI'.$indexer, $trainingWage[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AI'.$indexer, end($trainingWage)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AI'.$indexer, "");
 				if(sizeOf($fLSA14cCertificate) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$indexer, $fLSA14cCertificate[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$indexer, end($fLSA14cCertificate)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$indexer, "");
 
 				//This is from Encore too
 				if(sizeOf($productivityInPrimaryJob) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, $productivityInPrimaryJob[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, end($productivityInPrimaryJob)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AK'.$indexer, "");
 
 				if(sizeOf($basisForProductivity) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AL'.$indexer, $basisForProductivity[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AL'.$indexer, end($basisForProductivity)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AL'.$indexer, "");
 				if(sizeOf($eligibleForFringeBenefits) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AM'.$indexer, $eligibleForFringeBenefits[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AM'.$indexer, end($eligibleForFringeBenefits)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AM'.$indexer, "");
 				if(sizeOf($separationDate) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AN'.$indexer, $separationDate[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AN'.$indexer, end($separationDate)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AN'.$indexer, "");
 				if(sizeOf($separationType) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AO'.$indexer, $separationType[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AO'.$indexer, end($separationType)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AO'.$indexer, "");
 				if(sizeOf($separationReason) > 0)
-					$objPHPExcel->getActiveSheet()->setCellValue('AP'.$indexer, $separationReason[0]->response);
+					$objPHPExcel->getActiveSheet()->setCellValue('AP'.$indexer, end($separationReason)->response);
 				else
 					$objPHPExcel->getActiveSheet()->setCellValue('AP'.$indexer, "");
 				if($socialHash)
